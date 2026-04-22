@@ -50,6 +50,11 @@ const ALL_QUEENS = [
         name: "Darlene Mitchell",
         img: "https://i.pinimg.com/736x/14/6d/51/146d51b7e40f4d8988775617d42a8151.jpg",
         stats: { acting: 12, comedy: 12, improv: 12, dance: 6, design: 11, lipsync: 8 }
+    },
+    {
+        name: "Nini Coco",
+        img: "https://i.pinimg.com/736x/b5/1e/6a/b51e6aa16ea992aa267a435831919304.jpg",
+        stats: { acting: 8, comedy: 7, improv: 8, dance: 9, design: 10, lipsync: 12 }
     }
 ];
 
