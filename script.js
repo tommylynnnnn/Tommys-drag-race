@@ -140,21 +140,6 @@ function renderQueens() {
     });
 }
 
-
-renderQueens();
-
-document.getElementById("start-btn").addEventListener("click", () => {
-    const selected = [...document.querySelectorAll(".queen-card.selected")]
-        .map(card => card.dataset.name);
-
-    if (selected.length < 4 || selected.length > 18) {
-        alert("Please select between 4 and 18 queens.");
-        return;
-    }
-
-    alert("Your cast: " + selected.join(", "));
-});
-
 document.getElementById("search").addEventListener("input", (e) => {
     const term = e.target.value.toLowerCase();
 
