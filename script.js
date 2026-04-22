@@ -479,7 +479,7 @@ function advanceFinaleStep() {
             `, final2);
             break;
 
-            case 4:
+        case 4:
             setEpisodeText(`
                 <h2>Season Winner</h2>
                 <p>👑 <strong>${finaleWinner.name}</strong> is the winner of the season!</p>
