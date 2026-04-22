@@ -255,6 +255,15 @@ function scoreQueen(q, type) {
     return base + (Math.floor(Math.random() * 10) - 5);
 }
 
+function getPerformanceRating(q, judging) {
+    if (q.name === judging.winner.name) return "Slayed";
+    if (judging.high.some(h => h.name === q.name)) return "Good";
+    if (judging.safe.some(s => s.name === q.name)) return "Fine";
+    if (judging.low.some(l => l.name === q.name)) return "Bad";
+    if (judging.bottom2.some(b => b.name === q.name)) return "Flopped";
+    return "Fine";
+}
+
 function judgeQueens(cast, type) {
     const scored = cast.map(q => ({ queen: q, score: scoreQueen(q, type) }))
                        .sort((a, b) => b.score - a.score);
@@ -448,28 +457,62 @@ function advanceEpisodeStep() {
             break;
 
         case 2:
-            currentJudging = judgeQueens(currentCast, currentChallenge);
-            setEpisodeText(`<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins!</p>`, [currentJudging.winner]);
-            break;
+    // JUDGING HAPPENS HERE
+    currentJudging = judgeQueens(currentCast, currentChallenge);
 
-        case 3:
+    // PERFORMANCE SUMMARY PAGE
+    const j = currentJudging;
+
+    const safe = j.safe.map(q => `
+        <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+    `).join("");
+
+    const highAndWinner = [j.winner, ...j.high].map(q => `
+        <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+    `).join("");
+
+    const lowAndBottom = [...j.low, ...j.bottom2].map(q => `
+        <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+    `).join("");
+
+    setEpisodeText(`
+        <h2>Performance Results</h2>
+
+        <h3>Safe Queens</h3>
+        ${safe || "<p>None</p>"}
+
+        <h3>High & Winner</h3>
+        ${highAndWinner}
+
+        <h3>Low & Bottom 2</h3>
+        ${lowAndBottom}
+    `);
+
+    break;
+
+            case 3:
+    currentJudging = judgeQueens(...)
+    setEpisodeText(`<h2>Winner</h2>...`);
+    break;
+
+        case 4:
             setEpisodeText(`<h2>High</h2><p>${currentJudging.high.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.high);
             break;
 
-        case 4:
+        case 5:
             setEpisodeText(`<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.safe);
             break;
 
-        case 5:
+        case 6:
             setEpisodeText(`<h2>Low</h2><p>${currentJudging.low.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.low);
             break;
 
-        case 6:
+        case 7:
             currentBottom2 = currentJudging.bottom2;
             setEpisodeText(`<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`, currentBottom2);
             break;
 
-        case 7:
+        case 8:
             currentLipSyncResult = lipSync(currentBottom2);
             setEpisodeText(`
                 <h2>Lip Sync For Your Life</h2>
@@ -478,7 +521,7 @@ function advanceEpisodeStep() {
             `, currentBottom2);
             break;
 
-        case 8:
+        case 9:
             const eliminated = currentLipSyncResult.eliminated;
             currentCast = eliminateFromCast(currentCast, eliminated);
 
@@ -491,12 +534,12 @@ function advanceEpisodeStep() {
             `, [eliminated]);
             break;
 
-        case 9:
+        case 10:
             setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
             renderTrackRecordCards();
             break;
 
-        case 10:
+        case 11:
             if (currentCast.length <= 1) {
                 location.reload();
                 return;
