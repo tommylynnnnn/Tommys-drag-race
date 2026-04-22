@@ -7,17 +7,6 @@ body {
     text-align: center;
 }
 
-/* Search bar */
-#search {
-    width: 60%;
-    padding: 15px;
-    margin: 0 auto 30px auto;
-    display: block;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-}
-
 /* Grid layout */
 #queen-grid {
     display: grid;
@@ -33,8 +22,14 @@ body {
     border-radius: 10px;
     padding: 20px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
     font-size: 18px;
+}
+
+/* Hover effect */
+.queen-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.35);
 }
 
 /* Selected state */
@@ -42,4 +37,5 @@ body {
     background: white;
     color: #d100a8;
     border-color: #ffb3e6;
+    transform: translateY(-5px);
 }
