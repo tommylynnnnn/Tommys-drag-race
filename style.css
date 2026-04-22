@@ -27,6 +27,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .queen-card img {
@@ -44,22 +46,6 @@ body {
     background: rgba(255, 255, 255, 0.35);
 }
 
-/* Selected state */
-.queen-card.selected {
-    background: white;
-    color: #d100a8;
-    border-color: #ffb3e6;
-    transform: translateY(-5px);
-}
-
-
-/* Hover effect */
-.queen-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.35);
-}
-
-/* Selected state */
 .queen-card.selected {
     background: white;
     color: #d100a8;
@@ -72,23 +58,13 @@ body {
     transform: scale(1.03);
 }
 
-#search {
-    width: 60%;
-    padding: 12px 18px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-    margin-top: 10px;
-    outline: none;
-    text-align: center;
-}
-
+/* Stats box */
 .stats-box {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(150, 0, 255, 0.55); /* translucent purple */
+    background: rgba(150, 0, 255, 0.55);
     color: white;
     padding: 10px;
     font-size: 14px;
@@ -96,18 +72,14 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px); /* optional: makes it look expensive */
-}
-
-.queen-card {
-    position: relative;
-    overflow: hidden;
+    backdrop-filter: blur(4px);
 }
 
 .queen-card:hover .stats-box {
     opacity: 1;
 }
 
+/* Top bar */
 .top-bar {
     display: flex;
     justify-content: center;
@@ -125,6 +97,7 @@ body {
     text-align: center;
 }
 
+/* Start button */
 #start-btn {
     padding: 12px 20px;
     font-size: 18px;
@@ -147,12 +120,14 @@ body {
     transform: scale(0.97);
 }
 
+/* ===== FULL SCREEN EPISODE OVERLAY ===== */
+
 #episode-overlay {
     position: fixed;
     inset: 0;
     width: 100vw;
     height: 100vh;
-    background: #ff4fa8; /* full pink background */
+    background: #ff4fa8;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,6 +154,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Episode queen images */
 #episode-queens {
     display: flex;
     justify-content: center;
@@ -196,6 +172,7 @@ body {
     box-shadow: 0 0 15px rgba(255,255,255,0.9);
 }
 
+/* Continue button */
 #episode-continue-btn {
     padding: 14px 28px;
     font-size: 20px;
@@ -214,14 +191,15 @@ body {
     transform: scale(1.05);
 }
 
-.track-card-img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid white;
-    box-shadow: 0 0 8px rgba(255,255,255,0.7);
-    flex-shrink: 0;
+/* ===== TRACK RECORD ===== */
+
+.track-record-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
 }
 
 .track-card {
@@ -232,7 +210,19 @@ body {
     padding: 10px 14px;
     border-radius: 14px;
     margin-bottom: 12px;
+    width: 90%;
+    max-width: 500px;
     box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.track-card-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 0 8px rgba(255,255,255,0.7);
+    flex-shrink: 0;
 }
 
 .track-card-name {
@@ -241,4 +231,30 @@ body {
     color: white;
     min-width: 120px;
 }
+
+.track-card-placements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Badge colors */
+.track-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.track-win { background: gold; color: black; }
+.track-high { background: #4da6ff; }
+.track-safe { background: #bfbfbf; color: black; }
+.track-low { background: #ff944d; }
+.track-btm2 { background: #ff4d4d; }
+.track-elim { background: black; }
+.track-— { background: rgba(255,255,255,0.3); }
+
 
