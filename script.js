@@ -40,7 +40,7 @@ const ALL_QUEENS = [
         name: "Onya Nurve",
         img: "https://i.pinimg.com/736x/a7/04/a1/a704a15997585ec88a4d24f4ab1db791.jpg",
         stats: { acting: 13, comedy: 13, improv: 13, dance: 12, design: 8, lipsync: 14 }
-    }
+    },
     {
         name: "Myki Meeks",
         img: "https://i.pinimg.com/736x/b9/76/6a/b9766aedded3bc2ebcac17b8a6b3cbde.jpg",
