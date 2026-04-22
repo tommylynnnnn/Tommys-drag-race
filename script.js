@@ -69,7 +69,7 @@ const ALL_QUEENS = [
     {
         name: "Patricia Shen",
         img: "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/118/2020/09/09165555/BECOMING-EDDIE_Still_1-1000x600.png",
-        stats: { acting: 9, comedy: 11, improv: 10, dance: 6, design: 7, lipsync: 13 }
+        stats: { acting: 12, comedy: 14, improv: 13, dance: 9, design: 10, lipsync: 15 }
     }
 ];
 
