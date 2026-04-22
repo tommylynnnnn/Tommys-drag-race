@@ -2,11 +2,11 @@
 Silly little simulator cus the other one is premium....
 Welcome to Tommys Drag Race!
 
-Update 1.02
+Update 1.0.2
 
 -Polished Track Record Table further
 
-UPDATE 1.01
+UPDATE 1.0.1
 
 -Polished Track Record Table
 
