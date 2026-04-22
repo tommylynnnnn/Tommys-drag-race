@@ -461,37 +461,24 @@ function advanceEpisodeStep() {
             break;
 
         case 2:
-            // Judging happens here
-            currentJudging = judgeQueens(currentCast, currentChallenge);
+    // JUDGING HAPPENS HERE
+    currentJudging = judgeQueens(currentCast, currentChallenge);
 
-            // Performance summary page
-            const j = currentJudging;
+    const j = currentJudging;
 
-            const safe = j.safe.map(q => `
-                <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
-            `).join("");
+    const summaryHTML = currentCast.map(q => `
+        <div class="perf-summary">
+            <img src="${q.img}" class="perf-summary-img">
+            <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+        </div>
+    `).join("");
 
-            const highAndWinner = [j.winner, ...j.high].map(q => `
-                <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
-            `).join("");
+    setEpisodeText(`
+        <h2>Challenge Results</h2>
+        ${summaryHTML}
+    `);
 
-            const lowAndBottom = [...j.low, ...j.bottom2].map(q => `
-                <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
-            `).join("");
-
-            setEpisodeText(`
-                <h2>Performance Results</h2>
-
-                <h3>Safe Queens</h3>
-                ${safe || "<p>None</p>"}
-
-                <h3>High & Winner</h3>
-                ${highAndWinner}
-
-                <h3>Low & Bottom 2</h3>
-                ${lowAndBottom}
-            `);
-            break;
+    break;
 
         case 3:
             setEpisodeText(
