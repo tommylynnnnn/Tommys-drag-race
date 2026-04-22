@@ -82,6 +82,7 @@ const ENTRANCE_LINES = {
     "Darlene Mitchell": "She's corny!",
     "Nini Coco": "Gay!",
     "Jane Don't": "WAZZUP?!"
+    "Juicy Love Dion": "The party princess of Miami and Mykonos is finally here. Yes, baby. The juice is loose."
 };
 
 // ====== CHALLENGES ======
