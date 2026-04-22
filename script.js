@@ -127,15 +127,15 @@ const ENTRANCE_LINES = {
     "Darlene Mitchell": "She's corny!",
     "Nini Coco": "Gay!",
     "Jane Don't": "WAZZUP?!",
-    "Juicy Love Dion": "The party princess of Miami and Mykonos is finally here. Yes, baby. The juice is loose."
-    "Discord Addams": "Who's ready for a little chaos?"
-    "Kenya Pleaser": "I have one thing to say: Kenya Pleaser? (moans)"
-    "Athena Dion": "Honey, this is how you throw a party on Drag Race, bitch."
-    "Ciara Myst": "Feeling scared yet? You should be."
-    "Briar Blush": "WHY ARE YOU RECORDING ME!?"
-    "DD Fuego": "Can I say the F-word? FUEGO!"
-    "Mandy Mango": "Miss Nurse! Don't you know? A mango a day keeps the doctor away."
-    "Mia Starr": "I'm repping for the big backs, and I came to eat."
+    "Juicy Love Dion": "The party princess of Miami and Mykonos is finally here. Yes, baby. The juice is loose.",
+    "Discord Addams": "Who's ready for a little chaos?",
+    "Kenya Pleaser": "I have one thing to say: Kenya Pleaser? (moans)",
+    "Athena Dion": "Honey, this is how you throw a party on Drag Race, bitch.",
+    "Ciara Myst": "Feeling scared yet? You should be.",
+    "Briar Blush": "WHY ARE YOU RECORDING ME!?",
+    "DD Fuego": "Can I say the F-word? FUEGO!",
+    "Mandy Mango": "Miss Nurse! Don't you know? A mango a day keeps the doctor away.",
+    "Mia Starr": "I'm repping for the big backs, and I came to eat.",
     "Vita VonTesse Starr": "Baby it's easy to see, that I'm the key. You can question those other girls, but never Queen V"
 };
 
