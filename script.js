@@ -517,13 +517,12 @@ function advanceEpisodeStep() {
             break;
 
         case 8:
-            currentLipSyncResult = lipSync(currentBottom2);
-            setEpisodeText(`
-                <h2>Lip Sync For Your Life</h2>
-                <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
-                <p>🎤 <strong>${currentLipSyncResult.winner.name}</strong> wins!</p>
-            `, currentBottom2);
-            break;
+    currentLipSyncResult = lipSync(currentBottom2);
+    setEpisodeText(`
+        <h2>Lip Sync For Your Life</h2>
+        <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
+    `, currentBottom2);
+    break;
 
         case 9:
             const eliminated = currentLipSyncResult.eliminated;
@@ -601,10 +600,10 @@ function advanceFinaleStep() {
             updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
 
             setEpisodeText(`
-                <h2>Lip Sync For The Crown</h2>
-                <p>${final2[0].name} vs ${final2[1].name}</p>
-                <p>👑 <strong>${finaleWinner.name}</strong> wins the final lip sync!</p>
-            `, final2);
+    <h2>Lip Sync For The Crown</h2>
+    <p>${final2[0].name} vs ${final2[1].name}</p>
+`, final2);
+            
             break;
 
         case 4:
