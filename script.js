@@ -424,7 +424,12 @@ function advanceEpisodeStep() {
         case 0:
     if (episodeNumber === 1) {
         // Episode 1 entrance lines
-        const lines = currentCast.map(q => `<p><strong>${q.name}:</strong> ${ENTRANCE_LINES[q.name]}</p>`).join("");
+        const lines = currentCast.map(q => `
+    <div class="entrance-line">
+        <img src="${q.img}" class="entrance-img">
+        <p><strong>${q.name}:</strong> ${ENTRANCE_LINES[q.name]}</p>
+    </div>
+`).join("");
 
         setEpisodeText(`
             <h2>Episode 1</h2>
