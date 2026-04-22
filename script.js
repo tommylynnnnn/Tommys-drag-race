@@ -15,12 +15,15 @@ const grid = document.getElementById("queen-grid");
 function renderQueens() {
     grid.innerHTML = "";
 
-    ALL_QUEENS.forEach(name => {
+    ALL_QUEENS.forEach(q => {
         const card = document.createElement("div");
-        card.className = "queen-card";  // THIS MUST MATCH CSS EXACTLY
-        card.dataset.name = name;
+        card.className = "queen-card";
+        card.dataset.name = q.name;
 
-        card.textContent = name;
+        card.innerHTML = `
+            <img src="${q.img}" alt="${q.name}">
+            <p>${q.name}</p>
+        `;
 
         card.addEventListener("click", () => {
             card.classList.toggle("selected");
@@ -29,6 +32,7 @@ function renderQueens() {
         grid.appendChild(card);
     });
 }
+
 
 renderQueens();
 
