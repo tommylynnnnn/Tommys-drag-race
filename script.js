@@ -10,35 +10,27 @@ const ALL_QUEENS = [
 ];
 
 const grid = document.getElementById("queen-grid");
-const search = document.getElementById("search");
 
 // Render queen cards
-function renderQueens(filter = "") {
+function renderQueens() {
     grid.innerHTML = "";
 
-    ALL_QUEENS
-        .filter(name => name.toLowerCase().includes(filter.toLowerCase()))
-        .forEach(name => {
-            const card = document.createElement("div");
-            card.className = "queen-card";
-            card.dataset.name = name;
+    ALL_QUEENS.forEach(name => {
+        const card = document.createElement("div");
+        card.className = "queen-card";
+        card.dataset.name = name;
 
-            card.textContent = name;
+        card.textContent = name;
 
-            card.addEventListener("click", () => {
-                card.classList.toggle("selected");
-            });
-
-            grid.appendChild(card);
+        card.addEventListener("click", () => {
+            card.classList.toggle("selected");
         });
+
+        grid.appendChild(card);
+    });
 }
 
 renderQueens();
-
-// Search bar filtering
-search.addEventListener("input", () => {
-    renderQueens(search.value);
-});
 
 // Start button
 document.getElementById("start-btn").addEventListener("click", () => {
