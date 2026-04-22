@@ -1,6 +1,6 @@
 const ALL_QUEENS = [
     { name: "Alaska", img: "https://i.pinimg.com/736x/6e/ef/ca/6eefcadaa26067a62884227350d683b8.jpg" },
-    { name: "Alyssa Edwards", img: "" },
+    { name: "Alyssa Edwards", img: "https://i.pinimg.com/736x/0b/bd/51/0bbd517dfcbcb21aacb0fa05f0af9809.jpg" },
     { name: "Bob the Drag Queen", img: "" },
     { name: "Katya", img: "" },
     { name: "Sasha Velour", img: "" },
