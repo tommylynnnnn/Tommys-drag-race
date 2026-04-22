@@ -3,12 +3,12 @@ const ALL_QUEENS = [
     name: "Alaska",
     img: "https://i.pinimg.com/736x/6e/ef/ca/6eefcadaa26067a62884227350d683b8.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
-        improv: 10,
-        dance: 9,
-        design: 8,
-        lipsync: 7
+        acting: 13,
+        comedy: 13,
+        improv: 13,
+        dance: 11,
+        design: 9,
+        lipsync: 12
     }
 },
 
