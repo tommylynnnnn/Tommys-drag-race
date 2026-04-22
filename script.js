@@ -496,8 +496,8 @@ function renderTrackRecordCards() {
 function startSeason() {
     const selected = [...document.querySelectorAll(".queen-card.selected")].map(c => c.dataset.name);
 
-    if (selected.length < 4 || selected.length > 18) {
-        alert("Please select between 4 and 18 queens.");
+    if (selected.length < 4 || selected.length > 16) {
+        alert("Please select between 4 and 16 queens.");
         return;
     }
 
