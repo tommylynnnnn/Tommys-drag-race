@@ -319,6 +319,7 @@ function setEpisodeText(text, queens = []) {
 
 function initTrackRecord() {
     trackRecord = {};
+    eliminationOrder = []; // reset this too
     seasonQueens.forEach(q => trackRecord[q.name] = []);
 }
 
@@ -351,7 +352,7 @@ function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
 
 function getLatestPlacement(q) {
     const rec = trackRecord[q.name];
-    if (!rec || rec.length === 0) return "—";
+    if (!rec || rec.length === 0) return "";
     return rec[rec.length - 1];
 }
 
