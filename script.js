@@ -200,6 +200,25 @@ const CHALLENGES = [
     "Hosting Challenge"
 ];
 
+const LIP_SYNC_SONGS = [
+    { title: "Too Much", artist: "Dove Cameron" },
+    { title: "Love in Real Life", artist: "Lizzo" },
+    { title: "Lights Camera Action", artist: "Kylie Minogue" },
+    { title: "Toxic", artist: "Britney Spears" },
+    { title: "Houdini", artist: "Dua Lipa" },
+    { title: "Head Over Heels", artist: "The Go Go's" },
+    { title: "Call Me When You Break Up", artist: "Selena Gomez, Benny Blanco, and Gracie Abrams" },
+    { title: "Total Eclipse of the Heart", artist: "Bonnie Tyler" },
+    { title: "we can't be friends (wait for your love)", artist: "Ariana Grande" },
+    { title: "Garden Of Eden", artist: "Lady Gaga" },
+    { title: "Super Graphic Ultra Modern Girl", artist: "Chappell Roan" },
+    { title: "Enough (Miami)", artist: "Cardi B" },
+    { title: "Pretty Ugly", artist: "Zara Larsson" },
+    { title: "Jerkin'", artist: "Amyl & The Sniffers" },
+    { title: "Feels Like Another One ", artist: "Patti LaBelle" },
+    { title: "Every Girl You've Ever Loved", artist: "Miley Cyrus ft. Naomi Campbell" },
+];
+
 // ====== DOM ======
 
 const grid = document.getElementById("queen-grid");
@@ -406,6 +425,10 @@ function setEpisodeText(text, queens = []) {
         img.className = "episode-queen-img";
         episodeQueensContainer.appendChild(img);
     });
+}
+
+function getRandomLipSyncSong() {
+    return LIP_SYNC_SONGS[Math.floor(Math.random() * LIP_SYNC_SONGS.length)];
 }
 
 // ====== TRACK RECORD ======
@@ -650,10 +673,14 @@ function advanceEpisodeStep() {
 
         case 8:
     currentLipSyncResult = lipSync(currentBottom2);
-    setEpisodeText(`
-        <h2>Lip Sync For Your Life</h2>
-        <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
-    `, currentBottom2);
+    const song = getRandomLipSyncSong();
+currentLipSyncSong = song; // store it for elimination screen
+
+setEpisodeText(`
+    <h2>Lip Sync For Your Life</h2>
+    <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
+    <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
+`, currentBottom2);
     break;
 
         case 9:
@@ -666,6 +693,7 @@ function advanceEpisodeStep() {
             setEpisodeText(`
     <h2>Elimination</h2>
     <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
+    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
     <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
     <p>${currentCast.length} queens remain.</p>
 `, [eliminated]);
@@ -735,11 +763,15 @@ function advanceFinaleStep() {
 
             updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
 
-            setEpisodeText(`
+            const finaleSong = getRandomLipSyncSong();
+currentLipSyncSong = finaleSong;
+
+setEpisodeText(`
     <h2>Lip Sync For The Crown</h2>
     <p>${final2[0].name} vs ${final2[1].name}</p>
+    <p><strong>Final Song:</strong> "${finaleSong.title}" by ${finaleSong.artist}</p>
 `, final2);
-            
+
             break;
 
         case 4:
