@@ -1,12 +1,12 @@
-// Add your queens + image links here
+// Add your queens here
 const ALL_QUEENS = [
-    { name: "Alaska", img: "IMAGE_URL_HERE" },
-    { name: "Alyssa Edwards", img: "IMAGE_URL_HERE" },
-    { name: "Bob the Drag Queen", img: "IMAGE_URL_HERE" },
-    { name: "Katya", img: "IMAGE_URL_HERE" },
-    { name: "Sasha Velour", img: "IMAGE_URL_HERE" },
-    { name: "Bianca Del Rio", img: "IMAGE_URL_HERE" },
-    { name: "Jinkx Monsoon", img: "IMAGE_URL_HERE" }
+    "Alaska",
+    "Alyssa Edwards",
+    "Bob the Drag Queen",
+    "Katya",
+    "Sasha Velour",
+    "Bianca Del Rio",
+    "Jinkx Monsoon"
 ];
 
 const grid = document.getElementById("queen-grid");
@@ -17,16 +17,13 @@ function renderQueens(filter = "") {
     grid.innerHTML = "";
 
     ALL_QUEENS
-        .filter(q => q.name.toLowerCase().includes(filter.toLowerCase()))
-        .forEach(q => {
+        .filter(name => name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(name => {
             const card = document.createElement("div");
             card.className = "queen-card";
-            card.dataset.name = q.name;
+            card.dataset.name = name;
 
-            card.innerHTML = `
-                <img src="${q.img}" alt="${q.name}">
-                <p>${q.name}</p>
-            `;
+            card.textContent = name;
 
             card.addEventListener("click", () => {
                 card.classList.toggle("selected");
