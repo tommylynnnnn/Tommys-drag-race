@@ -319,7 +319,7 @@ function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
     seasonQueens.forEach(q => {
         let p = "—";
         if (q.name === winner.name) p = "WIN";
-        else if (q.name === runnerUp.name) p = "BTM2";
+        else if (q.name === runnerUp.name) p = "RUNNER-UP";
         else if (q.name === cutQueen.name) p = "ELIM";
         trackRecord[q.name].push(p);
     });
