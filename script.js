@@ -69,6 +69,21 @@ const ALL_QUEENS = [
 
 ];
 
+const ENTRANCE_LINES = {
+    "Alaska": "HIEEEE",
+    "Alyssa Edwards": "Girl, I am gagging",
+    "Bob the Drag Queen": "I didn't come to make friends, I came to make cupcakes.",
+    "Katya": "Давай cезон семь!",
+    "Sasha Velour": "(loud, acted scream followed by fake coughing and posing)",
+    "Bianca Del Rio": "Well, well, well! I hope you bitches are ready.",
+    "Jinkx Monsoon": "You know, I can hear the cackling from down the street.",
+    "Onya Nurve": "Well! It do take Nurve!",
+    "Myki Meeks": "I'm Myki, but you, you can call me Myki.",
+    "Darlene Mitchell": "She's corny!",
+    "Nini Coco": "Gay!",
+    "Jane Don't": "WAZZUP?!"
+};
+
 // ====== CHALLENGES ======
 
 const CHALLENGES = [
@@ -407,8 +422,20 @@ function advanceEpisodeStep() {
 
     switch (episodeStep) {
         case 0:
-            setEpisodeText(`<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`, currentCast);
-            break;
+    if (episodeNumber === 1) {
+        // Episode 1 entrance lines
+        const lines = currentCast.map(q => `<p><strong>${q.name}:</strong> ${ENTRANCE_LINES[q.name]}</p>`).join("");
+
+        setEpisodeText(`
+            <h2>Episode 1</h2>
+            <h3>Entrance Lines</h3>
+            ${lines}
+        `, currentCast);
+    } else {
+        // Normal episodes
+        setEpisodeText(`<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`, currentCast);
+    }
+    break;
 
         case 1:
             setEpisodeText(`<h2>Maxi Challenge</h2><p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>`, currentCast);
