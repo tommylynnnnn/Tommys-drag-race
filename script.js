@@ -15,7 +15,7 @@ function renderQueens() {
 
     ALL_QUEENS.forEach(name => {
         const card = document.createElement("div");
-        card.className = "queen-card";
+        card.className = "queen-card";  // THIS MUST MATCH CSS EXACTLY
         card.dataset.name = name;
 
         card.textContent = name;
