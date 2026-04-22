@@ -157,7 +157,7 @@ const ELIMINATION_LINES = {
     "Kenya Pleaser": "The question still stands, RuPaul: Kenya Pleaser?",
     "Athena Dion": "May your Prosecco always be on ice. May you always fly first. Always settle for more, and never accept any less. Thank you.",
     "Ciara Myst": "Oh, and since you girls need a new vocal stim, you can use this one: OOH-OOH-AH-OOH!",
-    "Briar Blush": "WHY ARE YOU RECORDING ME?!"",
+    "Briar Blush": "WHY ARE YOU RECORDING ME?!",
     "DD Fuego": "Well... it was short... it was sweet... I wish it had been a little spicier. Adiós!",
     "Mandy Mango": "Mangoes can be eaten, mangoes can be slurped... Cheers to all the lovers who make our mangoes burst!",
     "Mia Starr": "FUCK YOU BLOODY MARYYYYYYYYYYY!! BITCH!!",
