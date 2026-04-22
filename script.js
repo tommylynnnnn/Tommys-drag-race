@@ -139,6 +139,22 @@ const ENTRANCE_LINES = {
     "Vita VonTesse Starr": "Baby it's easy to see, that I'm the key. You can question those other girls, but never Queen V"
 };
 
+const ELIMINATION_LINES = {
+    "Alaska": "Well… at least I still have my merch sales.",
+    "Alyssa Edwards": "Back rolls? More like back home!",
+    "Bob the Drag Queen": "I may be eliminated, but I still won the room.",
+    "Katya": "I’m melting… I’m melting…",
+    "Sasha Velour": "A rose may wilt, but the art lives on.",
+    "Bianca Del Rio": "Really? Eliminated? This show is rigged.",
+    "Jinkx Monsoon": "Water off a duck’s back… and out the door.",
+    "Onya Nurve": "Well! It do take Nurve… to go home.",
+    "Myki Meeks": "Guess you won’t be calling me Myki anymore.",
+    "Darlene Mitchell": "She’s corny… and she’s gone!",
+    "Nini Coco": "Gay! And eliminated!",
+    "Jane Don't": "WAZZUP?! Not me anymore!",
+    "Juicy Love Dion": "The juice… has officially run out."
+};
+
 // ====== CHALLENGES ======
 
 const CHALLENGES = [
@@ -639,10 +655,11 @@ function advanceEpisodeStep() {
             updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 
             setEpisodeText(`
-                <h2>Elimination</h2>
-                <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
-                <p>${currentCast.length} queens remain.</p>
-            `, [eliminated]);
+    <h2>Elimination</h2>
+    <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
+    <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
+    <p>${currentCast.length} queens remain.</p>
+`, [eliminated]);
             break;
 
         case 10:
@@ -691,10 +708,11 @@ function advanceFinaleStep() {
             eliminationOrder.unshift(finaleCutQueen.name);
 
             setEpisodeText(`
-                <h2>Top 3 Cut</h2>
-                <p>❌ <strong>${finaleCutQueen.name}</strong> has been cut.</p>
-                <p>The final 2 will now lip sync for the crown.</p>
-            `, [finaleCutQueen]);
+    <h2>Top 3 Cut</h2>
+    <p>❌ <strong>${finaleCutQueen.name}</strong> has been cut.</p>
+    <p><em>"${ELIMINATION_LINES[finaleCutQueen.name] || ""}"</em></p>
+    <p>The final 2 will now lip sync for the crown.</p>
+`, [finaleCutQueen]);
             break;
 
         case 3:
