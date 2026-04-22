@@ -217,13 +217,12 @@ body {
 }
 
 .episode-panel {
-    background: #ff4fa8;
+    position: absolute;
+    inset: 0;
+    background: #ff4fa8; /* full pink background */
     color: white;
-    padding: 30px 40px;
-    border-radius: 20px;
-    max-width: 800px;
-    width: 90%;
-    box-shadow: 0 0 25px rgba(255, 0, 180, 0.9);
+    padding: 40px;
+    overflow-y: auto;
     text-align: center;
 }
 
@@ -265,6 +264,10 @@ body {
 
 #episode-continue-btn:hover {
     transform: scale(1.05);
+}
+
+#episode-queens {
+    margin-top: 20px;
 }
 
 
