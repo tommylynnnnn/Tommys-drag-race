@@ -3,7 +3,11 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
-🌟 Updated 1.3.0
+🌟 Update 1.4.0
+
+-Added random queen select
+
+🌟 Update 1.3.0
 
 -Added lipsync songs
 
