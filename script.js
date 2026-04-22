@@ -41,6 +41,16 @@ const ALL_QUEENS = [
         img: "https://i.pinimg.com/736x/a7/04/a1/a704a15997585ec88a4d24f4ab1db791.jpg",
         stats: { acting: 13, comedy: 13, improv: 13, dance: 12, design: 8, lipsync: 14 }
     }
+    {
+        name: "Myki Meeks",
+        img: "https://i.pinimg.com/736x/b9/76/6a/b9766aedded3bc2ebcac17b8a6b3cbde.jpg",
+        stats: { acting: 13, comedy: 14, improv: 14, dance: 9, design: 11, lipsync: 13 }
+    },
+    {
+        name: "Darlene Mitchell",
+        img: "https://i.pinimg.com/736x/14/6d/51/146d51b7e40f4d8988775617d42a8151.jpg",
+        stats: { acting: 12, comedy: 12, improv: 12, dance: 6, design: 11, lipsync: 8 }
+    }
 ];
 
 // ====== CHALLENGES ======
