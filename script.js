@@ -65,22 +65,8 @@ const ALL_QUEENS = [
         name: "Juicy Love Dion",
         img: "https://i.pinimg.com/736x/c1/a9/d9/c1a9d95922919fc9fc361072247c7a84.jpg",
         stats: { acting: 6, comedy: 5, improv: 6, dance: 9, design: 10, lipsync: 11 }
-    },
-    {
-        name: "Patricia Shen",
-        img: "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/118/2020/09/09165555/BECOMING-EDDIE_Still_1-1000x600.png",
-        stats: { acting: 12, comedy: 14, improv: 13, dance: 9, design: 10, lipsync: 15 }
-    },
-    {
-        name: "Karen Xu",
-        img: "https://barcelonahairacademy.com/wp-content/uploads/2024/07/Chinese-Bob-fine-hair.png",
-        stats: { acting: 12, comedy: 14, improv: 13, dance: 9, design: 10, lipsync: 15 }
-    },
-    {
-        name: "Tomlyn Chambers",
-        img: "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/118/2020/09/09165555/BECOMING-EDDIE_Still_1-1000x600.png",
-        stats: { acting: 12, comedy: 14, improv: 13, dance: 9, design: 10, lipsync: 15 }
     }
+
 ];
 
 // ====== CHALLENGES ======
