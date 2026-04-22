@@ -153,7 +153,6 @@ let currentCast = [];
 let episodeNumber = 1;
 let episodeStep = 0;
 let currentChallenge = null;
-let currentScores = null;
 let currentJudging = null;
 let currentBottom2 = null;
 let currentLipSyncResult = null;
@@ -203,23 +202,35 @@ function scoreQueen(queen, challengeType) {
 }
 
 function judgeQueens(cast, challengeType) {
-    const scores = cast.map(q => ({
+    const scored = cast.map(q => ({
         queen: q,
         score: scoreQueen(q, challengeType)
     }));
 
-    scores.sort((a, b) => b.score - a.score);
+    scored.sort((a, b) => b.score - a.score);
 
-    const winner = scores[0].queen;
-    const bottom2 = [scores[scores.length - 1].queen, scores[scores.length - 2].queen];
+    const winner = scored[0].queen;
+    const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
 
-    const high = scores.slice(1, 3).map(s => s.queen);
-    const low = scores.slice(scores.length - 4, scores.length - 2).map(s => s.queen);
-    const safe = scores
-        .slice(3, scores.length - 4)
+    // Remove winner and bottom2 from pool
+    const remaining = scored
+        .slice(1, scored.length - 2)
         .map(s => s.queen);
 
-    return { scores, winner, high, safe, low, bottom2 };
+    let high = [];
+    let low = [];
+    let safe = [];
+
+    if (remaining.length <= 2) {
+        // With very small casts, just treat everyone else as safe
+        safe = remaining;
+    } else {
+        high = remaining.slice(0, 2);
+        low = remaining.slice(-2);
+        safe = remaining.slice(2, remaining.length - 2);
+    }
+
+    return { winner, high, safe, low, bottom2 };
 }
 
 function lipSync(btm2) {
@@ -280,7 +291,6 @@ function startSeason() {
 function startEpisode() {
     episodeStep = 0;
     currentChallenge = getRandomChallenge();
-    currentScores = null;
     currentJudging = null;
     currentBottom2 = null;
     currentLipSyncResult = null;
@@ -304,6 +314,7 @@ function advanceEpisodeStep() {
             `, currentCast);
             break;
         case 2:
+            currentJudging = judgeQueens(currentCast, currentChallenge);
             setEpisodeText(`
                 <h2>Winner</h2>
                 <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the ${currentChallenge.toLowerCase()} challenge!</p>
