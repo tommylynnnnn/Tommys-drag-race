@@ -14,9 +14,23 @@
     <button id="start-btn">Start Simulator</button>
 </div>
 
-<div id="random-select-box">
-    <input type="number" id="random-count" min="1" max="16" placeholder="How many queens?">
-    <button id="random-select-btn">Select Random Queens</button>
+<div class="random-select-container">
+    <label for="random-count" class="random-label">Random Cast</label>
+
+    <div class="random-row">
+        <input 
+            type="number" 
+            id="random-count" 
+            min="1" 
+            max="16" 
+            placeholder="Number of queens"
+            class="random-input"
+        >
+
+        <button id="random-select-btn" class="random-btn">
+            🎲 Randomize
+        </button>
+    </div>
 </div>
 
     
