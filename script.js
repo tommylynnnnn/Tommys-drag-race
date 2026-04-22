@@ -272,6 +272,30 @@ document.getElementById("search").addEventListener("input", (e) => {
     });
 });
 
+document.getElementById("random-select-btn").addEventListener("click", () => {
+    const count = parseInt(document.getElementById("random-count").value);
+
+    if (isNaN(count) || count < 1 || count > 16) {
+        alert("Please enter a number between 1 and 16.");
+        return;
+    }
+
+    // Clear all selections first
+    document.querySelectorAll(".queen-card").forEach(card => {
+        card.classList.remove("selected");
+    });
+
+    // Pick random queens
+    const shuffled = ALL_QUEENS.slice().sort(() => Math.random() - 0.5);
+    const chosen = shuffled.slice(0, count).map(q => q.name);
+
+    // Select them in the UI
+    document.querySelectorAll(".queen-card").forEach(card => {
+        if (chosen.includes(card.dataset.name)) {
+            card.classList.add("selected");
+        }
+    });
+});
 // ====== STATE ======
 
 let currentCast = [];
