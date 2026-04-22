@@ -107,6 +107,10 @@ const episodeQueensContainer = document.getElementById("episode-queens");
 function renderQueens() {
     grid.innerHTML = "";
 
+    // Update queen count
+    document.getElementById("queen-count").textContent =
+        `Available Queens: ${ALL_QUEENS.length}`;
+    
     ALL_QUEENS
         .slice()
         .sort((a, b) => a.name.localeCompare(b.name))
