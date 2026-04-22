@@ -1,23 +1,35 @@
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background: #f7e9ff;
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
 
-h1 {
-    color: #d100a8;
+#queen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
 }
 
-label {
-    display: block;
-    margin: 5px 0;
+.queen-card {
+    background: white;
+    border: 2px solid #d100a8;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-button {
-    padding: 10px 20px;
+.queen-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.queen-card.selected {
     background: #d100a8;
     color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
+    border-color: #a0007c;
 }
