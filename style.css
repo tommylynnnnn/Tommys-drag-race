@@ -213,3 +213,13 @@ body {
 #episode-continue-btn:hover {
     transform: scale(1.05);
 }
+
+.track-card-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 0 8px rgba(255,255,255,0.7);
+    flex-shrink: 0;
+}
