@@ -1,5 +1,6 @@
 # Tommys-drag-race
 Silly little simulator cus the other one is premium....
+🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 Welcome to Tommys Drag Race!
 
 🌟 Update 1.1.0
@@ -16,7 +17,7 @@ Welcome to Tommys Drag Race!
 
 -Fixed many bugs
 
-🌟 UPDATE 1.00
+🎉 UPDATE 1.00
 
 -Added main season simulator
 
