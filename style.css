@@ -195,61 +195,48 @@ body {
 
 .track-record-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    white-space: nowrap;
+    width: 100%;
 }
 
 .track-card {
-    width: 140px; /* fixed width */
-    min-height: 220px; /* fixed height */
-    background: #111;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    white-space: normal; /* allow name to wrap */
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
 .track-card-img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
     object-fit: cover;
-    border: 3px solid white;
-    box-shadow: 0 0 8px rgba(255,255,255,0.7);
-    flex-shrink: 0;
 }
 
 .track-card-name {
+    width: 120px; /* fixed width so placements align */
     font-size: 14px;
     font-weight: bold;
-    margin-top: 6px;
     line-height: 1.1;
-    word-wrap: break-word;
     white-space: normal;
+    word-wrap: break-word;
 }
 
 .track-card-placements {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 8px;
-    flex-grow: 1;
+    flex-direction: row;
+    gap: 6px;
+    flex-wrap: nowrap;
 }
 
 /* Badge colors */
 .track-badge {
-    display: inline-block;
-    padding: 3px 6px;
+    padding: 2px 6px;
     border-radius: 4px;
     font-size: 12px;
-    text-align: center;
-    width: 100%;
+    white-space: nowrap;
 }
 
 .track-win { background: gold; color: black; }
