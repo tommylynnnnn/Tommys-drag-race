@@ -394,10 +394,20 @@ function judgeQueens(cast, type) {
         .map(q => ({ queen: q, score: scoreQueen(q, type) }))
         .sort((a, b) => b.score - a.score);
 
-    let winner = scored.find(s => getWinCount(s.queen) < 4)?.queen || scored[0].queen;
+    // Pick winner with win cap
+    const winnerEntry = scored.find(s => getWinCount(s.queen) < 4) || scored[0];
+    const winner = winnerEntry.queen;
+
+    // Bottom 2 are still the lowest scores
     const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
 
-    const remaining = scored.slice(1, scored.length - 2).map(s => s.queen);
+    // Remaining = everyone who is NOT winner and NOT in bottom 2
+    const remaining = scored
+        .filter(s =>
+            s.queen.name !== winner.name &&
+            !bottom2.some(b => b.name === s.queen.name)
+        )
+        .map(s => s.queen);
 
     let high = [], low = [], safe = [];
 
