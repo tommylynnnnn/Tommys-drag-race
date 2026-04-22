@@ -3,6 +3,10 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🏁 Update 1.4.1
+
+-Patched voided queen bug
+
 🌟 Update 1.4.0
 
 -Added random queen select
