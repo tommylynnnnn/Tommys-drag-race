@@ -271,7 +271,7 @@ function judgeQueens(cast, type) {
     const scored = cast.map(q => ({ queen: q, score: scoreQueen(q, type) }))
                        .sort((a, b) => b.score - a.score);
 
-    const winner = scored[0].queen;
+    let winner = scored.find(s => getWinCount(s.queen) < 4)?.queen || scored[0].queen;
     const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
 
     const remaining = scored.slice(1, scored.length - 2).map(s => s.queen);
@@ -291,8 +291,22 @@ function judgeQueens(cast, type) {
 
 function lipSync(btm2) {
     const [q1, q2] = btm2;
+
+    const q1Bottoms = getBottomCount(q1);
+    const q2Bottoms = getBottomCount(q2);
+
+    // AUTO-ELIM RULE
+    if (q1Bottoms >= 3 && q2Bottoms < 3) {
+        return { winner: q2, eliminated: q1 };
+    }
+    if (q2Bottoms >= 3 && q1Bottoms < 3) {
+        return { winner: q1, eliminated: q2 };
+    }
+
+    // If BOTH have 3 bottoms, use stats normally
     const s1 = q1.stats.lipsync + (Math.random() * 6 - 3);
     const s2 = q2.stats.lipsync + (Math.random() * 6 - 3);
+
     return s1 >= s2 ? { winner: q1, eliminated: q2 } : { winner: q2, eliminated: q1 };
 }
 
@@ -354,6 +368,14 @@ function getLatestPlacement(q) {
     const rec = trackRecord[q.name];
     if (!rec || rec.length === 0) return "";
     return rec[rec.length - 1];
+}
+
+function getWinCount(q) {
+    return trackRecord[q.name].filter(p => p === "WIN").length;
+}
+
+function getBottomCount(q) {
+    return trackRecord[q.name].filter(p => p === "BTM2").length;
 }
 
 function sortQueensByPlacement(queens) {
