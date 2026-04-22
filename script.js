@@ -145,7 +145,7 @@ const ELIMINATION_LINES = {
     "Bob the Drag Queen": "Thank you for everything Rupaul...",
     "Katya": "*Grunts and messes with her hair*",
     "Sasha Velour": "Thank you for everything you have done for the queer community, I love you all so much. Goodbye.",
-    "Bianca Del Rio": "Really>",
+    "Bianca Del Rio": "Really?",
     "Jinkx Monsoon": "Welp! Here comes all stars!",
     "Onya Nurve": "*Sobs*",
     "Myki Meeks": "At least I'm leaving with all my teeth.",
