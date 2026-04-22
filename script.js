@@ -390,8 +390,9 @@ function getScoreBasedRating(score, maxScore, minScore) {
 }
 
 function judgeQueens(cast, type) {
-    const scored = cast.map(q => ({ queen: q, score: scoreQueen(q, type) }))
-                       .sort((a, b) => b.score - a.score);
+    const scored = cast
+        .map(q => ({ queen: q, score: scoreQueen(q, type) }))
+        .sort((a, b) => b.score - a.score);
 
     let winner = scored.find(s => getWinCount(s.queen) < 4)?.queen || scored[0].queen;
     const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
@@ -408,7 +409,7 @@ function judgeQueens(cast, type) {
         safe = remaining.slice(2, remaining.length - 2);
     }
 
-    return { winner, high, safe, low, bottom2 };
+    return { scored, winner, high, safe, low, bottom2 };
 }
 
 function lipSync(btm2) {
@@ -633,19 +634,9 @@ function advanceEpisodeStep() {
             break;
 
         case 2:
-    // JUDGING HAPPENS HERE
     currentJudging = judgeQueens(currentCast, currentChallenge);
 
-    // Use the SAME scoring from judging for the summary
-    const scored = currentCast
-        .map(q => {
-            return {
-                queen: q,
-                score: scoreQueen(q, currentChallenge)
-            };
-        })
-        .sort((a, b) => b.score - a.score);
-
+    const scored = currentJudging.scored;
     const maxScore = scored[0].score;
     const minScore = scored[scored.length - 1].score;
 
