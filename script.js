@@ -636,15 +636,19 @@ function advanceEpisodeStep() {
     // JUDGING HAPPENS HERE
     currentJudging = judgeQueens(currentCast, currentChallenge);
 
-    // SCORE EACH QUEEN
+    // Use the SAME scoring from judging for the summary
     const scored = currentCast
-        .map(q => ({ queen: q, score: scoreQueen(q, currentChallenge) }))
+        .map(q => {
+            return {
+                queen: q,
+                score: scoreQueen(q, currentChallenge)
+            };
+        })
         .sort((a, b) => b.score - a.score);
 
     const maxScore = scored[0].score;
     const minScore = scored[scored.length - 1].score;
 
-    // BUILD SUMMARY HTML
     const summaryHTML = scored.map(s => `
         <div class="perf-summary">
             <img src="${s.queen.img}" class="perf-summary-img">
