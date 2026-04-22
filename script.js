@@ -323,7 +323,7 @@ function initTrackRecord() {
 
 function updateTrackRecordEpisode(j, bottom2, eliminated) {
     seasonQueens.forEach(q => {
-        let p = "—";
+        let p = "";
 
         if (q.name === eliminated.name) p = "ELIM";
         else if (q.name === j.winner.name) p = "WIN";
@@ -338,22 +338,12 @@ function updateTrackRecordEpisode(j, bottom2, eliminated) {
 
 function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
     seasonQueens.forEach(q => {
-        let p = "—";
+        let p = "";
 
-        if (q.name === winner.name) p = "WIN";
+        if (q.name === winner.name) p = "WINNER";
         else if (q.name === runnerUp.name) p = "RUNNER-UP";
         else if (q.name === cutQueen.name) p = "ELIM";
 
-        trackRecord[q.name].push(p);
-    });
-}
-
-function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
-    seasonQueens.forEach(q => {
-        let p = "—";
-        if (q.name === winner.name) p = "WIN";
-        else if (q.name === runnerUp.name) p = "RUNNER-UP";
-        else if (q.name === cutQueen.name) p = "ELIM";
         trackRecord[q.name].push(p);
     });
 }
@@ -365,7 +355,7 @@ function getLatestPlacement(q) {
 }
 
 function sortQueensByPlacement(queens) {
-    const order = ["WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", "—"];
+    const order = ["WINNER", "RUNNER-UP", "WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", "—"];
 
     return queens.slice().sort((a, b) => {
         const pa = getLatestPlacement(a);
