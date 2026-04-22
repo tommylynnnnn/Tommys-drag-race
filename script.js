@@ -92,27 +92,30 @@ const episodeQueensContainer = document.getElementById("episode-queens");
 function renderQueens() {
     grid.innerHTML = "";
 
-    ALL_QUEENS.forEach(q => {
-        const card = document.createElement("div");
-        card.className = "queen-card";
-        card.dataset.name = q.name;
+    ALL_QUEENS
+        .slice()
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .forEach(q => {
+            const card = document.createElement("div");
+            card.className = "queen-card";
+            card.dataset.name = q.name;
 
-        card.innerHTML = `
-            <img src="${q.img}" alt="${q.name}">
-            <p>${q.name}</p>
-            <div class="stats-box">
-                <p><strong>Comedy:</strong> ${q.stats.comedy}</p>
-                <p><strong>Acting:</strong> ${q.stats.acting}</p>
-                <p><strong>Improv:</strong> ${q.stats.improv}</p>
-                <p><strong>Dance:</strong> ${q.stats.dance}</p>
-                <p><strong>Design:</strong> ${q.stats.design}</p>
-                <p><strong>Lip Sync:</strong> ${q.stats.lipsync}</p>
-            </div>
-        `;
+            card.innerHTML = `
+                <img src="${q.img}" alt="${q.name}">
+                <p>${q.name}</p>
+                <div class="stats-box">
+                    <p><strong>Comedy:</strong> ${q.stats.comedy}</p>
+                    <p><strong>Acting:</strong> ${q.stats.acting}</p>
+                    <p><strong>Improv:</strong> ${q.stats.improv}</p>
+                    <p><strong>Dance:</strong> ${q.stats.dance}</p>
+                    <p><strong>Design:</strong> ${q.stats.design}</p>
+                    <p><strong>Lip Sync:</strong> ${q.stats.lipsync}</p>
+                </div>
+            `;
 
-        card.addEventListener("click", () => card.classList.toggle("selected"));
-        grid.appendChild(card);
-    });
+            card.addEventListener("click", () => card.classList.toggle("selected"));
+            grid.appendChild(card);
+        });
 }
 
 renderQueens();
