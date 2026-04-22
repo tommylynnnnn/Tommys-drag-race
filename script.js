@@ -121,11 +121,11 @@ function renderQueens() {
 
     <div class="stats-box">
         ${q.stats ? `
-            <p><strong>Charisma:</strong> ${q.stats.charisma}</p>
-            <p><strong>Uniqueness:</strong> ${q.stats.uniqueness}</p>
-            <p><strong>Nerve:</strong> ${q.stats.nerve}</p>
-            <p><strong>Talent:</strong> ${q.stats.talent}</p>
-            <p><strong>Runway:</strong> ${q.stats.runway}</p>
+            <p><strong>Comedy:</strong> ${q.stats.comedy}</p>
+            <p><strong>Acting:</strong> ${q.stats.acting}</p>
+            <p><strong>Improv:</strong> ${q.stats.improv}</p>
+            <p><strong>Dance:</strong> ${q.stats.dance}</p>
+            <p><strong>Design:</strong> ${q.stats.design}</p>
             <p><strong>Lip Sync:</strong> ${q.stats.lipsync}</p>
         ` : `<p>No stats yet</p>`}
     </div>
