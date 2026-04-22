@@ -187,6 +187,7 @@ let currentLipSyncResult = null;
 let isFinale = false;
 
 let trackRecord = {}; // { queenName: ["WIN", "HIGH", ...] }
+let eliminationOrder = [];
 
 // ====== HELPERS ======
 
@@ -545,6 +546,7 @@ function advanceEpisodeStep() {
         case 9:
             const eliminated = currentLipSyncResult.eliminated;
             currentCast = eliminateFromCast(currentCast, eliminated);
+            eliminationOrder.push(eliminated.name);
 
             updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 
@@ -598,6 +600,7 @@ function advanceFinaleStep() {
             const cutIndex = Math.floor(Math.random() * currentCast.length);
             finaleCutQueen = currentCast[cutIndex];
             currentCast = eliminateFromCast(currentCast, finaleCutQueen);
+            eliminationOrder.push(finaleCutQueen.name);
 
             setEpisodeText(`
                 <h2>Top 3 Cut</h2>
