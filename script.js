@@ -14,7 +14,7 @@ const ALL_QUEENS = [
     {
         name: "Bob the Drag Queen",
         img: "https://i.pinimg.com/736x/71/19/5a/71195a08be0d3a56bad3427f517901e4.jpg",
-        stats: { acting: 15, comedy: 15, improv: 15, dance: 15, design: 15, lipsync: 15 }
+        stats: { acting: 13, comedy: 15, improv: 14, dance: 11, design: 7, lipsync: 10 }
     },
     {
         name: "Katya",
