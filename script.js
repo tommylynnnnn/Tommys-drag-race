@@ -358,11 +358,30 @@ function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
     });
 }
 
+function getLatestPlacement(q) {
+    const rec = trackRecord[q.name];
+    if (!rec || rec.length === 0) return "—";
+    return rec[rec.length - 1];
+}
+
+function sortQueensByPlacement(queens) {
+    const order = ["WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", "—"];
+
+    return queens.slice().sort((a, b) => {
+        const pa = getLatestPlacement(a);
+        const pb = getLatestPlacement(b);
+
+        return order.indexOf(pa) - order.indexOf(pb);
+    });
+}
+
 function renderTrackRecordCards() {
     const container = document.createElement("div");
     container.className = "track-record-container";
 
-    seasonQueens.forEach(q => {
+    const sortedQueens = sortQueensByPlacement(seasonQueens);
+
+    sortedQueens.forEach(q => {
         const card = document.createElement("div");
         card.className = "track-card";
 
