@@ -17,11 +17,11 @@ const ALL_QUEENS = [
     img: "https://i.pinimg.com/736x/0b/bd/51/0bbd517dfcbcb21aacb0fa05f0af9809.jpg",
     stats: {
         acting: 9,
-        comedy: 8,
+        comedy: 10,
         improv: 10,
-        dance: 9,
-        design: 8,
-        lipsync: 7
+        dance: 12,
+        design: 9,
+        lipsync: 12
     }
 },
 
@@ -29,12 +29,12 @@ const ALL_QUEENS = [
     name: "Bob the Drag Queen",
     img: "https://i.pinimg.com/736x/71/19/5a/71195a08be0d3a56bad3427f517901e4.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
-        improv: 10,
-        dance: 9,
-        design: 8,
-        lipsync: 7
+        acting: 13,
+        comedy: 15,
+        improv: 14,
+        dance: 11,
+        design: 7,
+        lipsync: 10
     }
 },
     
@@ -42,12 +42,12 @@ const ALL_QUEENS = [
     name: "Katya",
     img: "https://i.pinimg.com/736x/e9/0f/f6/e90ff66a78ec1d4bdb7bd06ee320a5d2.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
+        acting: 8,
+        comedy: 12,
         improv: 10,
-        dance: 9,
-        design: 8,
-        lipsync: 7
+        dance: 15,
+        design: 10,
+        lipsync: 6
     }
 },
 
@@ -55,12 +55,12 @@ const ALL_QUEENS = [
     name: "Sasha Velour",
     img: "https://i.pinimg.com/736x/7c/6d/a4/7c6da4478b5625c83e74c55a542e5e95.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
-        improv: 10,
-        dance: 9,
-        design: 8,
-        lipsync: 7
+        acting: 11,
+        comedy: 14,
+        improv: 13,
+        dance: 11,
+        design: 11,
+        lipsync: 11
     }
 },
     
@@ -68,12 +68,12 @@ const ALL_QUEENS = [
     name: "Bianca Del Rio",
     img: "https://i.pinimg.com/736x/26/43/61/264361d07c867a88630c4a4986d0c3b3.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
-        improv: 10,
-        dance: 9,
-        design: 8,
-        lipsync: 7
+        acting: 11,
+        comedy: 12,
+        improv: 12,
+        dance: 12,
+        design: 14,
+        lipsync: 9
     }
 },
 
@@ -81,12 +81,12 @@ const ALL_QUEENS = [
     name: "Jinkx Monsoon",
     img: "https://i.pinimg.com/736x/18/c1/d1/18c1d14cdcdf348000446f1a1cfb8e8b.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
-        improv: 10,
-        dance: 9,
+        acting: 12,
+        comedy: 14,
+        improv: 13,
+        dance: 11,
         design: 8,
-        lipsync: 7
+        lipsync: 11
     }
 },
 
@@ -94,12 +94,12 @@ const ALL_QUEENS = [
     name: "Onya Nurve",
     img: "https://i.pinimg.com/736x/a7/04/a1/a704a15997585ec88a4d24f4ab1db791.jpg",
     stats: {
-        acting: 9,
-        comedy: 8,
-        improv: 10,
-        dance: 9,
+        acting: 13,
+        comedy: 13,
+        improv: 13,
+        dance: 12,
         design: 8,
-        lipsync: 7
+        lipsync: 14
     }
 }
     
