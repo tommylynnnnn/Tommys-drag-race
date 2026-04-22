@@ -1,3 +1,5 @@
+// ====== DATA ======
+
 const ALL_QUEENS = [
     {
         name: "Alaska",
@@ -97,11 +99,24 @@ const ALL_QUEENS = [
     }
 ];
 
+const CHALLENGES = [
+    "Acting",
+    "Comedy",
+    "Dance",
+    "Design",
+    "Improv",
+    "Rusical"
+];
+
+// ====== DOM ======
+
 const grid = document.getElementById("queen-grid");
 const overlay = document.getElementById("episode-overlay");
 const episodeContent = document.getElementById("episode-content");
 const episodeContinueBtn = document.getElementById("episode-continue-btn");
 const episodeQueensContainer = document.getElementById("episode-queens");
+
+// ====== RENDER QUEENS ======
 
 function renderQueens() {
     grid.innerHTML = "";
@@ -147,24 +162,21 @@ document.getElementById("search").addEventListener("input", (e) => {
     });
 });
 
-// ====== SIMULATOR ENGINE ======
+// ====== STATE ======
 
 let currentCast = [];
+let seasonQueens = [];
 let episodeNumber = 1;
 let episodeStep = 0;
 let currentChallenge = null;
 let currentJudging = null;
 let currentBottom2 = null;
 let currentLipSyncResult = null;
+let isFinale = false;
 
-const CHALLENGES = [
-    "Acting",
-    "Comedy",
-    "Dance",
-    "Design",
-    "Improv",
-    "Rusical"
-];
+let trackRecord = {}; // { queenName: [ "WIN", "HIGH", ... ] }
+
+// ====== HELPERS ======
 
 function getRandomChallenge() {
     return CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)];
@@ -212,7 +224,6 @@ function judgeQueens(cast, challengeType) {
     const winner = scored[0].queen;
     const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
 
-    // Remove winner and bottom2 from pool
     const remaining = scored
         .slice(1, scored.length - 2)
         .map(s => s.queen);
@@ -222,7 +233,6 @@ function judgeQueens(cast, challengeType) {
     let safe = [];
 
     if (remaining.length <= 2) {
-        // With very small casts, just treat everyone else as safe
         safe = remaining;
     } else {
         high = remaining.slice(0, 2);
@@ -251,8 +261,6 @@ function eliminateFromCast(cast, queen) {
     return cast.filter(q => q.name !== queen.name);
 }
 
-// ====== EPISODE FLOW ======
-
 function showOverlay() {
     overlay.classList.remove("hidden");
 }
@@ -274,6 +282,95 @@ function setEpisodeText(text, queensToShow = []) {
     });
 }
 
+function getQueenByName(name) {
+    return seasonQueens.find(q => q.name === name);
+}
+
+// ====== TRACK RECORD ======
+
+function initTrackRecord() {
+    trackRecord = {};
+    seasonQueens.forEach(q => {
+        trackRecord[q.name] = [];
+    });
+}
+
+function updateTrackRecordEpisode(judging, bottom2, eliminated) {
+    seasonQueens.forEach(q => {
+        let placement = "—";
+
+        if (q.name === eliminated.name) {
+            placement = "ELIM";
+        } else if (q.name === judging.winner.name) {
+            placement = "WIN";
+        } else if (bottom2.some(b => b.name === q.name)) {
+            placement = "BTM2";
+        } else if (judging.high.some(h => h.name === q.name)) {
+            placement = "HIGH";
+        } else if (judging.low.some(l => l.name === q.name)) {
+            placement = "LOW";
+        } else if (judging.safe.some(s => s.name === q.name)) {
+            placement = "SAFE";
+        }
+
+        trackRecord[q.name].push(placement);
+    });
+}
+
+function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
+    seasonQueens.forEach(q => {
+        let placement = "—";
+
+        if (q.name === winner.name) {
+            placement = "WIN";
+        } else if (q.name === runnerUp.name) {
+            placement = "BTM2";
+        } else if (q.name === cutQueen.name) {
+            placement = "ELIM";
+        }
+
+        trackRecord[q.name].push(placement);
+    });
+}
+
+function renderTrackRecordCards() {
+    const container = document.createElement("div");
+    container.className = "track-record-container";
+
+    seasonQueens.forEach(q => {
+        const card = document.createElement("div");
+        card.className = "track-card";
+
+        const img = document.createElement("img");
+        img.src = q.img;
+        img.alt = q.name;
+        img.className = "track-card-img";
+
+        const nameEl = document.createElement("div");
+        nameEl.className = "track-card-name";
+        nameEl.textContent = q.name;
+
+        const placementsRow = document.createElement("div");
+        placementsRow.className = "track-card-placements";
+
+        (trackRecord[q.name] || []).forEach(p => {
+            const badge = document.createElement("span");
+            badge.className = "track-badge track-" + p.toLowerCase();
+            badge.textContent = p;
+            placementsRow.appendChild(badge);
+        });
+
+        card.appendChild(img);
+        card.appendChild(nameEl);
+        card.appendChild(placementsRow);
+        container.appendChild(card);
+    });
+
+    episodeContent.appendChild(container);
+}
+
+// ====== SEASON / EPISODE CONTROL ======
+
 function startSeason() {
     const selected = [...document.querySelectorAll(".queen-card.selected")]
         .map(card => card.dataset.name);
@@ -284,12 +381,16 @@ function startSeason() {
     }
 
     currentCast = ALL_QUEENS.filter(q => selected.includes(q.name));
+    seasonQueens = [...currentCast];
+    initTrackRecord();
+
     episodeNumber = 1;
     startEpisode();
 }
 
 function startEpisode() {
     episodeStep = 0;
+    isFinale = currentCast.length === 3;
     currentChallenge = getRandomChallenge();
     currentJudging = null;
     currentBottom2 = null;
@@ -299,7 +400,18 @@ function startEpisode() {
     advanceEpisodeStep();
 }
 
+// ====== EPISODE FLOW ======
+
+let finaleCutQueen = null;
+let finaleWinner = null;
+let finaleRunnerUp = null;
+
 function advanceEpisodeStep() {
+    if (isFinale) {
+        advanceFinaleStep();
+        return;
+    }
+
     switch (episodeStep) {
         case 0:
             setEpisodeText(`
@@ -357,6 +469,8 @@ function advanceEpisodeStep() {
             const eliminated = currentLipSyncResult.eliminated;
             currentCast = eliminateFromCast(currentCast, eliminated);
 
+            updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
+
             setEpisodeText(`
                 <h2>Elimination</h2>
                 <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
@@ -366,6 +480,13 @@ function advanceEpisodeStep() {
             `, [eliminated]);
             break;
         case 9:
+            setEpisodeText(`
+                <h2>Track Record</h2>
+                <p>Here is the track record so far:</p>
+            `, []);
+            renderTrackRecordCards();
+            break;
+        case 10:
             if (currentCast.length <= 1) {
                 setEpisodeText(`
                     <h2>Season Winner</h2>
@@ -392,8 +513,72 @@ function advanceEpisodeStep() {
     episodeStep++;
 }
 
-// Start button launches the simulator
-document.getElementById("start-btn").addEventListener("click", startSeason);
+// ====== FINALE FLOW (TOP 3 → CUT → FINAL 2 LSFYL) ======
 
-// Continue button advances steps
+function advanceFinaleStep() {
+    switch (episodeStep) {
+        case 0:
+            setEpisodeText(`
+                <h2>Finale</h2>
+                <p>Our Top 3 queens are ready for the grand finale.</p>
+            `, currentCast);
+            break;
+        case 1:
+            setEpisodeText(`
+                <h2>Finale Challenge</h2>
+                <p>The queens face their final challenge before the crown…</p>
+            `, currentCast);
+            break;
+        case 2:
+            // Random cut from Top 3
+            const cutIndex = Math.floor(Math.random() * currentCast.length);
+            finaleCutQueen = currentCast[cutIndex];
+            currentCast = eliminateFromCast(currentCast, finaleCutQueen);
+
+            setEpisodeText(`
+                <h2>Top 3 Cut</h2>
+                <p>❌ <strong>${finaleCutQueen.name}</strong> has been cut from the finale.</p>
+                <p>Our final 2 queens will now lip sync for the crown.</p>
+            `, [finaleCutQueen]);
+            break;
+        case 3:
+            // Final 2 lip sync for the crown
+            const final2 = [...currentCast];
+            const finalResult = lipSync(final2);
+            finaleWinner = finalResult.winner;
+            finaleRunnerUp = finalResult.eliminated;
+            currentCast = [finaleWinner];
+
+            updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
+
+            setEpisodeText(`
+                <h2>Lip Sync For The Crown</h2>
+                <p>💄 <strong>${final2[0].name}</strong> vs <strong>${final2[1].name}</strong></p>
+                <p>🎤 <strong>${finaleWinner.name}</strong> wins the final lip sync!</p>
+            `, final2);
+            break;
+        case 4:
+            setEpisodeText(`
+                <h2>Season Winner</h2>
+                <p>👑 <strong>${finaleWinner.name}</strong> is the winner of the season!</p>
+            `, [finaleWinner]);
+            break;
+        case 5:
+            setEpisodeText(`
+                <h2>Final Track Record</h2>
+                <p>Here is the final track record for the season:</p>
+            `, []);
+            renderTrackRecordCards();
+            break;
+        default:
+            hideOverlay();
+            return;
+    }
+
+    episodeStep++;
+}
+
+// ====== EVENTS ======
+
+document.getElementById("start-btn").addEventListener("click", startSeason);
 episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
