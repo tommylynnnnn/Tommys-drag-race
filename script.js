@@ -479,6 +479,30 @@ function advanceFinaleStep() {
             `, final2);
             break;
 
-        case 4:
+            case 4:
             setEpisodeText(`
-                <
+                <h2>Season Winner</h2>
+                <p>👑 <strong>${finaleWinner.name}</strong> is the winner of the season!</p>
+            `, [finaleWinner]);
+            break;
+
+        case 5:
+            setEpisodeText(`
+                <h2>Final Track Record</h2>
+                <p>Here is the final track record for the season:</p>
+            `);
+            renderTrackRecordCards();
+            break;
+
+        case 6:
+            // Auto-refresh after finale
+            location.reload();
+            return;
+
+        default:
+            location.reload();
+            return;
+    }
+
+    episodeStep++;
+}
