@@ -1,4 +1,3 @@
-// Add your queens here
 const ALL_QUEENS = [
     "Alaska",
     "Alyssa Edwards",
@@ -11,7 +10,6 @@ const ALL_QUEENS = [
 
 const grid = document.getElementById("queen-grid");
 
-// Render queen cards
 function renderQueens() {
     grid.innerHTML = "";
 
@@ -32,7 +30,6 @@ function renderQueens() {
 
 renderQueens();
 
-// Start button
 document.getElementById("start-btn").addEventListener("click", () => {
     const selected = [...document.querySelectorAll(".queen-card.selected")]
         .map(card => card.dataset.name);
