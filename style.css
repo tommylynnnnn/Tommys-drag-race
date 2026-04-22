@@ -66,3 +66,8 @@ body {
     border-color: #ffb3e6;
     transform: translateY(-5px);
 }
+
+.queen-card:hover img {
+    box-shadow: 0 0 18px rgba(255, 105, 180, 1);
+    transform: scale(1.03);
+}
