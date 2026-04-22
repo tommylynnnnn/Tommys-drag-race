@@ -70,6 +70,11 @@ const ALL_QUEENS = [
         name: "Patricia Shen",
         img: "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/118/2020/09/09165555/BECOMING-EDDIE_Still_1-1000x600.png",
         stats: { acting: 12, comedy: 14, improv: 13, dance: 9, design: 10, lipsync: 15 }
+    },
+    {
+        name: "Karen Xu",
+        img: "https://barcelonahairacademy.com/wp-content/uploads/2024/07/Chinese-Bob-fine-hair.png",
+        stats: { acting: 12, comedy: 14, improv: 13, dance: 9, design: 10, lipsync: 15 }
     }
 ];
 
