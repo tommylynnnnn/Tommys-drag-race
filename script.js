@@ -116,9 +116,21 @@ function renderQueens() {
         card.dataset.name = q.name;
 
         card.innerHTML = `
-            <img src="${q.img}" alt="${q.name}">
-            <p>${q.name}</p>
-        `;
+    <img src="${q.img}" alt="${q.name}">
+    <p>${q.name}</p>
+
+    <div class="stats-box">
+        ${q.stats ? `
+            <p><strong>Charisma:</strong> ${q.stats.charisma}</p>
+            <p><strong>Uniqueness:</strong> ${q.stats.uniqueness}</p>
+            <p><strong>Nerve:</strong> ${q.stats.nerve}</p>
+            <p><strong>Talent:</strong> ${q.stats.talent}</p>
+            <p><strong>Runway:</strong> ${q.stats.runway}</p>
+            <p><strong>Lip Sync:</strong> ${q.stats.lipsync}</p>
+        ` : `<p>No stats yet</p>`}
+    </div>
+`;
+
 
         card.addEventListener("click", () => {
             card.classList.toggle("selected");
