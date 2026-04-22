@@ -271,4 +271,20 @@ body {
     border: 3px solid hotpink;
 }
 
+.perf-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.perf-summary-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid hotpink;
+}
+
+
 
