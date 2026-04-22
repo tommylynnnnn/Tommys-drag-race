@@ -305,50 +305,36 @@ function advanceEpisodeStep() {
             break;
         case 2:
             setEpisodeText(`
-                <h2>Preparation</h2>
-                <p>The queens prepare for the ${currentChallenge.toLowerCase()} challenge…</p>
-            `, currentCast);
-            break;
-        case 3:
-            currentJudging = judgeQueens(currentCast, currentChallenge);
-            currentScores = currentJudging.scores;
-            setEpisodeText(`
-                <h2>Performance</h2>
-                <p>The queens hit the stage and give it their all.</p>
-            `, currentCast);
-            break;
-        case 4:
-            setEpisodeText(`
                 <h2>Winner</h2>
                 <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the ${currentChallenge.toLowerCase()} challenge!</p>
             `, [currentJudging.winner]);
             break;
-        case 5:
+        case 3:
             setEpisodeText(`
                 <h2>High</h2>
                 <p>High this week: <strong>${currentJudging.high.map(q => q.name).join(", ") || "None"}</strong></p>
             `, currentJudging.high);
             break;
-        case 6:
+        case 4:
             setEpisodeText(`
                 <h2>Safe</h2>
                 <p>Safe queens: <strong>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</strong></p>
             `, currentJudging.safe);
             break;
-        case 7:
+        case 5:
             setEpisodeText(`
                 <h2>Low</h2>
                 <p>Low this week: <strong>${currentJudging.low.map(q => q.name).join(", ") || "None"}</strong></p>
             `, currentJudging.low);
             break;
-        case 8:
+        case 6:
             currentBottom2 = currentJudging.bottom2;
             setEpisodeText(`
                 <h2>Bottom 2</h2>
                 <p>Bottom 2: <strong>${currentBottom2[0].name}</strong> vs <strong>${currentBottom2[1].name}</strong></p>
             `, currentBottom2);
             break;
-        case 9:
+        case 7:
             currentLipSyncResult = lipSync(currentBottom2);
             setEpisodeText(`
                 <h2>Lip Sync For Your Life</h2>
@@ -356,7 +342,7 @@ function advanceEpisodeStep() {
                 <p>🎤 <strong>${currentLipSyncResult.winner.name}</strong> wins the lip sync!</p>
             `, currentBottom2);
             break;
-        case 10:
+        case 8:
             const eliminated = currentLipSyncResult.eliminated;
             currentCast = eliminateFromCast(currentCast, eliminated);
 
@@ -368,7 +354,7 @@ function advanceEpisodeStep() {
                     : `We have a winner, baby!`}</p>
             `, [eliminated]);
             break;
-        case 11:
+        case 9:
             if (currentCast.length <= 1) {
                 setEpisodeText(`
                     <h2>Season Winner</h2>
