@@ -216,7 +216,7 @@ const LIP_SYNC_SONGS = [
     { title: "Pretty Ugly", artist: "Zara Larsson" },
     { title: "Jerkin'", artist: "Amyl & The Sniffers" },
     { title: "Feels Like Another One ", artist: "Patti LaBelle" },
-    { title: "Every Girl You've Ever Loved", artist: "Miley Cyrus ft. Naomi Campbell" },
+    { title: "Every Girl You've Ever Loved", artist: "Miley Cyrus ft. Naomi Campbell" }
 ];
 
 // ====== DOM ======
