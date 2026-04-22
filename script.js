@@ -5,7 +5,8 @@ const ALL_QUEENS = [
     "Katya",
     "Sasha Velour",
     "Bianca Del Rio",
-    "Jinkx Monsoon"
+    "Jinkx Monsoon",
+    "Onya Nurve"
 ];
 
 const grid = document.getElementById("queen-grid");
