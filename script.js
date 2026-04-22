@@ -81,7 +81,7 @@ const ENTRANCE_LINES = {
     "Myki Meeks": "I'm Myki, but you, you can call me Myki.",
     "Darlene Mitchell": "She's corny!",
     "Nini Coco": "Gay!",
-    "Jane Don't": "WAZZUP?!"
+    "Jane Don't": "WAZZUP?!",
     "Juicy Love Dion": "The party princess of Miami and Mykonos is finally here. Yes, baby. The juice is loose."
 };
 
