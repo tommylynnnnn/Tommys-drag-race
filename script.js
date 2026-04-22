@@ -506,3 +506,9 @@ function advanceFinaleStep() {
 
     episodeStep++;
 }
+
+// ====== EVENT LISTENERS ======
+
+document.getElementById("start-btn").addEventListener("click", startSeason);
+episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
+
