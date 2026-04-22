@@ -3,6 +3,10 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Updated 1.3.0
+
+-Added lipsync songs
+
 🌟 Update 1.2.0
 
 -Added full season 18 cast
