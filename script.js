@@ -249,8 +249,18 @@ function hideOverlay() {
     overlay.classList.add("hidden");
 }
 
-function setEpisodeText(text) {
+function setEpisodeText(text, queensToShow = []) {
     episodeContent.innerHTML = text;
+
+    const container = document.getElementById("episode-queens");
+    container.innerHTML = "";
+
+    queensToShow.forEach(q => {
+        const img = document.createElement("img");
+        img.src = q.img;
+        img.className = "episode-queen-img";
+        container.appendChild(img);
+    });
 }
 
 function startSeason() {
