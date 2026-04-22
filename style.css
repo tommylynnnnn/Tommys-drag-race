@@ -202,3 +202,69 @@ body {
     transform: scale(0.97);
 }
 
+#episode-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+#episode-overlay.hidden {
+    display: none;
+}
+
+.episode-panel {
+    background: #ff4fa8;
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(255, 0, 180, 0.9);
+    text-align: center;
+}
+
+#episode-content {
+    min-height: 150px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#episode-queens {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.episode-queen-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 0 12px rgba(255,255,255,0.8);
+}
+
+#episode-continue-btn {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 999px;
+    border: none;
+    background: white;
+    color: #c0007a;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(255,255,255,0.7);
+    transition: 0.2s ease;
+}
+
+#episode-continue-btn:hover {
+    transform: scale(1.05);
+}
+
+
