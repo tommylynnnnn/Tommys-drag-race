@@ -47,3 +47,13 @@ document.getElementById("start-btn").addEventListener("click", () => {
 
     alert("Your cast: " + selected.join(", "));
 });
+
+document.getElementById("search").addEventListener("input", (e) => {
+    const term = e.target.value.toLowerCase();
+
+    document.querySelectorAll(".queen-card").forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        card.style.display = name.includes(term) ? "block" : "none";
+    });
+});
+
