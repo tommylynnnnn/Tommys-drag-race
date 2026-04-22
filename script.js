@@ -355,7 +355,7 @@ function getLatestPlacement(q) {
 }
 
 function sortQueensByPlacement(queens) {
-    const order = ["WINNER", "RUNNER-UP", "WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", "—"];
+    const order = ["WINNER", "RUNNER-UP", "WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", ""];
 
     return queens.slice().sort((a, b) => {
         const pa = getLatestPlacement(a);
