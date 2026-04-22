@@ -55,7 +55,12 @@ const ALL_QUEENS = [
         name: "Nini Coco",
         img: "https://i.pinimg.com/736x/b5/1e/6a/b51e6aa16ea992aa267a435831919304.jpg",
         stats: { acting: 8, comedy: 7, improv: 8, dance: 9, design: 10, lipsync: 12 }
-    }
+    },
+    {
+        name: "Jane Don't",
+        img: "https://i.pinimg.com/736x/21/96/83/2196830d84a99a963de849a8501f0772.jpg",
+        stats: { acting: 13, comedy: 10, improv: 12, dance: 15, design: 11, lipsync: 12 }
+    },
 ];
 
 // ====== CHALLENGES ======
