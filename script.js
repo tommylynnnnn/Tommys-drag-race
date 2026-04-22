@@ -1,6 +1,6 @@
 // Add your queens + image links here
 const ALL_QUEENS = [
-    { name: "Alaska", img: "https://i.pinimg.com/736x/6e/ef/ca/6eefcadaa26067a62884227350d683b8.jpg" },
+    { name: "Alaska", img: "IMAGE_URL_HERE" },
     { name: "Alyssa Edwards", img: "IMAGE_URL_HERE" },
     { name: "Bob the Drag Queen", img: "IMAGE_URL_HERE" },
     { name: "Katya", img: "IMAGE_URL_HERE" },
