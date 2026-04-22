@@ -432,10 +432,10 @@ function advanceEpisodeStep() {
 `).join("");
 
         setEpisodeText(`
-            <h2>Episode 1</h2>
-            <h3>Entrance Lines</h3>
-            ${lines}
-        `, currentCast);
+    <h2>Episode 1</h2>
+    <h3>Entrance Lines</h3>
+    ${lines}
+`);
     } else {
         // Normal episodes
         setEpisodeText(`<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`, currentCast);
