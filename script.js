@@ -432,84 +432,101 @@ function advanceEpisodeStep() {
 
     switch (episodeStep) {
         case 0:
-    if (episodeNumber === 1) {
-        // Episode 1 entrance lines
-        const lines = currentCast.map(q => `
-    <div class="entrance-line">
-        <img src="${q.img}" class="entrance-img">
-        <p><strong>${q.name}:</strong> ${ENTRANCE_LINES[q.name]}</p>
-    </div>
-`).join("");
+            if (episodeNumber === 1) {
+                const lines = currentCast.map(q => `
+                    <div class="entrance-line">
+                        <img src="${q.img}" class="entrance-img">
+                        <p><strong>${q.name}:</strong> ${ENTRANCE_LINES[q.name]}</p>
+                    </div>
+                `).join("");
 
-        setEpisodeText(`
-    <h2>Episode 1</h2>
-    <h3>Entrance Lines</h3>
-    ${lines}
-`);
-    } else {
-        // Normal episodes
-        setEpisodeText(`<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`, currentCast);
-    }
-    break;
+                setEpisodeText(`
+                    <h2>Episode 1</h2>
+                    <h3>Entrance Lines</h3>
+                    ${lines}
+                `);
+            } else {
+                setEpisodeText(
+                    `<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`,
+                    currentCast
+                );
+            }
+            break;
 
         case 1:
-            setEpisodeText(`<h2>Maxi Challenge</h2><p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>`, currentCast);
+            setEpisodeText(
+                `<h2>Maxi Challenge</h2><p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>`,
+                currentCast
+            );
             break;
 
         case 2:
-    // JUDGING HAPPENS HERE
-    currentJudging = judgeQueens(currentCast, currentChallenge);
+            // Judging happens here
+            currentJudging = judgeQueens(currentCast, currentChallenge);
 
-    // PERFORMANCE SUMMARY PAGE
-    const j = currentJudging;
+            // Performance summary page
+            const j = currentJudging;
 
-    const safe = j.safe.map(q => `
-        <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
-    `).join("");
+            const safe = j.safe.map(q => `
+                <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+            `).join("");
 
-    const highAndWinner = [j.winner, ...j.high].map(q => `
-        <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
-    `).join("");
+            const highAndWinner = [j.winner, ...j.high].map(q => `
+                <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+            `).join("");
 
-    const lowAndBottom = [...j.low, ...j.bottom2].map(q => `
-        <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
-    `).join("");
+            const lowAndBottom = [...j.low, ...j.bottom2].map(q => `
+                <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+            `).join("");
 
-    setEpisodeText(`
-        <h2>Performance Results</h2>
+            setEpisodeText(`
+                <h2>Performance Results</h2>
 
-        <h3>Safe Queens</h3>
-        ${safe || "<p>None</p>"}
+                <h3>Safe Queens</h3>
+                ${safe || "<p>None</p>"}
 
-        <h3>High & Winner</h3>
-        ${highAndWinner}
+                <h3>High & Winner</h3>
+                ${highAndWinner}
 
-        <h3>Low & Bottom 2</h3>
-        ${lowAndBottom}
-    `);
+                <h3>Low & Bottom 2</h3>
+                ${lowAndBottom}
+            `);
+            break;
 
-    break;
-
-            case 3:
-    currentJudging = judgeQueens(...)
-    setEpisodeText(`<h2>Winner</h2>...`);
-    break;
+        case 3:
+            setEpisodeText(
+                `<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins!</p>`,
+                [currentJudging.winner]
+            );
+            break;
 
         case 4:
-            setEpisodeText(`<h2>High</h2><p>${currentJudging.high.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.high);
+            setEpisodeText(
+                `<h2>High</h2><p>${currentJudging.high.map(q => q.name).join(", ") || "None"}</p>`,
+                currentJudging.high
+            );
             break;
 
         case 5:
-            setEpisodeText(`<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.safe);
+            setEpisodeText(
+                `<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`,
+                currentJudging.safe
+            );
             break;
 
         case 6:
-            setEpisodeText(`<h2>Low</h2><p>${currentJudging.low.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.low);
+            setEpisodeText(
+                `<h2>Low</h2><p>${currentJudging.low.map(q => q.name).join(", ") || "None"}</p>`,
+                currentJudging.low
+            );
             break;
 
         case 7:
             currentBottom2 = currentJudging.bottom2;
-            setEpisodeText(`<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`, currentBottom2);
+            setEpisodeText(
+                `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
+                currentBottom2
+            );
             break;
 
         case 8:
@@ -544,7 +561,10 @@ function advanceEpisodeStep() {
                 location.reload();
                 return;
             } else {
-                setEpisodeText(`<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`, currentCast);
+                setEpisodeText(
+                    `<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`,
+                    currentCast
+                );
             }
             break;
 
@@ -556,7 +576,7 @@ function advanceEpisodeStep() {
 
     episodeStep++;
 }
-
+  
 // ====== FINALE FLOW ======
 
 function advanceFinaleStep() {
