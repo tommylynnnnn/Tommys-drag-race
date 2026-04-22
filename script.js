@@ -65,6 +65,51 @@ const ALL_QUEENS = [
         name: "Juicy Love Dion",
         img: "https://i.pinimg.com/736x/c1/a9/d9/c1a9d95922919fc9fc361072247c7a84.jpg",
         stats: { acting: 6, comedy: 5, improv: 6, dance: 9, design: 10, lipsync: 11 }
+    },
+    {
+        name: "Discord Addams",
+        img: "https://i.pinimg.com/736x/d8/09/50/d809509a600af933c994510af325f0d5.jpg",
+        stats: { acting: 8, comedy: 8, improv: 8, dance: 9, design: 8, lipsync: 6 }
+    },
+    {
+        name: "Kenya Pleaser",
+        img: "https://i.pinimg.com/736x/67/1f/d8/671fd89dd140f71f27b4a50a83cf231d.jpg",
+        stats: { acting: 10, comedy: 5, improv: 8, dance: 9, design: 7, lipsync: 10 }
+    },
+    {
+        name: "Athena Dion",
+        img: "https://i.pinimg.com/736x/0f/ce/92/0fce92d7db2363352a0980269f43d0ca.jpg",
+        stats: { acting: 7, comedy: 9, improv: 8, dance: 6, design: 9, lipsync: 4 }
+    },
+    {
+        name: "Ciara Myst",
+        img: "https://i.pinimg.com/736x/f2/80/ac/f280ace351bbf9801cb9d9bc16903cad.jpg",
+        stats: { acting: 9, comedy: 0, improv: 5, dance: 9, design: 11, lipsync: 6 }
+    },
+    {
+        name: "Briar Blush",
+        img: "https://i.pinimg.com/736x/3c/fa/55/3cfa55846aec77075d25b7525781468b.jpg",
+        stats: { acting: 3, comedy: 0, improv: 2, dance: 9, design: 6, lipsync: 9 }
+    },
+    {
+        name: "DD Fuego",
+        img: "https://i.pinimg.com/736x/0a/ac/c2/0aacc2ebf2713b145299aea5e5bb9764.jpg",
+        stats: { acting: 0, comedy: 0, improv: 0, dance: 3, design: 9, lipsync: 3 }
+    },
+    {
+        name: "Mandy Mango",
+        img: "https://i.pinimg.com/736x/36/f6/77/36f677727d9633de35235fbd86c9141b.jpg",
+        stats: { acting: 3, comedy: 0, improv: 2, dance: 3, design: 6, lipsync: 7 }
+    },
+    {
+        name: "Mia Starr",
+        img: "https://i.pinimg.com/736x/6a/e1/ee/6ae1ee1d99d56d1f433898e32e7ee5c6.jpg",
+        stats: { acting: 8, comedy: 5, improv: 7, dance: 12, design: 9, lipsync: 10 }
+    },
+    {
+        name: "Vita VonTesse Starr",
+        img: "https://i.pinimg.com/736x/f9/62/6a/f9626a898746975b563350c8f1bade97.jpg",
+        stats: { acting: 5, comedy: 3, improv: 4, dance: 9, design: 14, lipsync: 5 }
     }
 
 ];
@@ -83,6 +128,15 @@ const ENTRANCE_LINES = {
     "Nini Coco": "Gay!",
     "Jane Don't": "WAZZUP?!",
     "Juicy Love Dion": "The party princess of Miami and Mykonos is finally here. Yes, baby. The juice is loose."
+    "Discord Addams": "Who's ready for a little chaos?"
+    "Kenya Pleaser": "I have one thing to say: Kenya Pleaser? (moans)"
+    "Athena Dion": "Honey, this is how you throw a party on Drag Race, bitch."
+    "Ciara Myst": "Feeling scared yet? You should be."
+    "Briar Blush": "WHY ARE YOU RECORDING ME!?"
+    "DD Fuego": "Can I say the F-word? FUEGO!"
+    "Mandy Mango": "Miss Nurse! Don't you know? A mango a day keeps the doctor away."
+    "Mia Starr": "I'm repping for the big backs, and I came to eat."
+    "Vita VonTesse Starr": "Baby it's easy to see, that I'm the key. You can question those other girls, but never Queen V"
 };
 
 // ====== CHALLENGES ======
