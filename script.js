@@ -255,13 +255,15 @@ function scoreQueen(q, type) {
     return base + (Math.floor(Math.random() * 10) - 5);
 }
 
-function getPerformanceRating(q, judging) {
-    if (q.name === judging.winner.name) return "Slayed";
-    if (judging.high.some(h => h.name === q.name)) return "Good";
-    if (judging.safe.some(s => s.name === q.name)) return "Fine";
-    if (judging.low.some(l => l.name === q.name)) return "Bad";
-    if (judging.bottom2.some(b => b.name === q.name)) return "Flopped";
-    return "Fine";
+function getScoreBasedRating(score, maxScore, minScore) {
+    const range = maxScore - minScore;
+    const normalized = (score - minScore) / range;
+
+    if (normalized >= 0.85) return "Slayed";
+    if (normalized >= 0.65) return "Good";
+    if (normalized >= 0.45) return "Fine";
+    if (normalized >= 0.25) return "Bad";
+    return "Flopped";
 }
 
 function judgeQueens(cast, type) {
@@ -464,12 +466,19 @@ function advanceEpisodeStep() {
     // JUDGING HAPPENS HERE
     currentJudging = judgeQueens(currentCast, currentChallenge);
 
-    const j = currentJudging;
+    // SCORE EACH QUEEN
+    const scored = currentCast
+        .map(q => ({ queen: q, score: scoreQueen(q, currentChallenge) }))
+        .sort((a, b) => b.score - a.score);
 
-    const summaryHTML = currentCast.map(q => `
+    const maxScore = scored[0].score;
+    const minScore = scored[scored.length - 1].score;
+
+    // BUILD SUMMARY HTML
+    const summaryHTML = scored.map(s => `
         <div class="perf-summary">
-            <img src="${q.img}" class="perf-summary-img">
-            <p><strong>${q.name}</strong> — ${getPerformanceRating(q, j)}</p>
+            <img src="${s.queen.img}" class="perf-summary-img">
+            <p><strong>${s.queen.name}</strong> — ${getScoreBasedRating(s.score, maxScore, minScore)}</p>
         </div>
     `).join("");
 
