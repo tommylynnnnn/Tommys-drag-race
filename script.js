@@ -101,6 +101,7 @@ const grid = document.getElementById("queen-grid");
 const overlay = document.getElementById("episode-overlay");
 const episodeContent = document.getElementById("episode-content");
 const episodeContinueBtn = document.getElementById("episode-continue-btn");
+const episodeQueensContainer = document.getElementById("episode-queens");
 
 function renderQueens() {
     grid.innerHTML = "";
@@ -252,14 +253,13 @@ function hideOverlay() {
 function setEpisodeText(text, queensToShow = []) {
     episodeContent.innerHTML = text;
 
-    const container = document.getElementById("episode-queens");
-    container.innerHTML = "";
-
+    episodeQueensContainer.innerHTML = "";
     queensToShow.forEach(q => {
         const img = document.createElement("img");
         img.src = q.img;
+        img.alt = q.name;
         img.className = "episode-queen-img";
-        container.appendChild(img);
+        episodeQueensContainer.appendChild(img);
     });
 }
 
@@ -295,19 +295,19 @@ function advanceEpisodeStep() {
             setEpisodeText(`
                 <h2>Episode ${episodeNumber}</h2>
                 <p>The competition continues with ${currentCast.length} queens.</p>
-            `);
+            `, currentCast);
             break;
         case 1:
             setEpisodeText(`
                 <h2>Maxi Challenge</h2>
                 <p>This week’s maxi challenge is… <strong>${currentChallenge.toUpperCase()}!</strong></p>
-            `);
+            `, currentCast);
             break;
         case 2:
             setEpisodeText(`
                 <h2>Preparation</h2>
                 <p>The queens prepare for the ${currentChallenge.toLowerCase()} challenge…</p>
-            `);
+            `, currentCast);
             break;
         case 3:
             currentJudging = judgeQueens(currentCast, currentChallenge);
@@ -315,38 +315,38 @@ function advanceEpisodeStep() {
             setEpisodeText(`
                 <h2>Performance</h2>
                 <p>The queens hit the stage and give it their all.</p>
-            `);
+            `, currentCast);
             break;
         case 4:
             setEpisodeText(`
                 <h2>Winner</h2>
                 <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the ${currentChallenge.toLowerCase()} challenge!</p>
-            `);
+            `, [currentJudging.winner]);
             break;
         case 5:
             setEpisodeText(`
                 <h2>High</h2>
                 <p>High this week: <strong>${currentJudging.high.map(q => q.name).join(", ") || "None"}</strong></p>
-            `);
+            `, currentJudging.high);
             break;
         case 6:
             setEpisodeText(`
                 <h2>Safe</h2>
                 <p>Safe queens: <strong>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</strong></p>
-            `);
+            `, currentJudging.safe);
             break;
         case 7:
             setEpisodeText(`
                 <h2>Low</h2>
                 <p>Low this week: <strong>${currentJudging.low.map(q => q.name).join(", ") || "None"}</strong></p>
-            `);
+            `, currentJudging.low);
             break;
         case 8:
             currentBottom2 = currentJudging.bottom2;
             setEpisodeText(`
                 <h2>Bottom 2</h2>
                 <p>Bottom 2: <strong>${currentBottom2[0].name}</strong> vs <strong>${currentBottom2[1].name}</strong></p>
-            `);
+            `, currentBottom2);
             break;
         case 9:
             currentLipSyncResult = lipSync(currentBottom2);
@@ -354,7 +354,7 @@ function advanceEpisodeStep() {
                 <h2>Lip Sync For Your Life</h2>
                 <p>💄 <strong>${currentBottom2[0].name}</strong> vs <strong>${currentBottom2[1].name}</strong></p>
                 <p>🎤 <strong>${currentLipSyncResult.winner.name}</strong> wins the lip sync!</p>
-            `);
+            `, currentBottom2);
             break;
         case 10:
             const eliminated = currentLipSyncResult.eliminated;
@@ -366,7 +366,7 @@ function advanceEpisodeStep() {
                 <p>${currentCast.length > 1
                     ? `${currentCast.length} queens remain.`
                     : `We have a winner, baby!`}</p>
-            `);
+            `, [eliminated]);
             break;
         case 11:
             if (currentCast.length <= 1) {
@@ -374,12 +374,12 @@ function advanceEpisodeStep() {
                     <h2>Season Winner</h2>
                     <p>👑 <strong>${currentCast[0].name}</strong> is the winner of the season!</p>
                     <p>Refresh the page or reselect queens to start a new season.</p>
-                `);
+                `, currentCast);
             } else {
                 setEpisodeText(`
                     <h2>Next Episode</h2>
                     <p>Get ready for Episode ${episodeNumber + 1}…</p>
-                `);
+                `, currentCast);
             }
             break;
         default:
@@ -395,7 +395,7 @@ function advanceEpisodeStep() {
     episodeStep++;
 }
 
-// Start button now launches the simulator
+// Start button launches the simulator
 document.getElementById("start-btn").addEventListener("click", startSeason);
 
 // Continue button advances steps
