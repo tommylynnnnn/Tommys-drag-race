@@ -61,6 +61,11 @@ const ALL_QUEENS = [
         img: "https://i.pinimg.com/736x/21/96/83/2196830d84a99a963de849a8501f0772.jpg",
         stats: { acting: 13, comedy: 10, improv: 12, dance: 15, design: 11, lipsync: 12 }
     },
+    {
+        name: "Juicy Love Dion",
+        img: "https://i.pinimg.com/736x/c1/a9/d9/c1a9d95922919fc9fc361072247c7a84.jpg",
+        stats: { acting: 6, comedy: 5, improv: 6, dance: 9, design: 10, lipsync: 11 }
+    }
 ];
 
 // ====== CHALLENGES ======
