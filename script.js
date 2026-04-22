@@ -1,12 +1,12 @@
 const ALL_QUEENS = [
     { name: "Alaska", img: "https://i.pinimg.com/736x/6e/ef/ca/6eefcadaa26067a62884227350d683b8.jpg" },
-    { name: "Alyssa Edwards", img: "IMAGE_URL_HERE" },
-    { name: "Bob the Drag Queen", img: "IMAGE_URL_HERE" },
-    { name: "Katya", img: "IMAGE_URL_HERE" },
-    { name: "Sasha Velour", img: "IMAGE_URL_HERE" },
-    { name: "Bianca Del Rio", img: "IMAGE_URL_HERE" },
-    { name: "Jinkx Monsoon", img: "IMAGE_URL_HERE" },
-    { name: "Onya Nurve", img: "IMAGE_URL_HERE" }
+    { name: "Alyssa Edwards", img: "" },
+    { name: "Bob the Drag Queen", img: "" },
+    { name: "Katya", img: "" },
+    { name: "Sasha Velour", img: "" },
+    { name: "Bianca Del Rio", img: "" },
+    { name: "Jinkx Monsoon", img: "" },
+    { name: "Onya Nurve", img: "" }
 ];
 
 
