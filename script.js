@@ -358,12 +358,23 @@ function getLatestPlacement(q) {
 function sortQueensByPlacement(queens) {
     const order = ["WINNER", "RUNNER-UP", "WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", ""];
 
-    return queens.slice().sort((a, b) => {
+    // ACTIVE queens (not eliminated)
+    const active = queens.filter(q => !eliminationOrder.includes(q.name));
+
+    // ELIMINATED queens in the exact order they were eliminated
+    const eliminated = eliminationOrder
+        .map(name => queens.find(q => q.name === name))
+        .filter(q => q); // remove nulls
+
+    // Sort active queens normally
+    const sortedActive = active.slice().sort((a, b) => {
         const pa = getLatestPlacement(a);
         const pb = getLatestPlacement(b);
-
         return order.indexOf(pa) - order.indexOf(pb);
     });
+
+    // Return active queens first, then eliminated queens frozen in order
+    return [...sortedActive, ...eliminated];
 }
 
 function renderTrackRecordCards() {
