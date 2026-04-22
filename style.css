@@ -297,4 +297,60 @@ body {
     margin-bottom: 8px;
 }
 
+/* Container */
+.random-select-container {
+    margin: 20px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label */
+.random-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Row layout */
+.random-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Input styling */
+.random-input {
+    width: 160px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    backdrop-filter: blur(4px);
+}
+
+/* Button styling */
+.random-btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ff4dc4, #ff0099);
+    color: white;
+    transition: 0.2s;
+}
+
+.random-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(255, 0, 153, 0.6);
+}
 
