@@ -152,15 +152,15 @@ const ELIMINATION_LINES = {
     "Darlene Mitchell": "*Poses seductively and then laughs*",
     "Nini Coco": "*Cries*",
     "Jane Don't": "Oh, uhm... eh...",
-    "Juicy Love Dion": "Never forget: the juice is officially loose!"
-    "Discord Addams": "Well, see you on All Stars!"
-    "Kenya Pleaser": "The question still stands, RuPaul: Kenya Pleaser?"
-    "Athena Dion": "May your Prosecco always be on ice. May you always fly first. Always settle for more, and never accept any less. Thank you."
-    "Ciara Myst": "Oh, and since you girls need a new vocal stim, you can use this one: OOH-OOH-AH-OOH!"
-    "Briar Blush": "WHY ARE YOU RECORDING ME?!""
-    "DD Fuego": "Well... it was short... it was sweet... I wish it had been a little spicier. Adiós!"
-    "Mandy Mango": "Mangoes can be eaten, mangoes can be slurped... Cheers to all the lovers who make our mangoes burst!"
-    "Mia Starr": "FUCK YOU BLOODY MARYYYYYYYYYYY!! BITCH!!"
+    "Juicy Love Dion": "Never forget: the juice is officially loose!",
+    "Discord Addams": "Well, see you on All Stars!",
+    "Kenya Pleaser": "The question still stands, RuPaul: Kenya Pleaser?",
+    "Athena Dion": "May your Prosecco always be on ice. May you always fly first. Always settle for more, and never accept any less. Thank you.",
+    "Ciara Myst": "Oh, and since you girls need a new vocal stim, you can use this one: OOH-OOH-AH-OOH!",
+    "Briar Blush": "WHY ARE YOU RECORDING ME?!"",
+    "DD Fuego": "Well... it was short... it was sweet... I wish it had been a little spicier. Adiós!",
+    "Mandy Mango": "Mangoes can be eaten, mangoes can be slurped... Cheers to all the lovers who make our mangoes burst!",
+    "Mia Starr": "FUCK YOU BLOODY MARYYYYYYYYYYY!! BITCH!!",
     "Vita VonTesse Starr": "Final words... Vita Vita Vita (Everyone: You know you wanna eat her!)"
 };
 
