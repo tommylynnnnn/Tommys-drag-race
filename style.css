@@ -146,3 +146,59 @@ body {
 #start-btn:active {
     transform: scale(0.97);
 }
+
+#episode-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+#episode-overlay.hidden {
+    display: none;
+}
+
+.episode-panel {
+    background: #ff4fa8; /* pink like your app */
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(255, 0, 180, 0.9);
+    font-family: system-ui, sans-serif;
+    text-align: center;
+}
+
+#episode-content {
+    min-height: 160px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+#episode-continue-btn {
+    margin-top: 20px;
+    padding: 10px 22px;
+    font-size: 18px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #ffffff, #ffd6f4);
+    color: #c0007a;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#episode-continue-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+}
+
+#episode-continue-btn:active {
+    transform: scale(0.97);
+}
+
