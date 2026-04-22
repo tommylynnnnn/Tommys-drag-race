@@ -558,7 +558,7 @@ function advanceEpisodeStep() {
         case 9:
             const eliminated = currentLipSyncResult.eliminated;
             currentCast = eliminateFromCast(currentCast, eliminated);
-            eliminationOrder.push(eliminated.name);
+            eliminationOrder.unshift(eliminated.name);
 
             updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 
@@ -612,7 +612,7 @@ function advanceFinaleStep() {
             const cutIndex = Math.floor(Math.random() * currentCast.length);
             finaleCutQueen = currentCast[cutIndex];
             currentCast = eliminateFromCast(currentCast, finaleCutQueen);
-            eliminationOrder.push(finaleCutQueen.name);
+            eliminationOrder.unshift(finaleCutQueen.name);
 
             setEpisodeText(`
                 <h2>Top 3 Cut</h2>
