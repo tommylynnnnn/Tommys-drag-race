@@ -749,7 +749,7 @@ function startSeason() {
     initTrackRecord();
 
     episodeNumber = 1;
-    startEpisode();
+    document.getElementById("season-options-overlay").classList.remove("hidden");
 }
 
 function startEpisode() {
