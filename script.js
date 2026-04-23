@@ -883,39 +883,38 @@ function advanceEpisodeStep() {
 
         case 1:
             const runwayTheme = getRandomRunwayTheme();
-currentRunwayTheme = runwayTheme;
+            currentRunwayTheme = runwayTheme;
 
-setEpisodeText(
-    `
-    <h2>Maxi Challenge</h2>
-    <p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>
-    <h3>Runway Theme</h3>
-    <p><strong>${runwayTheme}</strong></p>
-    `,
-    currentCast
-);
+            setEpisodeText(
+                `
+                <h2>Maxi Challenge</h2>
+                <p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>
+                <h3>Runway Theme</h3>
+                <p><strong>${runwayTheme}</strong></p>
+                `,
+                currentCast
+            );
             break;
 
         case 2:
-    currentJudging = judgeQueens(currentCast, currentChallenge);
+            currentJudging = judgeQueens(currentCast, currentChallenge);
 
-    const scored = currentJudging.scored;
-    const maxScore = scored[0].score;
-    const minScore = scored[scored.length - 1].score;
+            const scored = currentJudging.scored;
+            const maxScore = scored[0].score;
+            const minScore = scored[scored.length - 1].score;
 
-    const summaryHTML = scored.map(s => `
-        <div class="perf-summary">
-            <img src="${s.queen.img}" class="perf-summary-img">
-            <p><strong>${s.queen.name}</strong> — ${getScoreBasedRating(s.score, maxScore, minScore)}</p>
-        </div>
-    `).join("");
+            const summaryHTML = scored.map(s => `
+                <div class="perf-summary">
+                    <img src="${s.queen.img}" class="perf-summary-img">
+                    <p><strong>${s.queen.name}</strong> — ${getScoreBasedRating(s.score, maxScore, minScore)}</p>
+                </div>
+            `).join("");
 
-    setEpisodeText(`
-        <h2>Challenge Results</h2>
-        ${summaryHTML}
-    `);
-
-    break;
+            setEpisodeText(`
+                <h2>Challenge Results</h2>
+                ${summaryHTML}
+            `);
+            break;
 
         case 3:
             setEpisodeText(
@@ -932,181 +931,178 @@ setEpisodeText(
             break;
 
         case 5:
-    if (premiereType === "double" && episodeNumber <= 2) {
-        // SKIP WINNER PAGE — winner is decided after lipsync
-        episodeStep++;
-        return advanceEpisodeStep();
-    }
-
-    // NORMAL WINNER PAGE
-    setEpisodeText(`
-        <h2>Winner</h2>
-        <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the challenge!</p>
-    `, [currentJudging.winner]);
-    break;
-
-        case 6:
-    if (premiereType === "double" && episodeNumber <= 2) {
-        // SKIP LOW PAGE
-        episodeStep++;
-        return advanceEpisodeStep();
-    }
-
-    // NORMAL LOW PAGE
-    setEpisodeText(`
-        <h2>Low</h2>
-        <p>The following queens are low:</p>
-    `, currentJudging.low);
-    break;
-
-        case 7:
-    if (premiereType === "double" && episodeNumber <= 2) {
-        currentBottom2 = currentJudging.bottom2;
-        const [top1, top2] = currentBottom2;
-        
-        setEpisodeText(`
-            <h2>Top 2 Lipsync</h2>
-            <p>The top 2 queens will now lipsync for the win!</p>
-        `, [top1, top2]);
-
-        break;
-    }
-
-    // NORMAL BTM2 PAGE
-currentBottom2 = currentJudging.bottom2; // <-- ADD THIS LINE
-
-setEpisodeText(`
-    <h2>Bottom 2</h2>
-    <p>The following queens are up for elimination:</p>
-`, currentJudging.bottom2);
-break;
-
-        case 8:
-    if (premiereType === "double" && episodeNumber <= 2) {
-    const [top1, top2] = currentJudging.bottom2;
-
-    const winner = Math.random() < 0.5 ? top1 : top2;
-    const runner = winner === top1 ? top2 : top1;
-
-    trackRecord[winner.name].push("WIN");
-    trackRecord[runner.name].push("TOP2");
-    currentJudging.safe.forEach(q => trackRecord[q.name].push("SAFE"));
-
-    // Ensure EVERY queen gets an entry for this episode
-    normalizeTrackRecordForEpisode(); // <-- ADD THIS
-
-    setEpisodeText(`
-        <h2>Lipsync Winner</h2>
-        <p>🏆 <strong>${winner.name}</strong> wins the lipsync and the challenge!</p>
-    `, [winner]);
-
-    break;
-}
-
-    currentLipSyncSong = getRandomLipSyncSong(); // <-- CHANGE TO GLOBAL
-setEpisodeText(`
-    <h2>Lip Sync</h2>
-    <p>Song: <strong>${currentLipSyncSong.title}</strong> by ${currentLipSyncSong.artist}</p>
-`, currentJudging.bottom2);
-break;
-
-        case 9:
-
-    // ===== DOUBLE PREMIERE: NO ELIMINATION =====
-    if (premiereType === "double" && episodeNumber <= 2) {
-        // Skip elimination entirely
-        episodeStep++;
-        return advanceEpisodeStep();
-    }
-
-    // ===== NORMAL EPISODES BELOW =====
-    const result = currentLipSyncResult;
-
-    if (result.type === "double-shantay") {
-        setEpisodeText(`
-            <h2>Double Shantay!</h2>
-            <p>💖 Both queens stay!</p>
-            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-        `, currentBottom2);
-
-        // Track record: both get BTM2
-        seasonQueens.forEach(q => {
-            let p = "";
-            if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-            else if (q.name === currentJudging.winner.name) p = "WIN";
-            else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-            else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-            else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-            trackRecord[q.name].push(p);
-        });
-
-        break;
-    }
-
-    // (your remaining elimination logic continues here)
-
-if (result.type === "double-sashay") {
-    // NORMAL ELIMINATION
-const eliminated = result.eliminated[0];
-currentCast = eliminateFromCast(currentCast, eliminated);
-eliminationOrder.unshift(eliminated.name);
-
-updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
-normalizeTrackRecordForEpisode(); // <-- ADD THIS
-
-setEpisodeText(`
-    <h2>Elimination</h2>
-    <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
-    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
-    <p>${currentCast.length} queens remain.</p>
-`, [eliminated]);
-break;
-
-// NORMAL ELIMINATION
-const eliminated = result.eliminated[0];
-currentCast = eliminateFromCast(currentCast, eliminated);
-eliminationOrder.unshift(eliminated.name);
-
-updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
+            if (premiereType === "double" && episodeNumber <= 2) {
+                // Skip winner page in double premiere
+                episodeStep++;
+                return advanceEpisodeStep();
+            }
 
             setEpisodeText(`
-    <h2>Elimination</h2>
-    <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
-    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
-    <p>${currentCast.length} queens remain.</p>
-`, [eliminated]);
+                <h2>Winner</h2>
+                <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the challenge!</p>
+            `, [currentJudging.winner]);
             break;
 
-case 10:
-    setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
-    renderTrackRecordCards();
-    break;
+        case 6:
+            if (premiereType === "double" && episodeNumber <= 2) {
+                // Skip low page in double premiere
+                episodeStep++;
+                return advanceEpisodeStep();
+            }
 
-case 11:
-    if (currentCast.length <= 1) {
-        location.reload();
-        return;
-    } else {
-        setEpisodeText(
-            `<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`,
-            currentCast
-        );
-    }
-    break;
+            setEpisodeText(`
+                <h2>Low</h2>
+                <p>The following queens are low:</p>
+            `, currentJudging.low);
+            break;
+
+        case 7:
+            if (premiereType === "double" && episodeNumber <= 2) {
+                currentBottom2 = currentJudging.bottom2;
+                const [top1, top2] = currentBottom2;
+
+                setEpisodeText(`
+                    <h2>Top 2 Lipsync</h2>
+                    <p>The top 2 queens will now lipsync for the win!</p>
+                `, [top1, top2]);
+
+                break;
+            }
+
+            setEpisodeText(`
+                <h2>Bottom 2</h2>
+                <p>The following queens are up for elimination:</p>
+            `, currentJudging.bottom2);
+            break;
+
+        case 8:
+            if (premiereType === "double" && episodeNumber <= 2) {
+                const [top1, top2] = currentJudging.bottom2;
+
+                const winner = Math.random() < 0.5 ? top1 : top2;
+                const runner = winner === top1 ? top2 : top1;
+
+                trackRecord[winner.name].push("WIN");
+                trackRecord[runner.name].push("TOP2");
+                currentJudging.safe.forEach(q => trackRecord[q.name].push("SAFE"));
+
+                setEpisodeText(`
+                    <h2>Lipsync Winner</h2>
+                    <p>🏆 <strong>${winner.name}</strong> wins the lipsync and the challenge!</p>
+                `, [winner]);
+
+                break;
+            }
+
+            // NORMAL LIP SYNC
+            currentBottom2 = currentJudging.bottom2;
+            currentLipSyncResult = lipSync(currentBottom2);
+            currentLipSyncSong = getRandomLipSyncSong();
+
+            setEpisodeText(`
+                <h2>Lip Sync</h2>
+                <p>Song: <strong>${currentLipSyncSong.title}</strong> by ${currentLipSyncSong.artist}</p>
+            `, currentBottom2);
+            break;
+
+        case 9:
+            // DOUBLE PREMIERE: NO ELIMINATION
+            if (premiereType === "double" && episodeNumber <= 2) {
+                episodeStep++;
+                return advanceEpisodeStep();
+            }
+
+            const result = currentLipSyncResult;
+
+            if (result.type === "double-shantay") {
+                setEpisodeText(`
+                    <h2>Double Shantay!</h2>
+                    <p>💖 Both queens stay!</p>
+                    <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+                `, currentBottom2);
+
+                seasonQueens.forEach(q => {
+                    let p = "";
+                    if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
+                    else if (q.name === currentJudging.winner.name) p = "WIN";
+                    else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+                    else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+                    else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+                    trackRecord[q.name].push(p);
+                });
+
+                break;
+            }
+
+            if (result.type === "double-sashay") {
+                const eliminated = result.eliminated;
+
+                eliminated.forEach(q => {
+                    currentCast = eliminateFromCast(currentCast, q);
+                    eliminationOrder.unshift(q.name);
+                });
+
+                setEpisodeText(`
+                    <h2>Double Sashay!</h2>
+                    <p>❌ <strong>${eliminated[0].name}</strong> and <strong>${eliminated[1].name}</strong> have been eliminated.</p>
+                    <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+                `, eliminated);
+
+                seasonQueens.forEach(q => {
+                    let p = "";
+                    if (eliminated.some(e => e.name === q.name)) p = "ELIM";
+                    else if (q.name === currentJudging.winner.name) p = "WIN";
+                    else if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
+                    else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+                    else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+                    else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+                    trackRecord[q.name].push(p);
+                });
+
+                break;
+            }
+
+            // NORMAL ELIMINATION
+            const eliminated = result.eliminated[0];
+            currentCast = eliminateFromCast(currentCast, eliminated);
+            eliminationOrder.unshift(eliminated.name);
+
+            updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
+
+            setEpisodeText(`
+                <h2>Elimination</h2>
+                <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
+                <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+                <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
+                <p>${currentCast.length} queens remain.</p>
+            `, [eliminated]);
+            break;
+
+        case 10:
+            setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
+            renderTrackRecordCards();
+            normalizeTrackRecordForEpisode();   // <-- padding here
+            break;
+
+        case 11:
+            if (currentCast.length <= 1) {
+                location.reload();
+                return;
+            } else {
+                setEpisodeText(
+                    `<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`,
+                    currentCast
+                );
+            }
+            break;
 
         default:
-    // After second premiere, merge groups and go back to normal rules
-    if (premiereType === "double" && episodeNumber === 2) {
-        currentCast = [...premiereGroups[0], ...premiereGroups[1]];
-        premiereType = "normal"; // <<< IMPORTANT: turn off double premiere mode
-    }
-
-    episodeNumber++;
-    startEpisode();
-    return;
-
+            if (premiereType === "double" && episodeNumber === 2) {
+                currentCast = [...premiereGroups[0], ...premiereGroups[1]];
+            }
+            episodeNumber++;
+            startEpisode();
+            return;
     }
 
     episodeStep++;
