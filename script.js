@@ -1081,6 +1081,16 @@ updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
             renderTrackRecordCards();
             break;
 
+            if (premiereType === "double" && episodeNumber === 1) {
+    // Lock in episode 1 placements
+    seasonQueens.forEach(q => {
+        if (!trackRecord[q.name]) trackRecord[q.name] = [];
+        if (trackRecord[q.name].length < episodeNumber) {
+            trackRecord[q.name].push("SAFE");
+        }
+    });
+}
+
         case 11:
             if (currentCast.length <= 1) {
                 location.reload();
