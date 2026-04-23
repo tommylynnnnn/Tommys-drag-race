@@ -3,6 +3,11 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.8.0
+
+-Added Top 2 feature on regular seasons
+-Top 2 will randomly happen, and no elimination will occur
+
 🌟 Update 1.7.0
 
 -Added Double Shantay
