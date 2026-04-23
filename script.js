@@ -200,6 +200,18 @@ const CHALLENGES = [
     "Hosting Challenge"
 ];
 
+const RUNWAY_THEMES = [
+    "Your Neck, Your Back, Your Pussy Crack: Your Favorite Body Part",
+    "Animal Attraction",
+    "Not Today, Satin",
+    "Shake, Shake, Shake",
+    "I Can See Right Through Her",
+    "Eighties Ladies",
+    "Beige Against The Machine",
+    "From Wholsome To Folsom",
+    "Drag Excellence",
+];
+
 const LIP_SYNC_SONGS = [
     { title: "Too Much", artist: "Dove Cameron" },
     { title: "Love in Real Life", artist: "Lizzo" },
@@ -466,6 +478,10 @@ function getRandomLipSyncSong() {
     return LIP_SYNC_SONGS[Math.floor(Math.random() * LIP_SYNC_SONGS.length)];
 }
 
+function getRandomRunwayTheme() {
+    return RUNWAY_THEMES[Math.floor(Math.random() * RUNWAY_THEMES.length)];
+}
+
 // ====== TRACK RECORD ======
 
 function initTrackRecord() {
@@ -637,10 +653,18 @@ function advanceEpisodeStep() {
             break;
 
         case 1:
-            setEpisodeText(
-                `<h2>Maxi Challenge</h2><p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>`,
-                currentCast
-            );
+            const runwayTheme = getRandomRunwayTheme();
+currentRunwayTheme = runwayTheme;
+
+setEpisodeText(
+    `
+    <h2>Maxi Challenge</h2>
+    <p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>
+    <h3>Runway Theme</h3>
+    <p><strong>${runwayTheme}</strong></p>
+    `,
+    currentCast
+);
             break;
 
         case 2:
