@@ -814,7 +814,7 @@ setEpisodeText(
             break;
 
        case 2: {
-    // DRAMA GENERATOR — WITH IMAGE BLOCKS
+    // DRAMA GENERATOR — BIG VERSION
 
     // Pick 2–4 queens involved
     const dramaCount = Math.floor(Math.random() * 3) + 2; // 2–4 queens
@@ -826,7 +826,7 @@ setEpisodeText(
     const target = involved[1];
     const others = involved.slice(2);
 
-    // Drama types
+    // Drama templates
     const dramaTypes = [
         "shade",
         "argument",
@@ -842,18 +842,8 @@ setEpisodeText(
 
     const type = dramaTypes[Math.floor(Math.random() * dramaTypes.length)];
 
-    // Helper for queen name
+    // Helper for random queen name
     const q = q => `<strong>${q.name}</strong>`;
-
-    // Helper for queen image HTML
-    const img = q => `<img src="${q.img}" class="episode-queen-img drama-img">`;
-
-    // Build image row
-    const imageRow = `
-        <div class="drama-image-row">
-            ${involved.map(q => img(q)).join("")}
-        </div>
-    `;
 
     let dramaText = "";
 
@@ -861,99 +851,108 @@ setEpisodeText(
 
         case "shade":
             dramaText = `
-                ${imageRow}
-                <p>${q(instigator)} throws shade at ${q(target)} during makeup time.</p>
-                <p>${q(instigator)}: “I mean… if *that’s* what she calls a garment, good for her.”</p>
-                <p>${q(target)}: “Sweetie, worry about your nasty attitude and nasty breath.”</p>
+                ${q(instigator)} throws shade at ${q(target)} during makeup time.
+                <br><br>
+                ${q(instigator)}: “I mean… if *that’s* what she calls a garment, good for her.”
+                <br>
+                ${q(target)}: “Sweetie, worry about your nasty attitude, and nasty ass breath!.”
             `;
             break;
 
         case "argument":
             dramaText = `
-                ${imageRow}
-                <p>A heated argument erupts between ${q(instigator)} and ${q(target)}.</p>
-                <p>${q(instigator)} accuses ${q(target)} of copying her concept.</p>
-                <p>${q(target)}: “Why the fuck would I copy you, YOU of all people. Ugly ass bitch.”</p>
-                ${others.length ? `<p>${q(others[0])} tries to break it up but fails.</p>` : ""}
+                A heated argument erupts between ${q(instigator)} and ${q(target)}.
+                <br><br>
+                ${q(instigator)} accuses ${q(target)} of copying her.
+                <br>
+                ${q(target)} fires back: “Girl why the fuck would I ever copy you? I mean just LOOK at yourself... here comes the circus mama.”
+                <br><br>
+                ${others.length ? `${q(others[0])} tries to break it up but fails.` : ""}
             `;
             break;
 
         case "breakdown":
             dramaText = `
-                ${imageRow}
-                <p>${q(target)} breaks down emotionally after struggling with the challenge.</p>
-                <p>${q(target)}: “I just… I don’t want to go home yet.”</p>
-                <p>${q(instigator)} awkwardly pats her back.</p>
+                ${q(target)} breaks down emotionally after struggling with the challenge.
+                <br><br>
+                ${q(target)}: “I just… I don’t want to go home yet.”
+                <br>
+                ${q(instigator)} awkwardly pats her back.
             `;
             break;
 
         case "sabotage":
             dramaText = `
-                ${imageRow}
-                <p>${q(instigator)} is caught “accidentally” moving ${q(target)}’s materials.</p>
-                <p>${q(target)}: “Did you touch my stuff?”</p>
-                <p>${q(instigator)}: “Why would I? It’s ugly.”</p>
+                Tension rises when ${q(instigator)} is caught “accidentally” moving ${q(target)}’s materials.
+                <br><br>
+                ${q(target)}: “Did you touch my stuff?”
+                <br>
+                ${q(instigator)}: “Why would I? It’s ugly.”
             `;
             break;
 
         case "alliance":
             dramaText = `
-                ${imageRow}
-                <p>${q(instigator)} and ${q(target)} secretly form an alliance.</p>
-                <p>${q(instigator)} (confessional): “If we take out the strong girls early, we can run this competition.”</p>
-                ${others.length ? `<p>${q(others[0])} overhears everything.</p>` : ""}
+                ${q(instigator)} and ${q(target)} secretly form an alliance.
+                <br><br>
+                ${q(instigator)} (confessional): “If we take out the strong girls early, we can run this competition.”
+                <br>
+                ${others.length ? `${q(others[0])} overhears everything.` : ""}
             `;
             break;
 
         case "confessional_attack":
             dramaText = `
-                ${imageRow}
-                <p>${q(instigator)} goes OFF in confessional about ${q(target)}.</p>
-                <p>${q(instigator)}: “She really needs to step it up, or she's going home!”</p>
+                ${q(instigator)} goes OFF in confessional about ${q(target)}.
+                <br><br>
+                ${q(instigator)}: “She’s been coasting since week one. I’m tired of pretending she’s competition.”
             `;
             break;
 
         case "runway_fight":
             dramaText = `
-                ${imageRow}
-                <p>A fight breaks out in the werkroom over runway critiques.</p>
-                <p>${q(instigator)}: “The judges were right — your look was basic as hell.”</p>
-                <p>${q(target)}: “At least I don't go around being ugly but thinking I'm beautiful!”</p>
+                A fight breaks out in the werkroom over runway critiques.
+                <br><br>
+                ${q(instigator)}: “The judges were right — your look was basic.”
+                <br>
+                ${q(target)}: “At least I don't go around looking like shit but.”
             `;
             break;
 
         case "rehearsal_meltdown":
             dramaText = `
-                ${imageRow}
-                <p>During rehearsal, ${q(target)} has a meltdown after messing up the challenge..</p>
-                <p>${q(target)}: “I can’t do this!”</p>
-                <p>${q(instigator)} rolls her eyes dramatically.</p>
+                During rehearsal, ${q(target)} has a meltdown after messing up the challenge.
+                <br><br>
+                ${q(target)}: “I can’t do this!”
+                <br>
+                ${q(instigator)} rolls her eyes dramatically.
             `;
             break;
 
         case "backstage_whispering":
             dramaText = `
-                ${imageRow}
-                <p>${q(instigator)} and ${q(target)} whisper backstage about who they think will be in the bottom.</p>
-                ${others.length ? `<p>${q(others[0])} walks in and the room goes SILENT.</p>` : ""}
+                ${q(instigator)} and ${q(target)} whisper backstage about who they think will be in the bottom.
+                <br><br>
+                ${others.length ? `${q(others[0])} walks in and the room goes SILENT.` : ""}
             `;
             break;
 
         case "fabrication_drama":
             dramaText = `
-                ${imageRow}
-                <p>${q(instigator)} accuses ${q(target)} of lying about her talent.</p>
-                <p>${q(instigator)}: “I thought you said you were talented...”</p>
-                <p>${q(target)}: “I am! You bitch!”</p>
+                ${q(instigator)} accuses ${q(target)} of lying about her talents.
+                <br><br>
+                ${q(instigator)}: “I thought you said you were talented”
+                <br>
+                ${q(target)}: “I am! You bitch!”
             `;
             break;
     }
 
     setEpisodeText(`
         <h2>Werkroom Drama</h2>
-        ${dramaText}
+        <p>${dramaText}</p>
         <p><em>The queens gather themselves and prepare for judging…</em></p>
-    `);
+    `, involved);
 
     break;
 }
