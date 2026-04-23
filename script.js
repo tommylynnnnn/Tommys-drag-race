@@ -750,9 +750,15 @@ function startSeason() {
 
     episodeNumber = 1;
 
-    // SHOW POPUP
-    document.getElementById("season-options-overlay").classList.remove("hidden");
-}
+    document.getElementById("season-options-continue").addEventListener("click", () => {
+    premiereType = document.getElementById("premiere-type").value;
+    finaleType = document.getElementById("finale-type").value;
+
+    document.getElementById("season-options-overlay").classList.add("hidden");
+
+    startEpisode(); // ⭐ THIS MUST RUN
+});
+
 
 function startEpisode() {
     episodeStep = 0;
