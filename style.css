@@ -354,34 +354,53 @@ body {
     box-shadow: 0 0 10px rgba(255, 0, 153, 0.6);
 }
 
+/* Move the box upward */
 #season-options-box {
-    background: rgba(255, 255, 255, 0.85);
+    margin-top: -25px; /* adjust higher/lower as needed */
+    
+    /* Match your glam button UI */
+    background: white;
     border: 2px solid hotpink;
     border-radius: 10px;
-    padding: 12px 15px;
+    padding: 10px 12px;
     width: 220px;
-    margin-bottom: 15px;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
 }
 
+/* Title inside the box */
 #season-options-box h3 {
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 18px;
     color: hotpink;
     text-align: center;
+    font-weight: bold;
 }
 
+/* Labels */
 #season-options-box label {
     font-weight: bold;
     display: block;
     margin-top: 8px;
+    color: #c40074;
 }
 
+/* Dropdowns styled like your buttons */
 #season-options-box select {
     width: 100%;
-    padding: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-top: 3px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 2px solid hotpink;
+    background: white;
+    font-size: 14px;
+    font-weight: bold;
+    color: #c40074;
+    transition: 0.2s;
 }
+
+/* Hover glow like your buttons */
+#season-options-box select:hover {
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
+    border-color: #ff4db8;
+}
+
