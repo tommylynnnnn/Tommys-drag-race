@@ -447,6 +447,7 @@ let currentJudging = null;
 let currentBottom2 = null;
 let currentLipSyncResult = null;
 let isFinale = false;
+let isTop2 = false;
 
 let trackRecord = {}; // { queenName: ["WIN", "HIGH", ...] }
 let eliminationOrder = [];
@@ -534,14 +535,9 @@ function judgeQueens(cast, type) {
         .map(q => ({ queen: q, score: scoreQueen(q, type) }))
         .sort((a, b) => b.score - a.score);
 
-    // Pick winner with win cap
-    const winnerEntry = scored.find(s => getWinCount(s.queen) < 4) || scored[0];
-    const winner = winnerEntry.queen;
-
-    // Bottom 2 are still the lowest scores
+    let winner = scored.find(s => getWinCount(s.queen) < 4)?.queen || scored[0].queen;
     const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
 
-    // Remaining = everyone who is NOT winner and NOT in bottom 2
     const remaining = scored
         .filter(s =>
             s.queen.name !== winner.name &&
@@ -557,6 +553,19 @@ function judgeQueens(cast, type) {
         high = remaining.slice(0, 2);
         low = remaining.slice(-2);
         safe = remaining.slice(2, remaining.length - 2);
+    }
+
+    // ⭐ THIS IS WHERE STEP 4 GOES ⭐
+    if (isTop2) {
+        const top2 = [scored[0].queen, scored[1].queen];
+        return {
+            scored,
+            winner: null,
+            high: top2,
+            safe: cast.filter(q => !top2.includes(q)),
+            low: [],
+            bottom2: []
+        };
     }
 
     return { scored, winner, high, safe, low, bottom2 };
@@ -737,6 +746,10 @@ function renderTrackRecordCards() {
     episodeContent.appendChild(container);
 }
 
+function isTop2Episode() {
+    return Math.random() < 0.15; // 15% chance, change if you want
+}
+
 // ====== SEASON CONTROL ======
 
 function startSeason() {
@@ -758,6 +771,7 @@ function startSeason() {
 function startEpisode() {
     episodeStep = 0;
     isFinale = currentCast.length === 3;
+    isTop2 = !isFinale && isTop2Episode();
     currentChallenge = getRandomChallenge();
     currentJudging = null;
     currentBottom2 = null;
@@ -864,15 +878,32 @@ setEpisodeText(
             break;
 
         case 7:
-            currentBottom2 = currentJudging.bottom2;
-            setEpisodeText(
-                `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
-                currentBottom2
-            );
+           if (isTop2) {
+    const top2 = currentJudging.high;
+    setEpisodeText(
+        `<h2>Top 2</h2><p>${top2[0].name} vs ${top2[1].name}</p>`,
+        top2
+    );
+    break;
+}
+
+currentBottom2 = currentJudging.bottom2;
+setEpisodeText(
+    `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
+    currentBottom2
+);
             break;
 
         case 8:
+    if (isTop2) {
+    const top2 = currentJudging.high;
+    currentLipSyncResult = {
+        type: "top2",
+        winner: lipSync(top2).winner
+    };
+} else {
     currentLipSyncResult = lipSync(currentBottom2);
+}
     const song = getRandomLipSyncSong();
 currentLipSyncSong = song; // store it for elimination screen
 
@@ -885,6 +916,28 @@ setEpisodeText(`
 
         case 9:
             const result = currentLipSyncResult;
+if (isTop2) {
+    const top2 = currentJudging.high;
+    const winner = currentLipSyncResult.winner;
+
+    // Track record: winner = WIN, other top2 = HIGH, rest = SAFE
+    seasonQueens.forEach(q => {
+        let p = "";
+        if (q.name === winner.name) p = "WIN";
+        else if (top2.some(t => t.name === q.name)) p = "HIGH";
+        else p = "SAFE";
+        trackRecord[q.name].push(p);
+    });
+
+    setEpisodeText(`
+        <h2>Top 2 Lip Sync</h2>
+        <p>💖 <strong>${winner.name}</strong> wins the lip sync!</p>
+        <p>No one is eliminated this week.</p>
+        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+    `, [winner]);
+
+    break;
+}
 
 if (result.type === "double-shantay") {
     setEpisodeText(`
