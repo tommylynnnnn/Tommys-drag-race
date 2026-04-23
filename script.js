@@ -795,7 +795,7 @@ function normalizeTrackRecordForEpisode() {
     seasonQueens.forEach(q => {
         if (!trackRecord[q.name]) trackRecord[q.name] = [];
         while (trackRecord[q.name].length < episodeNumber) {
-            trackRecord[q.name].push("-"); // or "—" if you prefer a visible blank
+            trackRecord[q.name].push("RUN"); // or "—" if you prefer a visible blank
         }
     });
 }
