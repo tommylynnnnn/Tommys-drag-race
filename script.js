@@ -765,18 +765,8 @@ function startSeason() {
     episodeNumber = 1;
 
     // SHOW POPUP
-    document.getElementById("season-options-overlay").classList.remove("hidden");
-
-    // CONTINUE BUTTON
-    document.getElementById("season-options-continue").addEventListener("click", () => {
-        premiereType = document.getElementById("premiere-type").value;
-        finaleType = document.getElementById("finale-type").value;
-
-        document.getElementById("season-options-overlay").classList.add("hidden");
-
-        startEpisode();
-    });
-} // ⭐ THIS WAS MISSING
+   startEpisode();
+// ⭐ THIS WAS MISSING
 
 function startEpisode() {
     episodeStep = 0;
