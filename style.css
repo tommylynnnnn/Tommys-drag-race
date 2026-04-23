@@ -430,3 +430,68 @@ body {
     gap: 15px;
     margin: 20px 0;
 }
+
+/* ===== ALIGN SEASON OPTIONS + SEARCH BAR ===== */
+
+#top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Center the search + start button inside their wrapper */
+#title-search-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Season Options Box — unified */
+#season-options-box {
+    margin-top: -25px; /* adjust until perfect */
+    background: white;
+    border: 2px solid hotpink;
+    border-radius: 10px;
+    padding: 10px 12px;
+    width: 220px;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+    color: #c40074;
+}
+
+/* Title inside the box */
+#season-options-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: hotpink;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Labels */
+#season-options-box label {
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+    color: #c40074;
+}
+
+/* Dropdowns styled like your glam buttons */
+#season-options-box select {
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 2px solid hotpink;
+    background: white;
+    font-size: 14px;
+    font-weight: bold;
+    color: #c40074;
+    transition: 0.2s;
+}
+
+#season-options-box select:hover {
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
+    border-color: #ff4db8;
+}
