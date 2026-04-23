@@ -1,4 +1,6 @@
 // ====== DATA ======
+let selectedPremiereType = "normal";
+let selectedFinaleType = "top3";
 
 const ALL_QUEENS = [
     {
@@ -452,6 +454,14 @@ let eliminationOrder = [];
 
 // ====== HELPERS ======
 
+document.getElementById("premiere-type").addEventListener("change", (e) => {
+    selectedPremiereType = e.target.value;
+});
+
+document.getElementById("finale-type").addEventListener("change", (e) => {
+    selectedFinaleType = e.target.value;
+});
+
 function getRandomChallenge() {
     return CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)];
 }
@@ -752,6 +762,10 @@ function startSeason() {
 
     episodeNumber = 1;
     startEpisode();
+
+    console.log("Premiere:", selectedPremiereType);
+console.log("Finale:", selectedFinaleType);
+    
 }
 
 function startEpisode() {
