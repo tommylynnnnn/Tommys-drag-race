@@ -647,11 +647,34 @@ function initTrackRecord() {
 }
 
 function updateTrackRecordEpisode(j, bottom2, eliminated) {
+
+    // TOP 2 EPISODE (no elimination)
+    if (isTop2) {
+        seasonQueens.forEach(q => {
+            let p = "";
+
+            if (j.high.some(t => t.name === q.name)) {
+                if (currentLipSyncResult.winner && q.name === currentLipSyncResult.winner.name) {
+                    p = "WIN";
+                } else {
+                    p = "HIGH";
+                }
+            } else {
+                p = "SAFE";
+            }
+
+            trackRecord[q.name].push(p);
+        });
+
+        return;
+    }
+
+    // NORMAL EPISODE
     seasonQueens.forEach(q => {
         let p = "";
 
         if (q.name === eliminated.name) p = "ELIM";
-        else if (q.name === j.winner.name) p = "WIN";
+        else if (j.winner && q.name === j.winner.name) p = "WIN";
         else if (bottom2.some(b => b.name === q.name)) p = "BTM2";
         else if (j.high.some(h => h.name === q.name)) p = "HIGH";
         else if (j.low.some(l => l.name === q.name)) p = "LOW";
