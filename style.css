@@ -508,3 +508,21 @@ body {
 #season-options-box {
     margin-left: 40px; /* adjust to taste */
 }
+
+/* Make the search/start bar a fixed-width centered block */
+#title-search-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Nudge the search/start bar LEFT */
+.top-bar {
+    transform: translateX(-40px); /* adjust to taste */
+}
+
+/* Nudge the Season Options box RIGHT */
+#season-options-box {
+    transform: translateX(20px); /* adjust to taste */
+}
+
