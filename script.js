@@ -175,11 +175,6 @@ const ALL_QUEENS = [
         name: "Acacia Forgot",
         img: "https://i.pinimg.com/736x/b7/38/a6/b738a669d1953aed240f47cdbfe0a7a3.jpg",
         stats: { acting: 6, comedy: 9, improv: 8, dance: 3, design: 8, lipsync: 5 }
-    },
-    {
-        name: "Crystal Methyd",
-        img: "https://saf-cdn.com/crystalmethydas11castmug.jpg",
-        stats: { acting: 11, comedy: 10, improv: 11, dance: 9, design: 11, lipsync: 8 }
     }
 
 ];
@@ -219,9 +214,7 @@ const ENTRANCE_LINES = {
     "Hormona Lisa": "Hello, loyal subjects. It is I, Hormona Lisa, at your service. *laugh* Wow, that was annoying.",
     "Crystal Envy": "Yeah, I'd envy me too.",
     "Arrietty": "Hi! (said in Stitch voice)",
-    "Acacia Forgot": "Totally tubular."
-    "Crystal Methyd": "Who's ready to play? Checkers anyone?"
-    
+    "Acacia Forgot": "Totally tubular."  
 };
 
 const ELIMINATION_LINES = {
@@ -260,7 +253,6 @@ const ELIMINATION_LINES = {
     "Crystal Envy": "You definitely make me feel mayo real righty, RuPaul!",
     "Arrietty": "Well, it looks like the runway category just dropped, immensely! Y'all ugly boogers!",
     "Acacia Forgot": "You can now find my new single on all streaming platforms."
-    "Crystal Methyd": "Welp! Back to the circus!"
 };
 
 // ====== CHALLENGES ======
