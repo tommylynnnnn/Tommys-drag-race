@@ -543,7 +543,6 @@ function getScoreBasedRating(score, maxScore, minScore) {
 }
 
 function judgeQueens(cast, type) {
-        function judgeQueens(cast, type) {
 
     // ===== DOUBLE PREMIERE SPECIAL RULES =====
     if (premiereType === "double" && episodeNumber <= 2) {
