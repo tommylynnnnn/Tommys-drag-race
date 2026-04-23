@@ -850,8 +850,8 @@ setEpisodeText(
 
         case 3:
             setEpisodeText(
-                `<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins!</p>`,
-                [currentJudging.winner]
+                `<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`,
+                currentJudging.safe
             );
             break;
 
@@ -864,8 +864,8 @@ setEpisodeText(
 
         case 5:
             setEpisodeText(
-                `<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`,
-                currentJudging.safe
+                `<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins!</p>`,
+                [currentJudging.winner]
             );
             break;
 
