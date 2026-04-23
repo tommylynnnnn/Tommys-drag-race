@@ -763,6 +763,7 @@ function startSeason() {
     initTrackRecord();
 
     episodeNumber = 1;
+
     startEpisode();
 }
 
