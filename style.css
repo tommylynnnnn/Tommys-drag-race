@@ -523,6 +523,6 @@ body {
 
 /* Nudge the Season Options box RIGHT */
 #season-options-box {
-    transform: translateX(100px); /* adjust to taste */
+    transform: translateX(150px); /* adjust to taste */
 }
 
