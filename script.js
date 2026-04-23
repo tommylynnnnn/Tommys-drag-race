@@ -750,15 +750,33 @@ function startSeason() {
 
     episodeNumber = 1;
 
+   function startSeason() {
+    const selected = [...document.querySelectorAll(".queen-card.selected")].map(c => c.dataset.name);
+
+    if (selected.length < 4 || selected.length > 16) {
+        alert("Please select between 4 and 16 queens.");
+        return;
+    }
+
+    currentCast = ALL_QUEENS.filter(q => selected.includes(q.name));
+    seasonQueens = [...currentCast];
+    initTrackRecord();
+
+    episodeNumber = 1;
+
+    // SHOW POPUP
+    document.getElementById("season-options-overlay").classList.remove("hidden");
+
+    // CONTINUE BUTTON
     document.getElementById("season-options-continue").addEventListener("click", () => {
-    premiereType = document.getElementById("premiere-type").value;
-    finaleType = document.getElementById("finale-type").value;
+        premiereType = document.getElementById("premiere-type").value;
+        finaleType = document.getElementById("finale-type").value;
 
-    document.getElementById("season-options-overlay").classList.add("hidden");
+        document.getElementById("season-options-overlay").classList.add("hidden");
 
-    startEpisode(); // ⭐ THIS MUST RUN
-});
-
+        startEpisode();
+    });
+} // ⭐ THIS WAS MISSING
 
 function startEpisode() {
     episodeStep = 0;
