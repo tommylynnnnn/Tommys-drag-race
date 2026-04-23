@@ -518,7 +518,7 @@ body {
 
 /* Nudge the search/start bar LEFT */
 .top-bar {
-    transform: translateX(-700px); /* adjust to taste */
+    transform: translateX(-70px); /* adjust to taste */
 }
 
 /* Nudge the Season Options box RIGHT */
