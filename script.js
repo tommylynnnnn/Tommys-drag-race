@@ -534,9 +534,14 @@ function judgeQueens(cast, type) {
         .map(q => ({ queen: q, score: scoreQueen(q, type) }))
         .sort((a, b) => b.score - a.score);
 
-    let winner = scored.find(s => getWinCount(s.queen) < 4)?.queen || scored[0].queen;
+    // Pick winner with win cap
+    const winnerEntry = scored.find(s => getWinCount(s.queen) < 4) || scored[0];
+    const winner = winnerEntry.queen;
+
+    // Bottom 2 are still the lowest scores
     const bottom2 = [scored[scored.length - 1].queen, scored[scored.length - 2].queen];
 
+    // Remaining = everyone who is NOT winner and NOT in bottom 2
     const remaining = scored
         .filter(s =>
             s.queen.name !== winner.name &&
@@ -563,34 +568,19 @@ function lipSync(btm2) {
     const q1Bottoms = getBottomCount(q1);
     const q2Bottoms = getBottomCount(q2);
 
-    // AUTO-ELIM RULE (4th bottom)
+    // AUTO-ELIM RULE
     if (q1Bottoms >= 3 && q2Bottoms < 3) {
-        return { type: "single", winner: q2, eliminated: [q1] };
+        return { winner: q2, eliminated: q1 };
     }
     if (q2Bottoms >= 3 && q1Bottoms < 3) {
-        return { type: "single", winner: q1, eliminated: [q2] };
+        return { winner: q1, eliminated: q2 };
     }
 
-    // If BOTH have 3 bottoms → normal lipsync only
-    const allowSpecial = !(q1Bottoms >= 3 && q2Bottoms >= 3);
-
-    // Base lipsync scores
+    // If BOTH have 3 bottoms, use stats normally
     const s1 = q1.stats.lipsync + (Math.random() * 6 - 3);
     const s2 = q2.stats.lipsync + (Math.random() * 6 - 3);
 
-    // DOUBLE SHANTAY (both stay)
-    if (allowSpecial && chance(0.10)) { // 10% chance
-        return { type: "double-shantay", winner: null, eliminated: [] };
-    }
-
-    // DOUBLE SASHAY (both go)
-    if (allowSpecial && chance(0.05)) { // 5% chance
-        return { type: "double-sashay", winner: null, eliminated: [q1, q2] };
-    }
-
-    // NORMAL LIP SYNC
-    if (s1 >= s2) return { type: "single", winner: q1, eliminated: [q2] };
-    return { type: "single", winner: q2, eliminated: [q1] };
+    return s1 >= s2 ? { winner: q1, eliminated: q2 } : { winner: q2, eliminated: q1 };
 }
 
 function eliminateFromCast(cast, q) {
@@ -616,10 +606,6 @@ function getRandomLipSyncSong() {
     return LIP_SYNC_SONGS[Math.floor(Math.random() * LIP_SYNC_SONGS.length)];
 }
 
-function chance(p) {
-    return Math.random() < p;
-}
-
 function getRandomRunwayTheme() {
     return RUNWAY_THEMES[Math.floor(Math.random() * RUNWAY_THEMES.length)];
 }
@@ -633,13 +619,11 @@ function initTrackRecord() {
 }
 
 function updateTrackRecordEpisode(j, bottom2, eliminated) {
-
-    // NORMAL EPISODE
     seasonQueens.forEach(q => {
         let p = "";
 
         if (q.name === eliminated.name) p = "ELIM";
-        else if (j.winner && q.name === j.winner.name) p = "WIN";
+        else if (q.name === j.winner.name) p = "WIN";
         else if (bottom2.some(b => b.name === q.name)) p = "BTM2";
         else if (j.high.some(h => h.name === q.name)) p = "HIGH";
         else if (j.low.some(l => l.name === q.name)) p = "LOW";
@@ -749,24 +733,10 @@ function startSeason() {
     initTrackRecord();
 
     episodeNumber = 1;
-
-function startSeason() {
-    const selected = [...document.querySelectorAll(".queen-card.selected")].map(c => c.dataset.name);
-
-    if (selected.length < 4 || selected.length > 16) {
-        alert("Please select between 4 and 16 queens.");
-        return;
-    }
-
-    currentCast = ALL_QUEENS.filter(q => selected.includes(q.name));
-    seasonQueens = [...currentCast];
-    initTrackRecord();
-
-    episodeNumber = 1;
-
     startEpisode();
 }
 
+function startEpisode() {
     episodeStep = 0;
     isFinale = currentCast.length === 3;
     currentChallenge = getRandomChallenge();
@@ -875,108 +845,40 @@ setEpisodeText(
             break;
 
         case 7:
-    currentBottom2 = currentJudging.bottom2;
-    setEpisodeText(
-        `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
-        currentBottom2
-    );
-    break;
-
-currentBottom2 = currentJudging.bottom2;
-setEpisodeText(
-    `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
-    currentBottom2
-);
+            currentBottom2 = currentJudging.bottom2;
+            setEpisodeText(
+                `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
+                currentBottom2
+            );
             break;
 
         case 8:
-    const song = getRandomLipSyncSong();
-    currentLipSyncSong = song;
-
     currentLipSyncResult = lipSync(currentBottom2);
+    const song = getRandomLipSyncSong();
+currentLipSyncSong = song; // store it for elimination screen
 
-    setEpisodeText(`
-        <h2>Lip Sync For Your Life</h2>
-        <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
-        <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
-    `, currentBottom2);
+setEpisodeText(`
+    <h2>Lip Sync For Your Life</h2>
+    <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
+    <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
+`, currentBottom2);
     break;
 
         case 9:
-    // ⭐ DOUBLE SHANTAY ⭐
-    if (currentLipSyncResult.type === "double-shantay") {
-        const btm = currentBottom2;
+            const eliminated = currentLipSyncResult.eliminated;
+            currentCast = eliminateFromCast(currentCast, eliminated);
+            eliminationOrder.unshift(eliminated.name);
 
-        setEpisodeText(`
-            <h2>Double Shantay!</h2>
-            <p>💖 Both queens stay!</p>
-            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-        `, btm);
+            updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 
-        // Track record: both get BTM2
-        seasonQueens.forEach(q => {
-            let p = "";
-
-            if (btm.some(b => b.name === q.name)) p = "BTM2";
-            else if (q.name === currentJudging.winner.name) p = "WIN";
-            else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-            else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-            else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-
-            trackRecord[q.name].push(p);
-        });
-
-        break;
-    }
-
-    // ⭐ DOUBLE SASHAY ⭐
-    if (currentLipSyncResult.type === "double-sashay") {
-        const eliminated = currentLipSyncResult.eliminated;
-
-        eliminated.forEach(q => {
-            currentCast = eliminateFromCast(currentCast, q);
-            eliminationOrder.unshift(q.name);
-        });
-
-        setEpisodeText(`
-            <h2>Double Sashay!</h2>
-            <p>❌ <strong>${eliminated[0].name}</strong> and <strong>${eliminated[1].name}</strong> have been eliminated.</p>
-            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-        `, eliminated);
-
-        // Track record: both get ELIM
-        seasonQueens.forEach(q => {
-            let p = "";
-
-            if (eliminated.some(e => e.name === q.name)) p = "ELIM";
-            else if (q.name === currentJudging.winner.name) p = "WIN";
-            else if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-            else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-            else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-            else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-
-            trackRecord[q.name].push(p);
-        });
-
-        break;
-    }
-
-    // ⭐ NORMAL ELIMINATION ⭐
-    const eliminated = currentLipSyncResult.eliminated[0];
-    currentCast = eliminateFromCast(currentCast, eliminated);
-    eliminationOrder.unshift(eliminated.name);
-
-    updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
-
-    setEpisodeText(`
-        <h2>Elimination</h2>
-        <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
-        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-        <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
-        <p>${currentCast.length} queens remain.</p>
-    `, [eliminated]);
-
-    break;
+            setEpisodeText(`
+    <h2>Elimination</h2>
+    <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
+    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+    <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
+    <p>${currentCast.length} queens remain.</p>
+`, [eliminated]);
+            break;
 
         case 10:
             setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
@@ -1032,27 +934,26 @@ function advanceFinaleStep() {
             break;
 
         case 3:
-    const final2 = [...currentCast];
-    const finalResult = lipSync(final2);
+            const final2 = [...currentCast];
+            const finalResult = lipSync(final2);
 
-    finaleWinner = finalResult.winner;
-    finaleRunnerUp = finalResult.eliminated[0]; // FIXED
+            finaleWinner = finalResult.winner;
+            finaleRunnerUp = finalResult.eliminated;
 
-    currentCast = [finaleWinner];
+            currentCast = [finaleWinner];
 
-    updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
+            updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
 
-    const finaleSong = getRandomLipSyncSong();
-    currentLipSyncSong = finaleSong;
+            const finaleSong = getRandomLipSyncSong();
+currentLipSyncSong = finaleSong;
 
-    setEpisodeText(`
-        <h2>Lip Sync For The Crown</h2>
-        <p>${final2[0].name} vs ${final2[1].name}</p>
-        <p><strong>Final Song:</strong> "${finaleSong.title}" by ${finaleSong.artist}</p>
-    `, final2);
+setEpisodeText(`
+    <h2>Lip Sync For The Crown</h2>
+    <p>${final2[0].name} vs ${final2[1].name}</p>
+    <p><strong>Final Song:</strong> "${finaleSong.title}" by ${finaleSong.artist}</p>
+`, final2);
 
-    break;
-
+            break;
 
         case 4:
             setEpisodeText(`
@@ -1086,4 +987,3 @@ function advanceFinaleStep() {
 
 document.getElementById("start-btn").addEventListener("click", startSeason);
 episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
-
