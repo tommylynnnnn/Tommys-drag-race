@@ -3,6 +3,10 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.10.0
+
+-Added DOUBLE PREMIERE!!!
+
 🌟 Update 1.9.0
 
 -Removed top 2 feature as it got too complex, will probably add later
