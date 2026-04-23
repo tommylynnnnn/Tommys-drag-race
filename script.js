@@ -209,7 +209,7 @@ const RUNWAY_THEMES = [
     "Eighties Ladies",
     "Beige Against The Machine",
     "From Wholsome To Folsom",
-    "Drag Excellence",
+    "Drag Excellence"
 ];
 
 const LIP_SYNC_SONGS = [
