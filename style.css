@@ -526,3 +526,8 @@ body {
     transform: translateX(150px); /* adjust to taste */
 }
 
+.track-top2 {
+    background-color: #b19cd9; /* lavender */
+    color: white;
+    font-weight: bold;
+}
