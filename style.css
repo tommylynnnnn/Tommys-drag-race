@@ -495,3 +495,16 @@ body {
     box-shadow: 0 0 8px rgba(255, 105, 180, 0.5);
     border-color: #ff4db8;
 }
+
+/* Move the search + start slightly LEFT */
+#title-search-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-left: -40px; /* adjust to taste */
+}
+
+/* Move the Season Options box slightly RIGHT */
+#season-options-box {
+    margin-left: 40px; /* adjust to taste */
+}
