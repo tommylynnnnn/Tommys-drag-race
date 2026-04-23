@@ -404,3 +404,16 @@ body {
     border-color: #ff4db8;
 }
 
+#top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* aligns tops together */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Optional: nudge the box upward slightly */
+#season-options-box {
+    margin-top: -5px; /* adjust to taste */
+}
+
