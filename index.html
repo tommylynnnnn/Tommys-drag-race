@@ -9,10 +9,39 @@
 
 <h1>Drag Race Simulator</h1>
 
-<div class="top-bar">
-    <input id="search" type="text" placeholder="Search for a queen...">
-    <button id="start-btn">Start Simulator</button>
+<!-- ⭐ NEW FLEX ROW WRAPPER ⭐ -->
+<div id="top-row">
+
+    <!-- ⭐ Your Season Options Box ⭐ -->
+    <div id="season-options-box">
+        <h3>Season Options</h3>
+
+        <label>Premiere Type:</label>
+        <select id="premiere-type">
+            <option value="normal">Normal Premiere</option>
+            <option value="double">Double Premiere</option>
+            <option value="split">Split Premiere</option>
+            <option value="none">No Elimination Premiere</option>
+        </select>
+
+        <label>Finale Type:</label>
+        <select id="finale-type">
+            <option value="top3">Top 3 → Winner</option>
+            <option value="top2">Top 2 Lip Sync</option>
+            <option value="smackdown">Lip Sync Smackdown</option>
+            <option value="jury">Jury of Eliminated Queens</option>
+        </select>
+    </div>
+
+    <!-- ⭐ Your existing title/search bar stays EXACTLY where it is ⭐ -->
+    <div class="top-bar">
+        <input id="search" type="text" placeholder="Search for a queen...">
+        <button id="start-btn">Start Simulator</button>
+    </div>
+
 </div>
+<!-- END OF FLEX ROW -->
+
 
 <div class="random-select-container">
     <label for="random-count" class="random-label">Random Cast</label>
@@ -33,36 +62,15 @@
     </div>
 </div>
 
-    
 <p id="queen-count"></p>
 
-<div id="season-options-box">
-    <h3>Season Options</h3>
-
-    <label>Premiere Type:</label>
-    <select id="premiere-type">
-        <option value="normal">Normal Premiere</option>
-        <option value="double">Double Premiere</option>
-        <option value="split">Split Premiere</option>
-        <option value="none">No Elimination Premiere</option>
-    </select>
-
-    <label>Finale Type:</label>
-    <select id="finale-type">
-        <option value="top3">Top 3 → Winner</option>
-        <option value="top2">Top 2 Lip Sync</option>
-        <option value="smackdown">Lip Sync Smackdown</option>
-        <option value="jury">Jury of Eliminated Queens</option>
-    </select>
-</div>  
-    
 <div id="queen-grid"></div>
 
 <div id="episode-overlay" class="hidden">
   <div class="episode-panel">
     <div id="episode-content"></div>
 
-    <div id="episode-queens"></div> <!-- CIRCLE IMAGES GO HERE -->
+    <div id="episode-queens"></div>
 
     <button id="episode-continue-btn">Continue →</button>
   </div>
