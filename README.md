@@ -3,13 +3,18 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.7.0
+
+-Added Double Shantay
+-Added Double Sashay
+
 🌟 Update 1.6.0
 
 -Season 17 cast added
 -Season 17 lip-sync songs added
 -Season 17 runways added
 
-🌟 Update 1.5.2
+🌟 Update 1.5.0
 
 -Random queen selector UI enhanced
 
