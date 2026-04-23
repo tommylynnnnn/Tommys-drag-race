@@ -568,19 +568,34 @@ function lipSync(btm2) {
     const q1Bottoms = getBottomCount(q1);
     const q2Bottoms = getBottomCount(q2);
 
-    // AUTO-ELIM RULE
+    // AUTO-ELIM RULE (4th bottom)
     if (q1Bottoms >= 3 && q2Bottoms < 3) {
-        return { winner: q2, eliminated: q1 };
+        return { type: "single", winner: q2, eliminated: [q1] };
     }
     if (q2Bottoms >= 3 && q1Bottoms < 3) {
-        return { winner: q1, eliminated: q2 };
+        return { type: "single", winner: q1, eliminated: [q2] };
     }
 
-    // If BOTH have 3 bottoms, use stats normally
+    // If BOTH have 3 bottoms → normal lipsync only
+    const allowSpecial = !(q1Bottoms >= 3 && q2Bottoms >= 3);
+
+    // Base lipsync scores
     const s1 = q1.stats.lipsync + (Math.random() * 6 - 3);
     const s2 = q2.stats.lipsync + (Math.random() * 6 - 3);
 
-    return s1 >= s2 ? { winner: q1, eliminated: q2 } : { winner: q2, eliminated: q1 };
+    // DOUBLE SHANTAY (both stay)
+    if (allowSpecial && chance(0.10)) { // 10% chance
+        return { type: "double-shantay", winner: null, eliminated: [] };
+    }
+
+    // DOUBLE SASHAY (both go)
+    if (allowSpecial && chance(0.05)) { // 5% chance
+        return { type: "double-sashay", winner: null, eliminated: [q1, q2] };
+    }
+
+    // NORMAL LIP SYNC
+    if (s1 >= s2) return { type: "single", winner: q1, eliminated: [q2] };
+    return { type: "single", winner: q2, eliminated: [q1] };
 }
 
 function eliminateFromCast(cast, q) {
@@ -604,6 +619,10 @@ function setEpisodeText(text, queens = []) {
 
 function getRandomLipSyncSong() {
     return LIP_SYNC_SONGS[Math.floor(Math.random() * LIP_SYNC_SONGS.length)];
+}
+
+function chance(p) {
+    return Math.random() < p;
 }
 
 function getRandomRunwayTheme() {
@@ -865,11 +884,64 @@ setEpisodeText(`
     break;
 
         case 9:
-            const eliminated = currentLipSyncResult.eliminated;
-            currentCast = eliminateFromCast(currentCast, eliminated);
-            eliminationOrder.unshift(eliminated.name);
+            const result = currentLipSyncResult;
 
-            updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
+if (result.type === "double-shantay") {
+    setEpisodeText(`
+        <h2>Double Shantay!</h2>
+        <p>💖 Both queens stay!</p>
+        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+    `, currentBottom2);
+
+    // Track record: both get BTM2
+    seasonQueens.forEach(q => {
+        let p = "";
+        if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
+        else if (q.name === currentJudging.winner.name) p = "WIN";
+        else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+        else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+        else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+        trackRecord[q.name].push(p);
+    });
+
+    break;
+}
+
+if (result.type === "double-sashay") {
+    const eliminated = result.eliminated;
+
+    eliminated.forEach(q => {
+        currentCast = eliminateFromCast(currentCast, q);
+        eliminationOrder.unshift(q.name);
+    });
+
+    setEpisodeText(`
+        <h2>Double Sashay!</h2>
+        <p>❌ <strong>${eliminated[0].name}</strong> and <strong>${eliminated[1].name}</strong> have been eliminated.</p>
+        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+    `, eliminated);
+
+    // Track record: both get ELIM
+    seasonQueens.forEach(q => {
+        let p = "";
+        if (eliminated.some(e => e.name === q.name)) p = "ELIM";
+        else if (q.name === currentJudging.winner.name) p = "WIN";
+        else if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
+        else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+        else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+        else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+        trackRecord[q.name].push(p);
+    });
+
+    break;
+}
+
+// NORMAL ELIMINATION
+const eliminated = result.eliminated[0];
+currentCast = eliminateFromCast(currentCast, eliminated);
+eliminationOrder.unshift(eliminated.name);
+
+updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 
             setEpisodeText(`
     <h2>Elimination</h2>
