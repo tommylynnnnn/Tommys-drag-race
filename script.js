@@ -749,6 +749,8 @@ function startSeason() {
     initTrackRecord();
 
     episodeNumber = 1;
+
+    // SHOW POPUP
     document.getElementById("season-options-overlay").classList.remove("hidden");
 }
 
