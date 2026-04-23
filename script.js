@@ -766,7 +766,6 @@ function startSeason() {
     startEpisode();
 }
 
-function startEpisode() {
     episodeStep = 0;
     isFinale = currentCast.length === 3;
     currentChallenge = getRandomChallenge();
