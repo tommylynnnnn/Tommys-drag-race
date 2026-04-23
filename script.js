@@ -901,14 +901,21 @@ setEpisodeText(
             break;
 
         case 7:
-           if (isTop2) {
-    const top2 = currentJudging.high;
+    if (isTop2) {
+        const top2 = currentJudging.high;
+        setEpisodeText(
+            `<h2>Top 2</h2><p>${top2[0].name} vs ${top2[1].name}</p>`,
+            top2
+        );
+        break;
+    }
+
+    currentBottom2 = currentJudging.bottom2;
     setEpisodeText(
-        `<h2>Top 2</h2><p>${top2[0].name} vs ${top2[1].name}</p>`,
-        top2
+        `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
+        currentBottom2
     );
     break;
-}
 
 currentBottom2 = currentJudging.bottom2;
 setEpisodeText(
@@ -918,115 +925,138 @@ setEpisodeText(
             break;
 
         case 8:
-    if (isTop2) {
-    const top2 = currentJudging.high;
-    currentLipSyncResult = {
-        type: "top2",
-        winner: lipSync(top2).winner
-    };
-} else {
-    currentLipSyncResult = lipSync(currentBottom2);
-}
     const song = getRandomLipSyncSong();
-currentLipSyncSong = song; // store it for elimination screen
+    currentLipSyncSong = song;
 
-setEpisodeText(`
-    <h2>Lip Sync For Your Life</h2>
-    <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
-    <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
-`, currentBottom2);
+    if (isTop2) {
+        const top2 = currentJudging.high;
+        currentLipSyncResult = {
+            type: "top2",
+            winner: lipSync(top2).winner
+        };
+
+        setEpisodeText(`
+            <h2>Top 2 Lip Sync</h2>
+            <p>${top2[0].name} vs ${top2[1].name}</p>
+            <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
+        `, top2);
+
+        break;
+    }
+
+    currentLipSyncResult = lipSync(currentBottom2);
+
+    setEpisodeText(`
+        <h2>Lip Sync For Your Life</h2>
+        <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
+        <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
+    `, currentBottom2);
     break;
 
         case 9:
-            const result = currentLipSyncResult;
-if (isTop2) {
-    const top2 = currentJudging.high;
-    const winner = currentLipSyncResult.winner;
+    // ⭐ TOP 2 EPISODE — NO ELIMINATION ⭐
+    if (isTop2) {
+        const top2 = currentJudging.high;
+        const winner = currentLipSyncResult.winner;
 
-    // Track record: winner = WIN, other top2 = HIGH, rest = SAFE
-    seasonQueens.forEach(q => {
-        let p = "";
-        if (q.name === winner.name) p = "WIN";
-        else if (top2.some(t => t.name === q.name)) p = "HIGH";
-        else p = "SAFE";
-        trackRecord[q.name].push(p);
-    });
+        setEpisodeText(`
+            <h2>Top 2 Winner</h2>
+            <p>💖 <strong>${winner.name}</strong> wins the lip sync!</p>
+            <p>No one is eliminated this week.</p>
+            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+        `, [winner]);
+
+        // Track record update for Top 2
+        seasonQueens.forEach(q => {
+            let p = "";
+
+            if (top2.some(t => t.name === q.name)) {
+                if (winner && q.name === winner.name) p = "WIN";
+                else p = "HIGH";
+            } else {
+                p = "SAFE";
+            }
+
+            trackRecord[q.name].push(p);
+        });
+
+        break;
+    }
+
+    // ⭐ DOUBLE SHANTAY ⭐
+    if (currentLipSyncResult.type === "double-shantay") {
+        const btm = currentBottom2;
+
+        setEpisodeText(`
+            <h2>Double Shantay!</h2>
+            <p>💖 Both queens stay!</p>
+            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+        `, btm);
+
+        // Track record: both get BTM2
+        seasonQueens.forEach(q => {
+            let p = "";
+
+            if (btm.some(b => b.name === q.name)) p = "BTM2";
+            else if (q.name === currentJudging.winner.name) p = "WIN";
+            else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+            else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+            else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+
+            trackRecord[q.name].push(p);
+        });
+
+        break;
+    }
+
+    // ⭐ DOUBLE SASHAY ⭐
+    if (currentLipSyncResult.type === "double-sashay") {
+        const eliminated = currentLipSyncResult.eliminated;
+
+        eliminated.forEach(q => {
+            currentCast = eliminateFromCast(currentCast, q);
+            eliminationOrder.unshift(q.name);
+        });
+
+        setEpisodeText(`
+            <h2>Double Sashay!</h2>
+            <p>❌ <strong>${eliminated[0].name}</strong> and <strong>${eliminated[1].name}</strong> have been eliminated.</p>
+            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+        `, eliminated);
+
+        // Track record: both get ELIM
+        seasonQueens.forEach(q => {
+            let p = "";
+
+            if (eliminated.some(e => e.name === q.name)) p = "ELIM";
+            else if (q.name === currentJudging.winner.name) p = "WIN";
+            else if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
+            else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+            else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+            else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+
+            trackRecord[q.name].push(p);
+        });
+
+        break;
+    }
+
+    // ⭐ NORMAL ELIMINATION ⭐
+    const eliminated = currentLipSyncResult.eliminated[0];
+    currentCast = eliminateFromCast(currentCast, eliminated);
+    eliminationOrder.unshift(eliminated.name);
+
+    updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 
     setEpisodeText(`
-        <h2>Top 2 Lip Sync</h2>
-        <p>💖 <strong>${winner.name}</strong> wins the lip sync!</p>
-        <p>No one is eliminated this week.</p>
+        <h2>Elimination</h2>
+        <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
         <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    `, [winner]);
+        <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
+        <p>${currentCast.length} queens remain.</p>
+    `, [eliminated]);
 
     break;
-}
-
-if (result.type === "double-shantay") {
-    setEpisodeText(`
-        <h2>Double Shantay!</h2>
-        <p>💖 Both queens stay!</p>
-        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    `, currentBottom2);
-
-    // Track record: both get BTM2
-    seasonQueens.forEach(q => {
-        let p = "";
-        if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-        else if (q.name === currentJudging.winner.name) p = "WIN";
-        else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-        else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-        else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-        trackRecord[q.name].push(p);
-    });
-
-    break;
-}
-
-if (result.type === "double-sashay") {
-    const eliminated = result.eliminated;
-
-    eliminated.forEach(q => {
-        currentCast = eliminateFromCast(currentCast, q);
-        eliminationOrder.unshift(q.name);
-    });
-
-    setEpisodeText(`
-        <h2>Double Sashay!</h2>
-        <p>❌ <strong>${eliminated[0].name}</strong> and <strong>${eliminated[1].name}</strong> have been eliminated.</p>
-        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    `, eliminated);
-
-    // Track record: both get ELIM
-    seasonQueens.forEach(q => {
-        let p = "";
-        if (eliminated.some(e => e.name === q.name)) p = "ELIM";
-        else if (q.name === currentJudging.winner.name) p = "WIN";
-        else if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-        else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-        else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-        else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-        trackRecord[q.name].push(p);
-    });
-
-    break;
-}
-
-// NORMAL ELIMINATION
-const eliminated = result.eliminated[0];
-currentCast = eliminateFromCast(currentCast, eliminated);
-eliminationOrder.unshift(eliminated.name);
-
-updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
-
-            setEpisodeText(`
-    <h2>Elimination</h2>
-    <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
-    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
-    <p>${currentCast.length} queens remain.</p>
-`, [eliminated]);
-            break;
 
         case 10:
             setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
