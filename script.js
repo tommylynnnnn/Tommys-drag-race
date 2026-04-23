@@ -813,151 +813,7 @@ setEpisodeText(
 );
             break;
 
-       case 2: {
-    // DRAMA GENERATOR — BIG VERSION
-
-    // Pick 2–4 queens involved
-    const dramaCount = Math.floor(Math.random() * 3) + 2; // 2–4 queens
-    const shuffled = currentCast.slice().sort(() => Math.random() - 0.5);
-    const involved = shuffled.slice(0, dramaCount);
-
-    // Roles
-    const instigator = involved[0];
-    const target = involved[1];
-    const others = involved.slice(2);
-
-    // Drama templates
-    const dramaTypes = [
-        "shade",
-        "argument",
-        "breakdown",
-        "sabotage",
-        "alliance",
-        "confessional_attack",
-        "runway_fight",
-        "rehearsal_meltdown",
-        "backstage_whispering",
-        "fabrication_drama"
-    ];
-
-    const type = dramaTypes[Math.floor(Math.random() * dramaTypes.length)];
-
-    // Helper for random queen name
-    const q = q => `<strong>${q.name}</strong>`;
-
-    let dramaText = "";
-
-    switch (type) {
-
-        case "shade":
-            dramaText = `
-                ${q(instigator)} throws shade at ${q(target)} during makeup time.
-                <br><br>
-                ${q(instigator)}: “I mean… if *that’s* what she calls a garment, good for her.”
-                <br>
-                ${q(target)}: “Sweetie, worry about your nasty attitude, and nasty ass breath!.”
-            `;
-            break;
-
-        case "argument":
-            dramaText = `
-                A heated argument erupts between ${q(instigator)} and ${q(target)}.
-                <br><br>
-                ${q(instigator)} accuses ${q(target)} of copying her.
-                <br>
-                ${q(target)} fires back: “Girl why the fuck would I ever copy you? I mean just LOOK at yourself... here comes the circus mama.”
-                <br><br>
-                ${others.length ? `${q(others[0])} tries to break it up but fails.` : ""}
-            `;
-            break;
-
-        case "breakdown":
-            dramaText = `
-                ${q(target)} breaks down emotionally after struggling with the challenge.
-                <br><br>
-                ${q(target)}: “I just… I don’t want to go home yet.”
-                <br>
-                ${q(instigator)} awkwardly pats her back.
-            `;
-            break;
-
-        case "sabotage":
-            dramaText = `
-                Tension rises when ${q(instigator)} is caught “accidentally” moving ${q(target)}’s materials.
-                <br><br>
-                ${q(target)}: “Did you touch my stuff?”
-                <br>
-                ${q(instigator)}: “Why would I? It’s ugly.”
-            `;
-            break;
-
-        case "alliance":
-            dramaText = `
-                ${q(instigator)} and ${q(target)} secretly form an alliance.
-                <br><br>
-                ${q(instigator)} (confessional): “If we take out the strong girls early, we can run this competition.”
-                <br>
-                ${others.length ? `${q(others[0])} overhears everything.` : ""}
-            `;
-            break;
-
-        case "confessional_attack":
-            dramaText = `
-                ${q(instigator)} goes OFF in confessional about ${q(target)}.
-                <br><br>
-                ${q(instigator)}: “She’s been coasting since week one. I’m tired of pretending she’s competition.”
-            `;
-            break;
-
-        case "runway_fight":
-            dramaText = `
-                A fight breaks out in the werkroom over runway critiques.
-                <br><br>
-                ${q(instigator)}: “The judges were right — your look was basic.”
-                <br>
-                ${q(target)}: “At least I don't go around looking like shit but.”
-            `;
-            break;
-
-        case "rehearsal_meltdown":
-            dramaText = `
-                During rehearsal, ${q(target)} has a meltdown after messing up the challenge.
-                <br><br>
-                ${q(target)}: “I can’t do this!”
-                <br>
-                ${q(instigator)} rolls her eyes dramatically.
-            `;
-            break;
-
-        case "backstage_whispering":
-            dramaText = `
-                ${q(instigator)} and ${q(target)} whisper backstage about who they think will be in the bottom.
-                <br><br>
-                ${others.length ? `${q(others[0])} walks in and the room goes SILENT.` : ""}
-            `;
-            break;
-
-        case "fabrication_drama":
-            dramaText = `
-                ${q(instigator)} accuses ${q(target)} of lying about her talents.
-                <br><br>
-                ${q(instigator)}: “I thought you said you were talented”
-                <br>
-                ${q(target)}: “I am! You bitch!”
-            `;
-            break;
-    }
-
-    setEpisodeText(`
-        <h2>Werkroom Drama</h2>
-        <p>${dramaText}</p>
-        <p><em>The queens gather themselves and prepare for judging…</em></p>
-    `, involved);
-
-    break;
-}
-        
-        case 3:
+        case 2:
     currentJudging = judgeQueens(currentCast, currentChallenge);
 
     const scored = currentJudging.scored;
@@ -978,35 +834,35 @@ setEpisodeText(
 
     break;
 
-        case 4:
+        case 3:
             setEpisodeText(
                 `<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins!</p>`,
                 [currentJudging.winner]
             );
             break;
 
-        case 5:
+        case 4:
             setEpisodeText(
                 `<h2>High</h2><p>${currentJudging.high.map(q => q.name).join(", ") || "None"}</p>`,
                 currentJudging.high
             );
             break;
 
-        case 6:
+        case 5:
             setEpisodeText(
                 `<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`,
                 currentJudging.safe
             );
             break;
 
-        case 7:
+        case 6:
             setEpisodeText(
                 `<h2>Low</h2><p>${currentJudging.low.map(q => q.name).join(", ") || "None"}</p>`,
                 currentJudging.low
             );
             break;
 
-        case 8:
+        case 7:
             currentBottom2 = currentJudging.bottom2;
             setEpisodeText(
                 `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
@@ -1014,7 +870,7 @@ setEpisodeText(
             );
             break;
 
-        case 9:
+        case 8:
     currentLipSyncResult = lipSync(currentBottom2);
     const song = getRandomLipSyncSong();
 currentLipSyncSong = song; // store it for elimination screen
@@ -1026,7 +882,7 @@ setEpisodeText(`
 `, currentBottom2);
     break;
 
-        case 10:
+        case 9:
             const result = currentLipSyncResult;
 
 if (result.type === "double-shantay") {
