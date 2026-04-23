@@ -417,3 +417,16 @@ body {
     margin-top: -5px; /* adjust to taste */
 }
 
+/* Make the search + start button centered inside the right side */
+#title-search-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* centers the search + start */
+}
+
+/* Keep your existing .top-bar styles */
+.top-bar {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
