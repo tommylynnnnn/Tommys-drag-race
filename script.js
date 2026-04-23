@@ -733,7 +733,7 @@ function getBottomCount(q) {
 }
 
 function sortQueensByPlacement(queens) {
-    const order = ["WINNER", "RUNNER-UP", "WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", ""];
+    const order = ["WINNER", "RUNNER-UP", "WIN", "TOP2", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", ""];
 
     // ACTIVE queens (not eliminated)
     const active = queens.filter(q => !eliminationOrder.includes(q.name));
@@ -951,8 +951,9 @@ setEpisodeText(
 
         case 7:
     if (premiereType === "double" && episodeNumber <= 2) {
-        const [top1, top2] = currentJudging.bottom2;
-
+        currentBottom2 = currentJudging.bottom2;
+const [top1, top2] = currentBottom2;
+        
         setEpisodeText(`
             <h2>Top 2 Lipsync</h2>
             <p>The top 2 queens will now lipsync for the win!</p>
@@ -1084,6 +1085,13 @@ updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
             if (premiereType === "double" && episodeNumber === 1) {
     // Lock in episode 1 placements
     seasonQueens.forEach(q => {
+        if (premiereType === "double" && episodeNumber === 1) {
+    seasonQueens.forEach(q => {
+        if (trackRecord[q.name].length < 1) {
+            trackRecord[q.name].push("SAFE");
+        }
+    });
+}
         if (!trackRecord[q.name]) trackRecord[q.name] = [];
         if (trackRecord[q.name].length < episodeNumber) {
             trackRecord[q.name].push("SAFE");
@@ -1104,6 +1112,9 @@ updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
             break;
 
         default:
+            if (premiereType === "double" && episodeNumber === 2) {
+    currentCast = [...premiereGroups[0], ...premiereGroups[1]];
+}
             episodeNumber++;
             startEpisode();
             return;
