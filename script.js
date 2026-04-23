@@ -952,7 +952,7 @@ setEpisodeText(
         case 7:
     if (premiereType === "double" && episodeNumber <= 2) {
         currentBottom2 = currentJudging.bottom2;
-const [top1, top2] = currentBottom2;
+        const [top1, top2] = currentBottom2;
         
         setEpisodeText(`
             <h2>Top 2 Lipsync</h2>
@@ -963,6 +963,7 @@ const [top1, top2] = currentBottom2;
     }
 
     // NORMAL BTM2 PAGE
+    currentBottom2 = currentJudging.bottom2; // <<< add this
     setEpisodeText(`
         <h2>Bottom 2</h2>
         <p>The following queens are up for elimination:</p>
@@ -1077,47 +1078,45 @@ updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
 `, [eliminated]);
             break;
 
-        case 10:
-            setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
-            renderTrackRecordCards();
-            break;
+case 10:
+    setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
+    renderTrackRecordCards();
+    break;
 
-            if (premiereType === "double" && episodeNumber === 1) {
-    // Lock in episode 1 placements
-    seasonQueens.forEach(q => {
-        if (premiereType === "double" && episodeNumber === 1) {
-    seasonQueens.forEach(q => {
-        if (trackRecord[q.name].length < 1) {
-            trackRecord[q.name].push("SAFE");
-        }
-    });
-}
-        if (!trackRecord[q.name]) trackRecord[q.name] = [];
-        if (trackRecord[q.name].length < episodeNumber) {
-            trackRecord[q.name].push("SAFE");
-        }
-    });
-}
-
-        case 11:
-            if (currentCast.length <= 1) {
-                location.reload();
-                return;
-            } else {
-                setEpisodeText(
-                    `<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`,
-                    currentCast
-                );
+case 11:
+    // ===== DOUBLE PREMIERE: PAD TRACK RECORD SO EACH PREMIERE IS ITS OWN COLUMN =====
+    if (premiereType === "double" && episodeNumber <= 2) {
+        seasonQueens.forEach(q => {
+            if (!trackRecord[q.name]) trackRecord[q.name] = [];
+            // If this queen didn't get a placement this episode, add an empty slot
+            if (trackRecord[q.name].length < episodeNumber) {
+                trackRecord[q.name].push("");
             }
-            break;
+        });
+    }
+
+    if (currentCast.length <= 1) {
+        location.reload();
+        return;
+    } else {
+        setEpisodeText(
+            `<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`,
+            currentCast
+        );
+    }
+    break;
 
         default:
-            if (premiereType === "double" && episodeNumber === 2) {
-    currentCast = [...premiereGroups[0], ...premiereGroups[1]];
-}
-            episodeNumber++;
-            startEpisode();
-            return;
+    // After second premiere, merge groups and go back to normal rules
+    if (premiereType === "double" && episodeNumber === 2) {
+        currentCast = [...premiereGroups[0], ...premiereGroups[1]];
+        premiereType = "normal"; // <<< IMPORTANT: turn off double premiere mode
+    }
+
+    episodeNumber++;
+    startEpisode();
+    return;
+
     }
 
     episodeStep++;
