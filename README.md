@@ -3,6 +3,12 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.6.0
+
+-Season 17 cast added
+-Season 17 lip-sync songs added
+-Season 17 runways added
+
 🌟 Update 1.5.2
 
 -Random queen selector UI enhanced
