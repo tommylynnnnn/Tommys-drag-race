@@ -547,28 +547,57 @@ function judgeQueens(cast, type) {
     // ===== DOUBLE PREMIERE SPECIAL RULES =====
     if (premiereType === "double" && episodeNumber <= 2) {
 
-        // 1) Score everyone like normal
+        // Score everyone normally
         const scored = cast
             .map(q => ({ queen: q, score: scoreQueen(q, type) }))
             .sort((a, b) => b.score - a.score);
 
-        // 2) Top 2 = first two
         const top1 = scored[0].queen;
         const top2 = scored[1].queen;
-
-        // 3) Everyone else is SAFE
         const safe = scored.slice(2).map(s => s.queen);
 
-        // 4) No HIGH, no LOW, no real BTM2 — bottom2 is reused as TOP2
         return {
-            scored,          // so case 2 can still show the summary
-            winner: null,    // winner decided after lipsync
+            scored,
+            winner: null,
             high: [],
             safe,
             low: [],
-            bottom2: [top1, top2]
+            bottom2: [top1, top2] // reused as TOP2
         };
     }
+
+    // ===== NORMAL EPISODE LOGIC =====
+    const scored = cast
+        .map(q => ({ queen: q, score: scoreQueen(q, type) }))
+        .sort((a, b) => b.score - a.score);
+
+    const winnerEntry = scored.find(s => getWinCount(s.queen) < 4) || scored[0];
+    const winner = winnerEntry.queen;
+
+    const bottom2 = [
+        scored[scored.length - 1].queen,
+        scored[scored.length - 2].queen
+    ];
+
+    const remaining = scored
+        .filter(s =>
+            s.queen.name !== winner.name &&
+            !bottom2.some(b => b.name === s.queen.name)
+        )
+        .map(s => s.queen);
+
+    let high = [], low = [], safe = [];
+
+    if (remaining.length <= 2) {
+        safe = remaining;
+    } else {
+        high = remaining.slice(0, 2);
+        low = remaining.slice(-2);
+        safe = remaining.slice(2, remaining.length - 2);
+    }
+
+    return { scored, winner, high, safe, low, bottom2 };
+}
 
     // ===== NORMAL EPISODES BELOW =====
     const scored = cast
