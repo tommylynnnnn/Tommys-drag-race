@@ -37,6 +37,30 @@
 <p id="queen-count"></p>
 <div id="queen-grid"></div>
 
+<div id="season-options-overlay" class="hidden">
+    <div id="season-options-box">
+        <h2>Season Options</h2>
+
+        <label>Premiere Type</label>
+        <select id="premiere-type">
+            <option value="normal">Normal Premiere</option>
+            <option value="split">Split Premiere (S6/S12/S14)</option>
+            <option value="double">Double Premiere</option>
+            <option value="none">No Elimination Premiere</option>
+        </select>
+
+        <label>Finale Type</label>
+        <select id="finale-type">
+            <option value="lipsync">Lip Sync for the Crown</option>
+            <option value="smackdown">Lip Sync Smackdown</option>
+            <option value="top3">Top 3 Finale</option>
+            <option value="jury">Jury Vote Finale</option>
+        </select>
+
+        <button id="season-options-continue">Continue</button>
+    </div>
+</div>
+  
 <div id="episode-overlay" class="hidden">
   <div class="episode-panel">
     <div id="episode-content"></div>
