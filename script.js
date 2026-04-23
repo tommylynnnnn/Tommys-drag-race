@@ -1,4 +1,8 @@
 // ====== DATA ======
+// ===== DOUBLE PREMIERE STATE =====
+let premiereType = "normal";
+let premiereGroups = null;       // [group1, group2]
+let currentPremiereIndex = 0;    // 0 = first premiere, 1 = second
 let selectedPremiereType = "normal";
 let selectedFinaleType = "top3";
 
@@ -539,6 +543,28 @@ function getScoreBasedRating(score, maxScore, minScore) {
 }
 
 function judgeQueens(cast, type) {
+        // ===== DOUBLE PREMIERE SPECIAL RULES =====
+    if (premiereType === "double" && episodeNumber <= 2) {
+
+        const shuffled = [...cast];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const top1 = shuffled[0];
+        const top2 = shuffled[1];
+        const safe = shuffled.slice(2);
+
+        return {
+            scored: [],
+            winner: null, // winner decided after lipsync
+            high: [],
+            safe,
+            low: [],
+            bottom2: [top1, top2] // repurposed as TOP2
+        };
+    }
     const scored = cast
         .map(q => ({ queen: q, score: scoreQueen(q, type) }))
         .sort((a, b) => b.score - a.score);
@@ -636,6 +662,23 @@ function chance(p) {
 
 function getRandomRunwayTheme() {
     return RUNWAY_THEMES[Math.floor(Math.random() * RUNWAY_THEMES.length)];
+}
+
+// ===== DOUBLE PREMIERE: SPLIT GROUPS =====
+function splitIntoDoublePremiereGroups(queens) {
+    const shuffled = [...queens];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    const mid = Math.floor(shuffled.length / 2);
+
+    const group1 = shuffled.slice(0, mid);
+    const group2 = shuffled.slice(mid);
+
+    return [group1, group2];
 }
 
 // ====== TRACK RECORD ======
@@ -760,6 +803,16 @@ function startSeason() {
     seasonQueens = [...currentCast];
     initTrackRecord();
 
+    // ===== READ PREMIERE TYPE =====
+premiereType = selectedPremiereType;
+
+if (premiereType === "double") {
+    premiereGroups = splitIntoDoublePremiereGroups(currentCast);
+    currentPremiereIndex = 0;
+} else {
+    premiereGroups = null;
+}
+
     episodeNumber = 1;
     startEpisode();
 
@@ -771,6 +824,10 @@ console.log("Finale:", selectedFinaleType);
 function startEpisode() {
     episodeStep = 0;
     isFinale = currentCast.length === 3;
+    // ===== DOUBLE PREMIERE: USE GROUP QUEENS =====
+if (premiereType === "double" && episodeNumber <= 2) {
+    currentCast = premiereGroups[episodeNumber - 1];
+}
     currentChallenge = getRandomChallenge();
     currentJudging = null;
     currentBottom2 = null;
@@ -863,62 +920,114 @@ setEpisodeText(
             break;
 
         case 5:
-            setEpisodeText(
-                `<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins!</p>`,
-                [currentJudging.winner]
-            );
-            break;
+    if (premiereType === "double" && episodeNumber <= 2) {
+        // SKIP WINNER PAGE — winner is decided after lipsync
+        episodeStep++;
+        return advanceEpisodeStep();
+    }
+
+    // NORMAL WINNER PAGE
+    setEpisodeText(`
+        <h2>Winner</h2>
+        <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the challenge!</p>
+    `, [currentJudging.winner]);
+    break;
 
         case 6:
-            setEpisodeText(
-                `<h2>Low</h2><p>${currentJudging.low.map(q => q.name).join(", ") || "None"}</p>`,
-                currentJudging.low
-            );
-            break;
+    if (premiereType === "double" && episodeNumber <= 2) {
+        // SKIP LOW PAGE
+        episodeStep++;
+        return advanceEpisodeStep();
+    }
+
+    // NORMAL LOW PAGE
+    setEpisodeText(`
+        <h2>Low</h2>
+        <p>The following queens are low:</p>
+    `, currentJudging.low);
+    break;
 
         case 7:
-            currentBottom2 = currentJudging.bottom2;
-            setEpisodeText(
-                `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
-                currentBottom2
-            );
-            break;
+    if (premiereType === "double" && episodeNumber <= 2) {
+        const [top1, top2] = currentJudging.bottom2;
+
+        setEpisodeText(`
+            <h2>Top 2 Lipsync</h2>
+            <p>The top 2 queens will now lipsync for the win!</p>
+        `, [top1, top2]);
+
+        break;
+    }
+
+    // NORMAL BTM2 PAGE
+    setEpisodeText(`
+        <h2>Bottom 2</h2>
+        <p>The following queens are up for elimination:</p>
+    `, currentJudging.bottom2);
+    break;
 
         case 8:
-    currentLipSyncResult = lipSync(currentBottom2);
-    const song = getRandomLipSyncSong();
-currentLipSyncSong = song; // store it for elimination screen
+    if (premiereType === "double" && episodeNumber <= 2) {
+        const [top1, top2] = currentJudging.bottom2;
 
-setEpisodeText(`
-    <h2>Lip Sync For Your Life</h2>
-    <p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>
-    <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
-`, currentBottom2);
+        const winner = Math.random() < 0.5 ? top1 : top2;
+        const runner = winner === top1 ? top2 : top1;
+
+        trackRecord[winner.name].push("WIN");
+        trackRecord[runner.name].push("TOP2");
+        currentJudging.safe.forEach(q => trackRecord[q.name].push("SAFE"));
+
+        setEpisodeText(`
+            <h2>Lipsync Winner</h2>
+            <p>🏆 <strong>${winner.name}</strong> wins the lipsync and the challenge!</p>
+        `, [winner]);
+
+        break;
+    }
+
+    // NORMAL LIP SYNC
+    currentLipSyncResult = lipSync(currentJudging.bottom2);
+    const song = getRandomLipSyncSong();
+    setEpisodeText(`
+        <h2>Lip Sync</h2>
+        <p>Song: <strong>${song.title}</strong> by ${song.artist}</p>
+    `, currentJudging.bottom2);
     break;
 
         case 9:
-            const result = currentLipSyncResult;
 
-if (result.type === "double-shantay") {
-    setEpisodeText(`
-        <h2>Double Shantay!</h2>
-        <p>💖 Both queens stay!</p>
-        <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    `, currentBottom2);
+    // ===== DOUBLE PREMIERE: NO ELIMINATION =====
+    if (premiereType === "double" && episodeNumber <= 2) {
+        // Skip elimination entirely
+        episodeStep++;
+        return advanceEpisodeStep();
+    }
 
-    // Track record: both get BTM2
-    seasonQueens.forEach(q => {
-        let p = "";
-        if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-        else if (q.name === currentJudging.winner.name) p = "WIN";
-        else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-        else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-        else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-        trackRecord[q.name].push(p);
-    });
+    // ===== NORMAL EPISODES BELOW =====
+    const result = currentLipSyncResult;
 
-    break;
-}
+    if (result.type === "double-shantay") {
+        setEpisodeText(`
+            <h2>Double Shantay!</h2>
+            <p>💖 Both queens stay!</p>
+            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+        `, currentBottom2);
+
+        // Track record: both get BTM2
+        seasonQueens.forEach(q => {
+            let p = "";
+            if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
+            else if (q.name === currentJudging.winner.name) p = "WIN";
+            else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
+            else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
+            else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
+            trackRecord[q.name].push(p);
+        });
+
+        break;
+    }
+
+    // (your remaining elimination logic continues here)
 
 if (result.type === "double-sashay") {
     const eliminated = result.eliminated;
