@@ -447,7 +447,6 @@ let currentJudging = null;
 let currentBottom2 = null;
 let currentLipSyncResult = null;
 let isFinale = false;
-let isTop2 = false;
 
 let trackRecord = {}; // { queenName: ["WIN", "HIGH", ...] }
 let eliminationOrder = [];
@@ -555,19 +554,6 @@ function judgeQueens(cast, type) {
         safe = remaining.slice(2, remaining.length - 2);
     }
 
-    // ⭐ THIS IS WHERE STEP 4 GOES ⭐
-    if (isTop2) {
-        const top2 = [scored[0].queen, scored[1].queen];
-        return {
-            scored,
-            winner: null,
-            high: top2,
-            safe: cast.filter(q => !top2.includes(q)),
-            low: [],
-            bottom2: []
-        };
-    }
-
     return { scored, winner, high, safe, low, bottom2 };
 }
 
@@ -647,27 +633,6 @@ function initTrackRecord() {
 }
 
 function updateTrackRecordEpisode(j, bottom2, eliminated) {
-
-    // TOP 2 EPISODE (no elimination)
-    if (isTop2) {
-        seasonQueens.forEach(q => {
-            let p = "";
-
-            if (j.high.some(t => t.name === q.name)) {
-                if (currentLipSyncResult.winner && q.name === currentLipSyncResult.winner.name) {
-                    p = "WIN";
-                } else {
-                    p = "HIGH";
-                }
-            } else {
-                p = "SAFE";
-            }
-
-            trackRecord[q.name].push(p);
-        });
-
-        return;
-    }
 
     // NORMAL EPISODE
     seasonQueens.forEach(q => {
@@ -769,10 +734,6 @@ function renderTrackRecordCards() {
     episodeContent.appendChild(container);
 }
 
-function isTop2Episode() {
-    return Math.random() < 0.15; // 15% chance, change if you want
-}
-
 // ====== SEASON CONTROL ======
 
 function startSeason() {
@@ -794,7 +755,6 @@ function startSeason() {
 function startEpisode() {
     episodeStep = 0;
     isFinale = currentCast.length === 3;
-    isTop2 = !isFinale && isTop2Episode();
     currentChallenge = getRandomChallenge();
     currentJudging = null;
     currentBottom2 = null;
@@ -901,15 +861,6 @@ setEpisodeText(
             break;
 
         case 7:
-    if (isTop2) {
-        const top2 = currentJudging.high;
-        setEpisodeText(
-            `<h2>Top 2</h2><p>${top2[0].name} vs ${top2[1].name}</p>`,
-            top2
-        );
-        break;
-    }
-
     currentBottom2 = currentJudging.bottom2;
     setEpisodeText(
         `<h2>Bottom 2</h2><p>${currentBottom2[0].name} vs ${currentBottom2[1].name}</p>`,
@@ -928,22 +879,6 @@ setEpisodeText(
     const song = getRandomLipSyncSong();
     currentLipSyncSong = song;
 
-    if (isTop2) {
-        const top2 = currentJudging.high;
-        currentLipSyncResult = {
-            type: "top2",
-            winner: lipSync(top2).winner
-        };
-
-        setEpisodeText(`
-            <h2>Top 2 Lip Sync</h2>
-            <p>${top2[0].name} vs ${top2[1].name}</p>
-            <p><strong>Song:</strong> "${song.title}" by ${song.artist}</p>
-        `, top2);
-
-        break;
-    }
-
     currentLipSyncResult = lipSync(currentBottom2);
 
     setEpisodeText(`
@@ -954,35 +889,6 @@ setEpisodeText(
     break;
 
         case 9:
-    // ⭐ TOP 2 EPISODE — NO ELIMINATION ⭐
-    if (isTop2) {
-        const top2 = currentJudging.high;
-        const winner = currentLipSyncResult.winner;
-
-        setEpisodeText(`
-            <h2>Top 2 Winner</h2>
-            <p>💖 <strong>${winner.name}</strong> wins the lip sync!</p>
-            <p>No one is eliminated this week.</p>
-            <p><strong>Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-        `, [winner]);
-
-        // Track record update for Top 2
-        seasonQueens.forEach(q => {
-            let p = "";
-
-            if (top2.some(t => t.name === q.name)) {
-                if (winner && q.name === winner.name) p = "WIN";
-                else p = "HIGH";
-            } else {
-                p = "SAFE";
-            }
-
-            trackRecord[q.name].push(p);
-        });
-
-        break;
-    }
-
     // ⭐ DOUBLE SHANTAY ⭐
     if (currentLipSyncResult.type === "double-shantay") {
         const btm = currentBottom2;
