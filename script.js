@@ -750,7 +750,7 @@ function startSeason() {
 
     episodeNumber = 1;
 
-   function startSeason() {
+function startSeason() {
     const selected = [...document.querySelectorAll(".queen-card.selected")].map(c => c.dataset.name);
 
     if (selected.length < 4 || selected.length > 16) {
@@ -763,10 +763,8 @@ function startSeason() {
     initTrackRecord();
 
     episodeNumber = 1;
-
-    // SHOW POPUP
-   startEpisode();
-// ⭐ THIS WAS MISSING
+    startEpisode();
+}
 
 function startEpisode() {
     episodeStep = 0;
