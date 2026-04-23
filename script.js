@@ -110,6 +110,71 @@ const ALL_QUEENS = [
         name: "Vita VonTesse Starr",
         img: "https://i.pinimg.com/736x/f9/62/6a/f9626a898746975b563350c8f1bade97.jpg",
         stats: { acting: 5, comedy: 3, improv: 4, dance: 9, design: 14, lipsync: 5 }
+    },
+    {
+        name: "Suzie Toot",
+        img: "https://i.pinimg.com/736x/13/38/6c/13386cf6ca123b8d96bc8d78f4cb84b6.jpg",
+        stats: { acting: 11, comedy: 8, improv: 10, dance: 12, design: 10, lipsync: 11 }
+    },
+    {
+        name: "Sam Star",
+        img: "https://i.pinimg.com/736x/34/76/6e/34766eddba9282f1c02a93c79e4f3f0e.jpg",
+        stats: { acting: 9, comedy: 8, improv: 9, dance: 15, design: 13, lipsync: 14 }
+    },
+    {
+        name: "Lydia B. Kollins",
+        img: "https://i.pinimg.com/736x/d4/0c/75/d40c753538a7cd1d204ddf79b8a39429.jpg",
+        stats: { acting: 8, comedy: 10, improv: 9, dance: 12, design: 9, lipsync: 11 }
+    },
+    {
+        name: "Lexi Valentine L.",
+        img: "https://i.pinimg.com/736x/4a/56/46/4a56467c2f78713d514db81d61a1a665.jpg",
+        stats: { acting: 11, comedy: 11, improv: 11, dance: 9, design: 9, lipsync: 11 }
+    },
+    {
+        name: "Lucky Starzzz",
+        img: "https://i.pinimg.com/736x/79/fc/dd/79fcddc0dd30128f8552f365699ac2bf.jpg",
+        stats: { acting: 0, comedy: 0, improv: 0, dance: 0, design: 3, lipsync: 3 }
+    },
+    {
+        name: "Lana Ja'Rae",
+        img: "https://i.pinimg.com/736x/7f/b0/01/7fb001d3300459bb92841f926644cd3f.jpg",
+        stats: { acting: 7, comedy: 6, improv: 7, dance: 9, design: 7, lipsync: 11 }
+    },
+    {
+        name: "Kori King",
+        img: "https://i.pinimg.com/736x/fe/ad/3f/fead3fcac4b3e2864196d2d6193bcb3f.jpg",
+        stats: { acting: 6, comedy: 9, improv: 8, dance: 3, design: 6, lipsync: 8 }
+    },
+    {
+        name: "Joella",
+        img: "https://i.pinimg.com/736x/af/1b/a4/af1ba41e9b83480684f7a1913a2945f0.jpg",
+        stats: { acting: 0, comedy: 0, improv: 0, dance: 0, design: 3, lipsync: 7 }
+    },
+    {
+        name: "Jewels Sparkles",
+        img: "https://i.pinimg.com/736x/ae/83/41/ae8341948b8149b37f92b9c3be81b777.jpg",
+        stats: { acting: 11, comedy: 10, improv: 11, dance: 12, design: 9, lipsync: 10 }
+    },
+    {
+        name: "Hormona Lisa",
+        img: "https://i.pinimg.com/736x/f9/87/21/f98721b24133671745403beb7936e4b0.jpg",
+        stats: { acting: 12, comedy: 0, improv: 6, dance: 0, design: 6, lipsync: 5 }
+    },
+    {
+        name: "Crystal Envy",
+        img: "https://i.pinimg.com/736x/a2/47/97/a2479768395d4851189a52d9e9202efc.jpg",
+        stats: { acting: 9, comedy: 3, improv: 6, dance: 0, design: 11, lipsync: 6 }
+    },
+    {
+        name: "Arrietty",
+        img: "https://i.pinimg.com/736x/0d/4b/11/0d4b11ac6ccea5be9123b97f815bd280.jpg",
+        stats: { acting: 6, comedy: 5, improv: 6, dance: 9, design: 13, lipsync: 5 }
+    },
+    {
+        name: "Acacia Forgot",
+        img: "https://i.pinimg.com/736x/b7/38/a6/b738a669d1953aed240f47cdbfe0a7a3.jpg",
+        stats: { acting: 6, comedy: 9, improv: 8, dance: 3, design: 8, lipsync: 5 }
     }
 
 ];
@@ -136,7 +201,21 @@ const ENTRANCE_LINES = {
     "DD Fuego": "Can I say the F-word? FUEGO!",
     "Mandy Mango": "Miss Nurse! Don't you know? A mango a day keeps the doctor away.",
     "Mia Starr": "I'm repping for the big backs, and I came to eat.",
-    "Vita VonTesse Starr": "Baby it's easy to see, that I'm the key. You can question those other girls, but never Queen V"
+    "Vita VonTesse Starr": "Baby it's easy to see, that I'm the key. You can question those other girls, but never Queen V",
+    "Suzie Toot": "I've always wanted my name in the papers.",
+    "Sam Star": "Well, I heard y'all were looking for America's Next Drag Superstar!",
+    "Lydia B. Kollins": "Did someone say my name three times? (moans)",
+    "Lexi Valentine L.": "Why y'all gagging? I haven't even stepped on any necks yet.",
+    "Lucky Starzzz": "Oh, daddy, I think I stained the sheets.",
+    "Lana Ja'Rae": "Gouda morning, Ja'Reamers.",
+    "Kori King": "*sip* Ahhh. Good morning, kingdom!",
+    "Joella": "大家好, 大家好, welcome to the Joella Dynasty, bitch!",
+    "Jewels Sparkles": "Don't worry, I'm not just a bitch; I'm that bitch.",
+    "Hormona Lisa": "Hello, loyal subjects. It is I, Hormona Lisa, at your service. *laugh* Wow, that was annoying.",
+    "Crystal Envy": "Yeah, I'd envy me too.",
+    "Arrietty": "Hi! (said in Stitch voice)",
+    "Acacia Forgot": "Totally tubular."
+    
 };
 
 const ELIMINATION_LINES = {
@@ -161,7 +240,20 @@ const ELIMINATION_LINES = {
     "DD Fuego": "Well... it was short... it was sweet... I wish it had been a little spicier. Adiós!",
     "Mandy Mango": "Mangoes can be eaten, mangoes can be slurped... Cheers to all the lovers who make our mangoes burst!",
     "Mia Starr": "FUCK YOU BLOODY MARYYYYYYYYYYY!! BITCH!!",
-    "Vita VonTesse Starr": "Final words... Vita Vita Vita (Everyone: You know you wanna eat her!)"
+    "Vita VonTesse Starr": "Final words... Vita Vita Vita (Everyone: You know you wanna eat her!)",
+    "Suzie Toot": "RuPaul, I have just one thing to say! (points at foot and begins tap dancing)",
+    "Sam Star": "*Cries* Goodbye...",
+    "Lydia B. Kollins": "Well, shit.",
+    "Lexi Valentine L.": "Man... fuck bro, now what?",
+    "Lucky Starzzz": "RuPaul, remember, it's Star-zuh-zuh-zuh-zuh!",
+    "Lana Ja'Rae": "Well, is the bus still running?",
+    "Kori King": "At the end of the day, all you can do is laugh!",
+    "Joella": "Well, at least I didn't die a local girl!",
+    "Jewels Sparkles": "Ding!",
+    "Hormona Lisa": "Rot in hell, thanks a lot!",
+    "Crystal Envy": "You definitely make me feel mayo real righty, RuPaul!",
+    "Arrietty": "Well, it looks like the runway category just dropped, immensely! Y'all ugly boogers!",
+    "Acacia Forgot": "You can now find my new single on all streaming platforms."
 };
 
 // ====== CHALLENGES ======
@@ -209,7 +301,19 @@ const RUNWAY_THEMES = [
     "Eighties Ladies",
     "Beige Against The Machine",
     "From Wholsome To Folsom",
-    "Drag Excellence"
+    "Drag Excellence",
+    "Masked for Masked Singer",
+    "Is It Cake?",
+    "Quilted For Your Pleasure",
+    "Tickled Pink",
+    "Bathing Beauties",
+    "Sea Creature Couture",
+    "Nailed It",
+    "Parasols, Shady Ladies",
+    "Who Wears Short Shorts?",
+    "Black & White Ball",
+    "Ugliest Dress Ever",
+    "Opulent Outerwear",
 ];
 
 const LIP_SYNC_SONGS = [
@@ -228,7 +332,31 @@ const LIP_SYNC_SONGS = [
     { title: "Pretty Ugly", artist: "Zara Larsson" },
     { title: "Jerkin'", artist: "Amyl & The Sniffers" },
     { title: "Feels Like Another One ", artist: "Patti LaBelle" },
-    { title: "Every Girl You've Ever Loved", artist: "Miley Cyrus ft. Naomi Campbell" }
+    { title: "Every Girl You've Ever Loved", artist: "Miley Cyrus ft. Naomi Campbell" },
+    { title: "yes, and?", artist: "Ariana Grande" },
+    { title: "The Way That You Love Me", artist: "Paula Abdul" },
+    { title: "Buttons", artist: "The Pussycat Dolls ft. Snoopdog" },
+    { title: "Boogie Wonderland", artist: "Earth, Wind & Fire and The Emotions" },
+    { title: "get him back!", artist: "Olivia Rodrigo" },
+    { title: "Hands to Myself", artist: "Selena Gomez" },
+    { title: "WET DREAM", artist: "Adam Lambert" },
+    { title: "Kiss Me Deadly", artist: "Lita Ford" },
+    { title: "YA YA", artist: "Beyoncé" },
+    { title: "Unholy", artist: "Sam Smith and Kim Petras" },
+    { title: "Illusion", artist: "Dua Lipa" },
+    { title: "1 Thing", artist: "Amerie" },
+    { title: "Love Child", artist: "Diana Ross & The Supremes" },
+    { title: "Woman's World", artist: "Katy Perry" },
+    { title: "Alter Ego", artist: "Doechii & JT" },
+    { title: "Say Liza (Liza with a 'Z')", artist: "Liza Minelli" },
+    { title: "Training Season", artist: "Dua Lipa" },
+    { title: "Step by Step (Junior Vasquez Tribal X Beats)", artist: "Whitney Houston" },
+    { title: "Blow Me (One Last Kiss)", artist: "P!nk" },
+    { title: "You Make Me Feel (Mighty Real)", artist: "Sylvester" },
+    { title: "We Found Love", artist: "Rihanna" },
+    { title: "360", artist: "Charli XCX" },
+    { title: "APT", artist: "ROSÉ and Bruno Mars" },
+    { title: "Abracadabra", artist: "Lady Gaga" },
 ];
 
 // ====== DOM ======
