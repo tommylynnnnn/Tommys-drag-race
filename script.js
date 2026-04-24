@@ -149,7 +149,7 @@ const ALL_QUEENS = [
         name: "Sam Star",
         img: "https://i.pinimg.com/736x/34/76/6e/34766eddba9282f1c02a93c79e4f3f0e.jpg",
         stats: { acting: 9, comedy: 8, improv: 9, dance: 15, design: 13, lipsync: 14 },
-        seasons: ["Season 17"]
+        seasons: ["Season 17", "All Stars 11"]
     },
     {
         name: "Lydia B. Kollins",
