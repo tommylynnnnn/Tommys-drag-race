@@ -306,6 +306,102 @@ const ALL_QUEENS = [
         img: "https://i.pinimg.com/736x/63/6f/93/636f9344a9ce2f1cc0d63099ed0754cf.jpg",
         stats: { acting: 13, comedy: 11, improv: 12, dance: 14, design: 13, lipsync: 13 },
         seasons: ["Season 15"]
+    },
+    {
+        name: "Malaysia Babydoll Foxx",
+        img: "https://i.pinimg.com/736x/cd/74/ee/cd74ee0b9b3471744a9ea774602d2e45.jpg",
+        stats: { acting: 8, comedy: 7, improv: 8, dance: 9, design: 11, lipsync: 8 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Anetra",
+        img: "https://i.pinimg.com/736x/94/c4/fe/94c4fe1beb07ea7a0cb8546726fc88f5.jpg",
+        stats: { acting: 11, comedy: 8, improv: 10, dance: 5, design: 12, lipsync: 8 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Sugar",
+        img: "https://i.pinimg.com/736x/7a/08/93/7a0893a137bbc35326d84a38e51ce3f1.jpg",
+        stats: { acting: 9, comedy: 6, improv: 8, dance: 0, design: 0, lipsync: 3 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Spice",
+        img: "https://i.pinimg.com/736x/70/6d/19/706d196825dca42a3971bb4340f8f6dc.jpg",
+        stats: { acting: 8, comedy: 6, improv: 7, dance: 9, design: 6, lipsync: 7 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Robin Fierce",
+        img: "https://i.pinimg.com/736x/4b/21/d2/4b21d21567727291688963b8f19bc3bf.jpg",
+        stats: { acting: 9, comedy: 9, improv: 9, dance: 3, design: 12, lipsync: 3 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Jax",
+        img: "https://i.pinimg.com/736x/86/55/9d/86559d83a97a1c93ad65de4565142a19.jpg",
+        stats: { acting: 5, comedy: 8, improv: 7, dance: 3, design: 6, lipsync: 6 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Marcia Marcia Marcia",
+        img: "https://i.pinimg.com/736x/fb/3a/01/fb3a0110ff0999f4a792e1015524b4f3.jpg",
+        stats: { acting: 10, comedy: 8, improv: 9, dance: 9, design: 9, lipsync: 9 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Princess Poppy",
+        img: "https://i.pinimg.com/736x/5b/b7/91/5bb791045988e6ca3c6ec5ee4e2e96b2.jpg",
+        stats: { acting: 3, comedy: 3, improv: 3, dance: 0, design: 0, lipsync: 3 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Luxx Noir London",
+        img: "https://i.pinimg.com/736x/27/9d/95/279d95f7438963746313a05cd4a650b2.jpg",
+        stats: { acting: 11, comedy: 12, improv: 12, dance: 11, design: 9, lipsync: 11 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Amethyst",
+        img: "https://i.pinimg.com/736x/89/b1/93/89b193761deb6b3bb9ae51ae98303c1b.jpg",
+        stats: { acting: 3, comedy: 6, improv: 5, dance: 0, design: 3, lipsync: 11 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Loosey LaDuca",
+        img: "https://i.pinimg.com/736x/d6/4b/e8/d64be8ceb18424440ad381f232fbcf39.jpg",
+        stats: { acting: 9, comedy: 14, improv: 12, dance: 9, design: 6, lipsync: 6 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Loosey LaDuca",
+        img: "https://i.pinimg.com/736x/d6/4b/e8/d64be8ceb18424440ad381f232fbcf39.jpg",
+        stats: { acting: 9, comedy: 14, improv: 12, dance: 9, design: 6, lipsync: 6 },
+        seasons: ["Season 15"]
+    },
+    {
+        name: "Mistress Isabelle Brooks",
+        img: "https://i.pinimg.com/736x/68/9c/ed/689ced9a87c0447e3db6b433fb8aaf66.jpg",
+        stats: { acting: 10, comedy: 10, improv: 10, dance: 8, design: 11, lipsync: 11 },
+        seasons: ["Season 15", "All Stars 10"]
+    },
+    {
+        name: "Irene the Alien",
+        img: "https://i.pinimg.com/736x/41/80/ca/4180ca062f03b274934dcce45283ceee.jpg",
+        stats: { acting: 0, comedy: 12, improv: 6, dance: 15, design: 15, lipsync: 7 },
+        seasons: ["Season 15", "All Stars 10"]
+    },
+    {
+        name: "Aura Mayari",
+        img: "https://i.pinimg.com/736x/43/6c/65/436c650eff8e3239e5aae0b9687af58c.jpg",
+        stats: { acting: 6, comedy: 8, improv: 7, dance: 15, design: 9, lipsync: 9 },
+        seasons: ["Season 15", "All Stars 11"]
+    },
+    {
+        name: "Salina EsTitties",
+        img: "https://i.pinimg.com/736x/43/6c/65/436c650eff8e3239e5aae0b9687af58c.jpg",
+        stats: { acting: 6, comedy: 8, improv: 7, dance: 9, design: 3, lipsync: 11 },
+        seasons: ["Season 15", "All Stars 11"]
     }
 ];
 
@@ -359,14 +455,29 @@ const ENTRANCE_LINES = {
     "Geneva Karr": "Viva Mexico, 'Karr-brones'!",
     "Mhi'ya Iman Le'Paige": "The 'Queen of Flips.' I don't set the bar, I flips it.",
     "Hershii LiqCour-Jeté": "I... did not prepare for this.",
-    "Sasha Colby": "Period."
+    "Sasha Colby": "Period.",
+    "Anetra": "What?",
+    "Luxx Noir London": "Gagged them a bit. For sure.",
+    "Mistress Isabelle Brooks": "Don't be fooled, the camera adds 10 pounds!",
+    "Loosey LaDuca": "Oh Loosey, you've got some slaying to do! Oh!",
+    "Salina EsTitties": "Is this the meeting for the itty bitty EsTitties committee? 'Cause they're here!",
+    "Malaysia Babydoll Foxx": "I'm just here to Foxx shit up!",
+    "Robin Fierce": "Mirror mirror on the wall, who's the fiercest queen of them all? It’s me.",
+    "Marcia Marcia Marcia": "Ow! My nose!",
+    "Sugar": "Well this doesn't look like the toy store!",
+    "Spice": "Well this doesn't look like the toy store!",
+    "Aura Mayari": "Do you feel that aura? I bet you do.",
+    "Amethyst": "Is this thing on?",
+    "Irene the Alien": "(sneezes) Okay, someone's wearing cheap perfume. Oh wait, it's me!",
+    "Jax": "Make room for your MVP, spelled J-A-X.”",
+    "Princess Poppy": "I'm homo... phobic."
 };
 
 const ELIMINATION_LINES = {
     "Alaska": "*Cries*",
     "Alyssa Edwards": "Well, I was a lovely fifth alternate!",
     "Bob the Drag Queen": "Thank you for everything Rupaul...",
-    "Katya": "*Grunts and messes with her hair*",
+    "Katya": "*Scoffs and messes with her hair*",
     "Sasha Velour": "Thank you for everything you have done for the queer community, I love you all so much. Goodbye.",
     "Bianca Del Rio": "Really?",
     "Jinkx Monsoon": "Welp! Here comes all stars!",
@@ -412,7 +523,22 @@ const ELIMINATION_LINES = {
     "Geneva Karr": "I'll just keep it short and bilingual. Hasta la vi-star!",
     "Mhi'ya Iman Le'Paige": "From the palace to the queendom, the queen of flips is exiting the group chat!",
     "Hershii LiqCour-Jeté": "I... did not prepare this part.",
-    "Sasha Colby": "Thank you so much for letting me come here and share my creativity... you've done so much for me and everyone else on this stage. Goodbye."
+    "Sasha Colby": "Thank you so much for letting me come here and share my creativity... you've done so much for me and everyone else on this stage. Goodbye.",
+    "Anetra": "Deuces!",
+    "Luxx Noir London": "NO! *Refuses to leave, security drags her out*",
+    "Mistress Isabelle Brooks": "Mwah!",
+    "Loosey LaDuca": "Just make sure to tell them I wasn't just a great set of boobs. I'm also an incredible set of legs.",
+    "Salina EsTitties": "EsTitties, EsTitties, my titties, not your titties! All right baby, the titties are coming.",
+    "Malaysia Babydoll Foxx": "This whole competition I’ve been out of breath and now I can finally breathe!",
+    "Robin Fierce": "Darling, win with a smile and lose with a smile and baby, she's still winning.",
+    "Marcia Marcia Marcia": "Forget the nose. Ow! My heart!",
+    "Sugar": "This bitch might still be in the competition, but I'm still hotter, better and everything in between bitch, so bye!",
+    "Spice": "I may not know how to lipsync, but I do know how to trot!",
+    "Aura Mayari": "My dead dad will haunt you all.",
+    "Amethyst": "Thank you so much, Ru. Thank you, everybody. I really appreciate it. I'm gonna go now. *walks off runway, then turns around to the judges* Okay. *fakes out final words on runway, then leaves*",
+    "Irene the Alien": "Well, I may not have won the crown…",
+    "Jax": "Fatality!",
+    "Princess Poppy": "*burps*"
 };
 
 // ====== CHALLENGES ======
@@ -486,6 +612,16 @@ const RUNWAY_THEMES = [
     "Chain Reaction",
     "Fandango",
     "Red, White, and Blue",
+    "Who is She?",
+    "Metallica",
+    "Beautiful Nightmare",
+    "Tie-Dye to Die For",
+    "Puffer Please!",
+    "Start Your Engines",
+    "My Favorite Ball",
+    "Night of 1000 Beyoncés",
+    "Rip Her to Shreds!",
+    "Everybody Say Glove!",
 ];
 
 const LIP_SYNC_SONGS = [
@@ -552,7 +688,27 @@ const LIP_SYNC_SONGS = [
     { title: "This Time I Know It's For Real", artist: "Donna Summer" },
     { title: "We Got The Beat", artist: "The Go-Go's" },
     { title: "Gonna Make You Sweat (Everybody Dance Now)", artist: "C+C Music Factory" },
-    { title: "Padam Padam", artist: "Kylie Minogue" }
+    { title: "Padam Padam", artist: "Kylie Minogue" },
+    { title: "7 Rings", artist: "Ariana Grande" },
+    { title: "Ain't No Mountain High Enough", artist: "Diana Ross" },
+    { title: "You Better Run", artist: "Pat Benatar" },
+    { title: "Q.U.E.E.N.", artist: "Janelle Monáe" },
+    { title: "In Your Room", artist: "The Bangles" },
+    { title: "Sweetest Pie", artist: "Megan Thee Stallion & Dua Lipa" },
+    { title: "That's What I want", artist: "Lil Nas X" },
+    { title: "Single Ladies", artist: "Beyoncé" },
+    { title: "Boss Bitch", artist: "Doja Cat" },
+    { title: "Running Up That Hill", artist: "Kate Bush" },
+    { title: "For the Girls", artist: "Hayley Kiyoko" },
+    { title: "When Love Takes Over", artist: "David Guetta feat. Kelly Rowland" },
+    { title: "Boys Don't Cry", artist: "Anitta" },
+    { title: "Do You Wanna Touch", artist: "Joan Jett" },
+    { title: "It's All Coming Back To Me Now", artist: "Celine Dion" },
+    { title: "I'm in Love with a Monster", artist: "Fifth Harmony" },
+    { title: "Don't Go Yet", artist: "Camilla Cabello" },
+    { title: "The Right Stuff", artist: "Vanessa Williams" },
+    { title: "Finally", artist: "CeCe Peniston" },
+    { title: "Knock on Wood", artist: "Amii Stewart" }
 ];
 
 // ====== DOM ======
