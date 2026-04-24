@@ -1337,8 +1337,6 @@ let finale4Step = 0;
 let finaleCut1 = null;
 let finaleCut2 = null;
 let finaleFinal2 = [];
-let finaleWinner = null;
-let finaleRunnerUp = null;
 
 function advanceFinal4Cut2() {
     switch (finale4Step) {
