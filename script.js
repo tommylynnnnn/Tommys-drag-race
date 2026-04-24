@@ -181,8 +181,77 @@ const ALL_QUEENS = [
         name: "Acacia Forgot",
         img: "https://i.pinimg.com/736x/b7/38/a6/b738a669d1953aed240f47cdbfe0a7a3.jpg",
         stats: { acting: 6, comedy: 9, improv: 8, dance: 3, design: 8, lipsync: 5 }
+    },
+    {
+        name: "Nymphia Wind",
+        img: "https://i.pinimg.com/736x/ba/27/b5/ba27b5fce2121839f01f6f9a6d8b53e4.jpg",
+        stats: { acting: 10, comedy: 10, improv: 10, dance: 12, design: 12, lipsync: 12 }
+    },
+    {
+        name: "Sapphira Cristál",
+        img: "https://i.pinimg.com/736x/c9/5f/fb/c95ffb0156e77766934d39b1acc7d9c5.jpg",
+        stats: { acting: 13, comedy: 14, improv: 14, dance: 12, design: 9, lipsync: 12 }
+    },
+    {
+        name: "Xunami Muse",
+        img: "https://i.pinimg.com/736x/15/76/49/1576499e17dbc9aa5a434ecf35de87f7.jpg",
+        stats: { acting: 9, comedy: 3, improv: 6, dance: 9, design: 9, lipsync: 7 }
+    },
+    {
+        name: "Plane Jane",
+        img: "https://i.pinimg.com/736x/ac/64/5f/ac645f62d037533eff6dd2824b3ec33c.jpg",
+        stats: { acting: 10, comedy: 11, improv: 11, dance: 8, design: 12, lipsync: 11 }
+    },
+    {
+        name: "Q",
+        img: "https://i.pinimg.com/736x/03/b3/7a/03b37a14b4a23ac9db3ac68e9627342f.jpg",
+        stats: { acting: 9, comedy: 3, improv: 6, dance: 5, design: 14, lipsync: 7 }
+    },
+    {
+        name: "Mhi'ya Iman Le'Paige",
+        img: "https://i.pinimg.com/736x/63/f3/d4/63f3d46cc4d90b3b0b9a7f66a30eafe8.jpg",
+        stats: { acting: 4, comedy: 8, improv: 6, dance: 14, design: 4, lipsync: 11 }
+    },
+    {
+        name: "Plasma",
+        img: "https://i.pinimg.com/736x/7b/70/9d/7b709d5fe3cd05ca80fbf1c380e90b22.jpg",
+        stats: { acting: 15, comedy: 9, improv: 12, dance: 9, design: 6, lipsync: 9 }
+    },
+    {
+        name: "Megami",
+        img: "https://i.pinimg.com/736x/a9/ab/6d/a9ab6da721054e482c420db04c47f84e.jpg",
+        stats: { acting: 6, comedy: 0, improv: 3, dance: 15, design: 9, lipsync: 7 }
+    },
+    {
+        name: "Geneva Karr",
+        img: "https://i.pinimg.com/736x/69/a7/2c/69a72cd11425af559280e5737b2148df.jpg",
+        stats: { acting: 3, comedy: 0, improv: 2, dance: 15, design: 3, lipsync: 10 }
+    },
+    {
+        name: "Amanda Tori Meating",
+        img: "https://i.pinimg.com/736x/34/00/5e/34005e9efe427f82d98475e167134aff.jpg",
+        stats: { acting: 9, comedy: 0, improv: 5, dance: 3, design: 9, lipsync: 3 }
+    },
+    {
+        name: "Mirage",
+        img: "https://i.pinimg.com/736x/41/08/b8/4108b8a9b541ab797a7e70d32eeec649.jpg",
+        stats: { acting: 3, comedy: 0, improv: 2, dance: 0, design: 9, lipsync: 3 }
+    },
+    {
+        name: "Hershii LiqCour-Jeté",
+        img: "https://i.pinimg.com/736x/ac/14/51/ac145177a0e4fac29ac2e57c4bb406ec.jpg",
+        stats: { acting: 0, comedy: 0, improv: 0, dance: 0, design: 3, lipsync: 3 }
+    },
+    {
+        name: "Morphine Love Dion",
+        img: "https://i.pinimg.com/736x/83/6a/c1/836ac105eb50cca4a2d36c9275d8c87c.jpg",
+        stats: { acting: 5, comedy: 3, improv: 4, dance: 11, design: 7, lipsync: 10 }
+    },
+    {
+        name: "Dawn",
+        img: "https://i.pinimg.com/736x/a8/e6/df/a8e6df99c8e799cfad06d2794f1d9f26.jpg",
+        stats: { acting: 7, comedy: 6, improv: 7, dance: 11, design: 11, lipsync: 8 }
     }
-
 ];
 
 const ENTRANCE_LINES = {
@@ -220,7 +289,21 @@ const ENTRANCE_LINES = {
     "Hormona Lisa": "Hello, loyal subjects. It is I, Hormona Lisa, at your service. *laugh* Wow, that was annoying.",
     "Crystal Envy": "Yeah, I'd envy me too.",
     "Arrietty": "Hi! (said in Stitch voice)",
-    "Acacia Forgot": "Totally tubular."  
+    "Acacia Forgot": "Totally tubular.", 
+    "Nymphia Wind": "Bananas!", 
+    "Sapphira Cristál": "Ooooh, Ooooooh! I think this place is haunted.",
+    "Plane Jane": "Fasten your seatbelts, 'cause this plane always goes down.",
+    "Q": "'Q' the music, because the show is about to start!",
+    "Morphine Love Dion": "The beauty and the booty is here, a darlo todo!",
+    "Dawn": "Rise and shine, motherfuckers; it's Dawn.",
+    "Xunami Muse": "Yer! The natural disaster has arrived.",
+    "Megami": "A goddess amongst men.",
+    "Mirage": "I hope you trash bags are ready to lose!",
+    "Plasma": "Darling, why give blood when you can sell... Plasma?",
+    "Amanda Tori Meating": "Wait a second, this place doesn't have a bidet!",
+    "Geneva Karr": "Viva Mexico, 'Karr-brones'!",
+    "Mhi'ya Iman Le'Paige": "The 'Queen of Flips.' I don't set the bar, I flips it.",
+    "Hershii LiqCour-Jeté": "I... did not prepare for this."
 };
 
 const ELIMINATION_LINES = {
@@ -258,7 +341,21 @@ const ELIMINATION_LINES = {
     "Hormona Lisa": "Rot in hell, thanks a lot!",
     "Crystal Envy": "You definitely make me feel mayo real righty, RuPaul!",
     "Arrietty": "Well, it looks like the runway category just dropped, immensely! Y'all ugly boogers!",
-    "Acacia Forgot": "You can now find my new single on all streaming platforms."
+    "Acacia Forgot": "You can now find my new single on all streaming platforms.",
+    "Nymphia Wind": "*Cries a lot*", 
+    "Sapphira Cristál": "Thank you for everything Rupaul, peace out.",
+    "Plane Jane": "Ugh!",
+    "Q": "Quoi?!",
+    "Morphine Love Dion": "Well, shout out to everybody, I had fun. Now, I can't wait to book my second BBL surgery!",
+    "Dawn": "Goodbye!- Oh, and WAKE UP motherfuckers, IT'S DAWN!",
+    "Xunami Muse": "Don't cry because I left, celebrate because I exist.",
+    "Megami": "Everyone watching; support local drag, and protect queer art. Thank you.",
+    "Mirage": "*Breaks down on the stage and has a panis attack, production staff escorts her out*",
+    "Plasma": "I'm so glad we had this time together just to laugh and sing a song. Seems we just get started, and before you know it, comes the time where we have to say so long.",
+    "Amanda Tori Meating": "Well, at least I did what I came to do: blow the sound crew!",
+    "Geneva Karr": "I'll just keep it short and bilingual. Hasta la vi-star!",
+    "Mhi'ya Iman Le'Paige": "From the palace to the queendom, the queen of flips is exiting the group chat!",
+    "Hershii LiqCour-Jeté": "I... did not prepare this part."
 };
 
 // ====== CHALLENGES ======
@@ -319,6 +416,19 @@ const RUNWAY_THEMES = [
     "Black & White Ball",
     "Ugliest Dress Ever",
     "Opulent Outerwear",
+    "Ruveal Yourself",
+    "Made Ya Look",
+    "Mother Goose",
+    "Significant Mother",
+    "Everything Every-Cher All At Once",
+    "Faster Pussycat, Wig! Wig!",
+    "I Can Buy Myself Flowers",
+    "Dancing Queens",
+    "True Colors",
+    "Flashback: DragCon 1980",
+    "Chain Reaction",
+    "Fandango",
+    "Red, White, and Blue",
 ];
 
 const LIP_SYNC_SONGS = [
@@ -362,6 +472,30 @@ const LIP_SYNC_SONGS = [
     { title: "360", artist: "Charli XCX" },
     { title: "APT", artist: "ROSÉ and Bruno Mars" },
     { title: "Abracadabra", artist: "Lady Gaga" },
+    { title: "Maybe You're The Problem", artist: "Ava Max" },
+    { title: "Dark Lady", artist: "Cher" },
+    { title: "Emergency", artist: "Icona Pop" },
+    { title: "Control", artist: "Janet Jackson" },
+    { title: "Flowers", artist: "Miley Cyrus" },
+    { title: "I Wanna Dance With Somebody", artist: "Whitney Houston" },
+    { title: "Bloody Mary (Wednesday Dance Tiktok Version)", artist: "Lady Gaga" },
+    { title: "Dim All the Lights", artist: "Donna Summer" },
+    { title: "Body", artist: "Megan Thee Stallion" },
+    { title: "Miss Me More", artist: "Kelsea Ballerini" },
+    { title: "Better Be Good to Me", artist: "Tina Turner" },
+    { title: "Break My Soul", artist: "Beyoncé" },
+    { title: "Shower", artist: "Becky G" },
+    { title: "Made You Look", artist: "Meghan Trainor" },
+    { title: "Damaged", artist: "Danity Kane" },
+    { title: "What About", artist: "Janet Jackson" },
+    { title: "Million Dollar Baby", artist: "Ava Max" },
+    { title: "Alone 2.0", artist: "Kim Petra & Nicki Minaj" },
+    { title: "Milkshake", artist: "Kelis" },
+    { title: "The Shoop Shoop Song", artist: "Cher" },
+    { title: "This Time I Know It's For Real", artist: "Donna Summer" },
+    { title: "We Got The Beat", artist: "The Go-Go's" },
+    { title: "Gonna Make You Sweat (Everybody Dance Now)", artist: "C+C Music Factory" },
+    { title: "Padam Padam", artist: "Kylie Minogue" }
 ];
 
 // ====== DOM ======
