@@ -251,6 +251,11 @@ const ALL_QUEENS = [
         name: "Dawn",
         img: "https://i.pinimg.com/736x/a8/e6/df/a8e6df99c8e799cfad06d2794f1d9f26.jpg",
         stats: { acting: 7, comedy: 6, improv: 7, dance: 11, design: 11, lipsync: 8 }
+    },
+    {
+        name: "Sasha Colby",
+        img: "https://i.pinimg.com/736x/63/6f/93/636f9344a9ce2f1cc0d63099ed0754cf.jpg",
+        stats: { acting: 13, comedy: 11, improv: 12, dance: 14, design: 13, lipsync: 13 }
     }
 ];
 
@@ -303,7 +308,8 @@ const ENTRANCE_LINES = {
     "Amanda Tori Meating": "Wait a second, this place doesn't have a bidet!",
     "Geneva Karr": "Viva Mexico, 'Karr-brones'!",
     "Mhi'ya Iman Le'Paige": "The 'Queen of Flips.' I don't set the bar, I flips it.",
-    "Hershii LiqCour-Jeté": "I... did not prepare for this."
+    "Hershii LiqCour-Jeté": "I... did not prepare for this.",
+    "Sasha Colby": "Period."
 };
 
 const ELIMINATION_LINES = {
@@ -356,6 +362,7 @@ const ELIMINATION_LINES = {
     "Geneva Karr": "I'll just keep it short and bilingual. Hasta la vi-star!",
     "Mhi'ya Iman Le'Paige": "From the palace to the queendom, the queen of flips is exiting the group chat!",
     "Hershii LiqCour-Jeté": "I... did not prepare this part."
+    "Sasha Colby": "Thank you so much for letting me come here and share my creativity... you've done so much for me and everyone else on this stage. Goodbye."
 };
 
 // ====== CHALLENGES ======
