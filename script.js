@@ -969,7 +969,9 @@ console.log("Finale:", selectedFinaleType);
 
 function startEpisode() {
     episodeStep = 0;
-    isFinale = currentCast.length === 3;
+    isFinale =
+    (selectedFinaleType === "top3" && currentCast.length === 3) ||
+    (selectedFinaleType === "top4cut2" && currentCast.length === 4);
     // ===== DOUBLE PREMIERE: USE GROUP QUEENS =====
 if (premiereType === "double" && episodeNumber <= 2) {
     currentCast = premiereGroups[episodeNumber - 1];
@@ -1245,6 +1247,13 @@ function advanceEpisodeStep() {
 // ====== FINALE FLOW ======
 
 function advanceFinaleStep() {
+
+    // ⭐ NEW: route to Final 4 → Final 2 finale
+    if (selectedFinaleType === "top4cut2") {
+        return advanceFinal4Cut2();
+    }
+
+    // ⭐ EXISTING: Top 3 finale
     switch (episodeStep) {
         case 0:
             setEpisodeText(`<h2>Finale</h2><p>Our Top 3 queens are ready for the crown.</p>`, currentCast);
@@ -1317,6 +1326,94 @@ setEpisodeText(`
     }
 
     episodeStep++;
+}
+
+// ====== FINAL 4 → FINAL 2 FINALE ======
+
+let finale4Step = 0;
+let finaleCut1 = null;
+let finaleCut2 = null;
+let finaleFinal2 = [];
+let finaleWinner = null;
+let finaleRunnerUp = null;
+
+function advanceFinal4Cut2() {
+    switch (finale4Step) {
+
+        case 0:
+            setEpisodeText(`
+                <h2>Final 4</h2>
+                <p>The top 4 queens will now compete for a spot in the final lipsync.</p>
+            `, currentCast);
+            break;
+
+        case 1:
+            const scored = currentCast
+                .map(q => ({ queen: q, score: scoreQueen(q, "Finale") }))
+                .sort((a, b) => b.score - a.score);
+
+            finaleCut1 = scored[3].queen;
+            finaleCut2 = scored[2].queen;
+
+            finaleFinal2 = [scored[0].queen, scored[1].queen];
+
+            currentCast = [...finaleFinal2];
+
+            setEpisodeText(`
+                <h2>Final 4 Results</h2>
+                <p>❌ <strong>${finaleCut1.name}</strong> and <strong>${finaleCut2.name}</strong> have been cut.</p>
+                <p>The final 2 are: <strong>${finaleFinal2[0].name}</strong> and <strong>${finaleFinal2[1].name}</strong>.</p>
+            `, [finaleCut1, finaleCut2]);
+            break;
+
+        case 2:
+            const song = getRandomLipSyncSong();
+            currentLipSyncSong = song;
+
+            setEpisodeText(`
+                <h2>Final Lipsync</h2>
+                <p>${finaleFinal2[0].name} vs ${finaleFinal2[1].name}</p>
+                <p><strong>Final Song:</strong> "${song.title}" by ${song.artist}</p>
+            `, finaleFinal2);
+            break;
+
+        case 3:
+            const s1 = finaleFinal2[0].stats.lipsync + (Math.random() * 6 - 3);
+            const s2 = finaleFinal2[1].stats.lipsync + (Math.random() * 6 - 3);
+
+            finaleWinner = s1 >= s2 ? finaleFinal2[0] : finaleFinal2[1];
+            finaleRunnerUp = s1 >= s2 ? finaleFinal2[1] : finaleFinal2[0];
+
+            seasonQueens.forEach(q => {
+                if (q.name === finaleWinner.name) trackRecord[q.name].push("WINNER");
+                else if (q.name === finaleRunnerUp.name) trackRecord[q.name].push("RUNNER-UP");
+                else if (q.name === finaleCut1.name || q.name === finaleCut2.name) trackRecord[q.name].push("ELIM");
+            });
+
+            setEpisodeText(`
+                <h2>Season Winner</h2>
+                <p>👑 <strong>${finaleWinner.name}</strong> is the winner of the season!</p>
+            `, [finaleWinner]);
+            break;
+
+        case 4:
+            setEpisodeText(`
+                <h2>Final Track Record</h2>
+                <p>Here is the final track record for the season:</p>
+            `);
+            renderTrackRecordCards();
+            break;
+
+        case 5:
+            location.reload();
+            return;
+
+        default:
+            location.reload();
+            return;
+    }
+
+    finale4Step++;
 }
 
 // ====== EVENT LISTENERS ======
