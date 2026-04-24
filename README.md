@@ -3,6 +3,10 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.12.0
+
+-Added final 4 finale
+
 🌟 Update 1.11.0
 
 -Season 16 cast added
