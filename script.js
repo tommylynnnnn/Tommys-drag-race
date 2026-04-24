@@ -1441,12 +1441,17 @@ function advanceSmackdownFinale() {
         case 1: {
             const [q1, q2, q3, q4] = currentCast;
 
+            // ⭐ SONG FOR SEMI 1
+            const song1 = getRandomLipSyncSong();
+            currentLipSyncSong = song1;
+
             const semi1 = lipSync([q1, q2]);
             semi1Winner = semi1.winner;
 
             setEpisodeText(`
                 <h2>Semifinal 1</h2>
                 <p>${q1.name} vs ${q2.name}</p>
+                <p><strong>Song:</strong> "${song1.title}" by ${song1.artist}</p>
                 <p><strong>Winner:</strong> ${semi1Winner.name}</p>
             `, [q1, q2]);
             break;
@@ -1455,18 +1460,24 @@ function advanceSmackdownFinale() {
         case 2: {
             const [q1, q2, q3, q4] = currentCast;
 
+            // ⭐ SONG FOR SEMI 2
+            const song2 = getRandomLipSyncSong();
+            currentLipSyncSong = song2;
+
             const semi2 = lipSync([q3, q4]);
             semi2Winner = semi2.winner;
 
             setEpisodeText(`
                 <h2>Semifinal 2</h2>
                 <p>${q3.name} vs ${q4.name}</p>
+                <p><strong>Song:</strong> "${song2.title}" by ${song2.artist}</p>
                 <p><strong>Winner:</strong> ${semi2Winner.name}</p>
             `, [q3, q4]);
             break;
         }
 
         case 3: {
+            // ⭐ SONG FOR FINAL LIPSYNC
             const finalSong = getRandomLipSyncSong();
             currentLipSyncSong = finalSong;
 
