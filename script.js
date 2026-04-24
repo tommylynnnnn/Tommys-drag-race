@@ -11,251 +11,301 @@ const ALL_QUEENS = [
         name: "Alaska",
         img: "https://i.pinimg.com/736x/6e/ef/ca/6eefcadaa26067a62884227350d683b8.jpg",
         stats: { acting: 13, comedy: 13, improv: 13, dance: 11, design: 9, lipsync: 12 }
+        seasons: ["Season 5", "All Stars 2"]
     },
     {
         name: "Alyssa Edwards",
         img: "https://i.pinimg.com/736x/0b/bd/51/0bbd517dfcbcb21aacb0fa05f0af9809.jpg",
         stats: { acting: 9, comedy: 10, improv: 10, dance: 12, design: 9, lipsync: 12 }
+        seasons: ["Season 5", "All Stars 2", "Global All Stars"]
     },
     {
         name: "Bob the Drag Queen",
         img: "https://i.pinimg.com/736x/71/19/5a/71195a08be0d3a56bad3427f517901e4.jpg",
         stats: { acting: 13, comedy: 15, improv: 14, dance: 11, design: 7, lipsync: 10 }
+        seasons: ["Season 8"]
     },
     {
         name: "Katya",
         img: "https://i.pinimg.com/736x/e9/0f/f6/e90ff66a78ec1d4bdb7bd06ee320a5d2.jpg",
         stats: { acting: 8, comedy: 12, improv: 10, dance: 15, design: 10, lipsync: 6 }
+        seasons: ["Season 7", "All Stars 2"]
     },
     {
         name: "Sasha Velour",
         img: "https://i.pinimg.com/736x/7c/6d/a4/7c6da4478b5625c83e74c55a542e5e95.jpg",
         stats: { acting: 11, comedy: 14, improv: 13, dance: 11, design: 11, lipsync: 11 }
+        seasons: ["Season 9"]
     },
     {
         name: "Bianca Del Rio",
         img: "https://i.pinimg.com/736x/26/43/61/264361d07c867a88630c4a4986d0c3b3.jpg",
         stats: { acting: 11, comedy: 12, improv: 12, dance: 12, design: 14, lipsync: 9 }
+        seasons: ["Season 6"]
     },
     {
         name: "Jinkx Monsoon",
         img: "https://i.pinimg.com/736x/18/c1/d1/18c1d14cdcdf348000446f1a1cfb8e8b.jpg",
         stats: { acting: 12, comedy: 14, improv: 13, dance: 11, design: 8, lipsync: 11 }
+        seasons: ["Season 5", "All Stars 7"]
     },
     {
         name: "Onya Nurve",
         img: "https://i.pinimg.com/736x/a7/04/a1/a704a15997585ec88a4d24f4ab1db791.jpg",
         stats: { acting: 13, comedy: 13, improv: 13, dance: 12, design: 8, lipsync: 14 }
+        seasons: ["Season 17"]
     },
     {
         name: "Myki Meeks",
         img: "https://i.pinimg.com/736x/b9/76/6a/b9766aedded3bc2ebcac17b8a6b3cbde.jpg",
         stats: { acting: 13, comedy: 14, improv: 14, dance: 9, design: 11, lipsync: 13 }
+        seasons: ["Season 18"]
     },
     {
         name: "Darlene Mitchell",
         img: "https://i.pinimg.com/736x/14/6d/51/146d51b7e40f4d8988775617d42a8151.jpg",
         stats: { acting: 12, comedy: 12, improv: 12, dance: 6, design: 11, lipsync: 8 }
+        seasons: ["Season 18"]
     },
     {
         name: "Nini Coco",
         img: "https://i.pinimg.com/736x/b5/1e/6a/b51e6aa16ea992aa267a435831919304.jpg",
         stats: { acting: 8, comedy: 7, improv: 8, dance: 9, design: 10, lipsync: 12 }
+        seasons: ["Season 18"]
     },
     {
         name: "Jane Don't",
         img: "https://i.pinimg.com/736x/21/96/83/2196830d84a99a963de849a8501f0772.jpg",
         stats: { acting: 13, comedy: 10, improv: 12, dance: 15, design: 11, lipsync: 12 }
+        seasons: ["Season 18"]
     },
     {
         name: "Juicy Love Dion",
         img: "https://i.pinimg.com/736x/c1/a9/d9/c1a9d95922919fc9fc361072247c7a84.jpg",
         stats: { acting: 6, comedy: 5, improv: 6, dance: 9, design: 10, lipsync: 11 }
+        seasons: ["Season 18"]
     },
     {
         name: "Discord Addams",
         img: "https://i.pinimg.com/736x/d8/09/50/d809509a600af933c994510af325f0d5.jpg",
         stats: { acting: 8, comedy: 8, improv: 8, dance: 9, design: 8, lipsync: 6 }
+        seasons: ["Season 18"]
     },
     {
         name: "Kenya Pleaser",
         img: "https://i.pinimg.com/736x/67/1f/d8/671fd89dd140f71f27b4a50a83cf231d.jpg",
         stats: { acting: 10, comedy: 5, improv: 8, dance: 9, design: 7, lipsync: 10 }
+        seasons: ["Season 18"]
     },
     {
         name: "Athena Dion",
         img: "https://i.pinimg.com/736x/0f/ce/92/0fce92d7db2363352a0980269f43d0ca.jpg",
         stats: { acting: 7, comedy: 9, improv: 8, dance: 6, design: 9, lipsync: 4 }
+        seasons: ["Season 18"]
     },
     {
         name: "Ciara Myst",
         img: "https://i.pinimg.com/736x/f2/80/ac/f280ace351bbf9801cb9d9bc16903cad.jpg",
         stats: { acting: 9, comedy: 0, improv: 5, dance: 9, design: 11, lipsync: 6 }
+        seasons: ["Season 18"]
     },
     {
         name: "Briar Blush",
         img: "https://i.pinimg.com/736x/3c/fa/55/3cfa55846aec77075d25b7525781468b.jpg",
         stats: { acting: 3, comedy: 0, improv: 2, dance: 9, design: 6, lipsync: 9 }
+        seasons: ["Season 18"]
     },
     {
         name: "DD Fuego",
         img: "https://i.pinimg.com/736x/0a/ac/c2/0aacc2ebf2713b145299aea5e5bb9764.jpg",
         stats: { acting: 0, comedy: 0, improv: 0, dance: 3, design: 9, lipsync: 3 }
+        seasons: ["Season 18"]
     },
     {
         name: "Mandy Mango",
         img: "https://i.pinimg.com/736x/36/f6/77/36f677727d9633de35235fbd86c9141b.jpg",
         stats: { acting: 3, comedy: 0, improv: 2, dance: 3, design: 6, lipsync: 7 }
+        seasons: ["Season 18"]
     },
     {
         name: "Mia Starr",
         img: "https://i.pinimg.com/736x/6a/e1/ee/6ae1ee1d99d56d1f433898e32e7ee5c6.jpg",
         stats: { acting: 8, comedy: 5, improv: 7, dance: 12, design: 9, lipsync: 10 }
+        seasons: ["Season 18"]
     },
     {
         name: "Vita VonTesse Starr",
         img: "https://i.pinimg.com/736x/f9/62/6a/f9626a898746975b563350c8f1bade97.jpg",
         stats: { acting: 5, comedy: 3, improv: 4, dance: 9, design: 14, lipsync: 5 }
+        seasons: ["Season 18"]
     },
     {
         name: "Suzie Toot",
         img: "https://i.pinimg.com/736x/13/38/6c/13386cf6ca123b8d96bc8d78f4cb84b6.jpg",
         stats: { acting: 11, comedy: 8, improv: 10, dance: 12, design: 10, lipsync: 11 }
+        seasons: ["Season 17"]
     },
     {
         name: "Sam Star",
         img: "https://i.pinimg.com/736x/34/76/6e/34766eddba9282f1c02a93c79e4f3f0e.jpg",
         stats: { acting: 9, comedy: 8, improv: 9, dance: 15, design: 13, lipsync: 14 }
+        seasons: ["Season 17"]
     },
     {
         name: "Lydia B. Kollins",
         img: "https://i.pinimg.com/736x/d4/0c/75/d40c753538a7cd1d204ddf79b8a39429.jpg",
         stats: { acting: 8, comedy: 10, improv: 9, dance: 12, design: 9, lipsync: 11 }
+        seasons: ["Season 17", "All Stars 10"]
     },
     {
         name: "Lexi Valentine L.",
         img: "https://i.pinimg.com/736x/4a/56/46/4a56467c2f78713d514db81d61a1a665.jpg",
         stats: { acting: 11, comedy: 11, improv: 11, dance: 9, design: 9, lipsync: 11 }
+        seasons: ["Season 17"]
     },
     {
         name: "Lucky Starzzz",
         img: "https://i.pinimg.com/736x/79/fc/dd/79fcddc0dd30128f8552f365699ac2bf.jpg",
         stats: { acting: 0, comedy: 0, improv: 0, dance: 0, design: 3, lipsync: 3 }
+        seasons: ["Season 17"]
     },
     {
         name: "Lana Ja'Rae",
         img: "https://i.pinimg.com/736x/7f/b0/01/7fb001d3300459bb92841f926644cd3f.jpg",
         stats: { acting: 7, comedy: 6, improv: 7, dance: 9, design: 7, lipsync: 11 }
+        seasons: ["Season 17"]
     },
     {
         name: "Kori King",
         img: "https://i.pinimg.com/736x/fe/ad/3f/fead3fcac4b3e2864196d2d6193bcb3f.jpg",
         stats: { acting: 6, comedy: 9, improv: 8, dance: 3, design: 6, lipsync: 8 }
+        seasons: ["Season 17"]
     },
     {
         name: "Joella",
         img: "https://i.pinimg.com/736x/af/1b/a4/af1ba41e9b83480684f7a1913a2945f0.jpg",
         stats: { acting: 0, comedy: 0, improv: 0, dance: 0, design: 3, lipsync: 7 }
+        seasons: ["Season 17"]
     },
     {
         name: "Jewels Sparkles",
         img: "https://i.pinimg.com/736x/ae/83/41/ae8341948b8149b37f92b9c3be81b777.jpg",
         stats: { acting: 11, comedy: 10, improv: 11, dance: 12, design: 9, lipsync: 10 }
+        seasons: ["Season 17"]
     },
     {
         name: "Hormona Lisa",
         img: "https://i.pinimg.com/736x/f9/87/21/f98721b24133671745403beb7936e4b0.jpg",
         stats: { acting: 12, comedy: 0, improv: 6, dance: 0, design: 6, lipsync: 5 }
+        seasons: ["Season 17"]
     },
     {
         name: "Crystal Envy",
         img: "https://i.pinimg.com/736x/a2/47/97/a2479768395d4851189a52d9e9202efc.jpg",
         stats: { acting: 9, comedy: 3, improv: 6, dance: 0, design: 11, lipsync: 6 }
+        seasons: ["Season 17"]
     },
     {
         name: "Arrietty",
         img: "https://i.pinimg.com/736x/0d/4b/11/0d4b11ac6ccea5be9123b97f815bd280.jpg",
         stats: { acting: 6, comedy: 5, improv: 6, dance: 9, design: 13, lipsync: 5 }
+        seasons: ["Season 17"]
     },
     {
         name: "Acacia Forgot",
         img: "https://i.pinimg.com/736x/b7/38/a6/b738a669d1953aed240f47cdbfe0a7a3.jpg",
         stats: { acting: 6, comedy: 9, improv: 8, dance: 3, design: 8, lipsync: 5 }
+        seasons: ["Season 17"]
     },
     {
         name: "Nymphia Wind",
         img: "https://i.pinimg.com/736x/ba/27/b5/ba27b5fce2121839f01f6f9a6d8b53e4.jpg",
         stats: { acting: 10, comedy: 10, improv: 10, dance: 12, design: 12, lipsync: 12 }
+        seasons: ["Season 16"]
     },
     {
         name: "Sapphira Cristál",
         img: "https://i.pinimg.com/736x/c9/5f/fb/c95ffb0156e77766934d39b1acc7d9c5.jpg",
         stats: { acting: 13, comedy: 14, improv: 14, dance: 12, design: 9, lipsync: 12 }
+        seasons: ["Season 16"]
     },
     {
         name: "Xunami Muse",
         img: "https://i.pinimg.com/736x/15/76/49/1576499e17dbc9aa5a434ecf35de87f7.jpg",
         stats: { acting: 9, comedy: 3, improv: 6, dance: 9, design: 9, lipsync: 7 }
+        seasons: ["Season 16"]
     },
     {
         name: "Plane Jane",
         img: "https://i.pinimg.com/736x/ac/64/5f/ac645f62d037533eff6dd2824b3ec33c.jpg",
         stats: { acting: 10, comedy: 11, improv: 11, dance: 8, design: 12, lipsync: 11 }
+        seasons: ["Season 16"]
     },
     {
         name: "Q",
         img: "https://i.pinimg.com/736x/03/b3/7a/03b37a14b4a23ac9db3ac68e9627342f.jpg",
         stats: { acting: 9, comedy: 3, improv: 6, dance: 5, design: 14, lipsync: 7 }
+        seasons: ["Season 16"]
     },
     {
         name: "Mhi'ya Iman Le'Paige",
         img: "https://i.pinimg.com/736x/63/f3/d4/63f3d46cc4d90b3b0b9a7f66a30eafe8.jpg",
         stats: { acting: 4, comedy: 8, improv: 6, dance: 14, design: 4, lipsync: 11 }
+        seasons: ["Season 16"]
     },
     {
         name: "Plasma",
         img: "https://i.pinimg.com/736x/7b/70/9d/7b709d5fe3cd05ca80fbf1c380e90b22.jpg",
         stats: { acting: 15, comedy: 9, improv: 12, dance: 9, design: 6, lipsync: 9 }
+        seasons: ["Season 16"]
     },
     {
         name: "Megami",
         img: "https://i.pinimg.com/736x/a9/ab/6d/a9ab6da721054e482c420db04c47f84e.jpg",
         stats: { acting: 6, comedy: 0, improv: 3, dance: 15, design: 9, lipsync: 7 }
+        seasons: ["Season 16"]
     },
     {
         name: "Geneva Karr",
         img: "https://i.pinimg.com/736x/69/a7/2c/69a72cd11425af559280e5737b2148df.jpg",
         stats: { acting: 3, comedy: 0, improv: 2, dance: 15, design: 3, lipsync: 10 }
+        seasons: ["Season 16"]
     },
     {
         name: "Amanda Tori Meating",
         img: "https://i.pinimg.com/736x/34/00/5e/34005e9efe427f82d98475e167134aff.jpg",
         stats: { acting: 9, comedy: 0, improv: 5, dance: 3, design: 9, lipsync: 3 }
+        seasons: ["Season 16"]
     },
     {
         name: "Mirage",
         img: "https://i.pinimg.com/736x/41/08/b8/4108b8a9b541ab797a7e70d32eeec649.jpg",
         stats: { acting: 3, comedy: 0, improv: 2, dance: 0, design: 9, lipsync: 3 }
+        seasons: ["Season 16"]
     },
     {
         name: "Hershii LiqCour-Jeté",
         img: "https://i.pinimg.com/736x/ac/14/51/ac145177a0e4fac29ac2e57c4bb406ec.jpg",
         stats: { acting: 0, comedy: 0, improv: 0, dance: 0, design: 3, lipsync: 3 }
+        seasons: ["Season 16", "All Stars 11"]
     },
     {
         name: "Morphine Love Dion",
         img: "https://i.pinimg.com/736x/83/6a/c1/836ac105eb50cca4a2d36c9275d8c87c.jpg",
         stats: { acting: 5, comedy: 3, improv: 4, dance: 11, design: 7, lipsync: 10 }
+        seasons: ["Season 16", "All Stars 11"]
     },
     {
         name: "Dawn",
         img: "https://i.pinimg.com/736x/a8/e6/df/a8e6df99c8e799cfad06d2794f1d9f26.jpg",
         stats: { acting: 7, comedy: 6, improv: 7, dance: 11, design: 11, lipsync: 8 }
+        seasons: ["Season 16", "All Stars 11"]
     },
     {
         name: "Sasha Colby",
         img: "https://i.pinimg.com/736x/63/6f/93/636f9344a9ce2f1cc0d63099ed0754cf.jpg",
         stats: { acting: 13, comedy: 11, improv: 12, dance: 14, design: 13, lipsync: 13 }
+        seasons: ["Season 15"]
     }
 ];
 
