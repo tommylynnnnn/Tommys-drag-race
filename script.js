@@ -1723,6 +1723,16 @@ function advanceSmackdownFinale() {
                 else trackRecord[q.name].push("ELIM");
             });
 
+            // Prevent double ELIM bug
+seasonQueens.forEach(q => {
+    const row = trackRecord[q.name];
+
+    // If the last two placements are both "ELIM", remove one
+    if (row[row.length - 1] === "ELIM" && row[row.length - 2] === "ELIM") {
+        row.pop();
+    }
+});
+
             setEpisodeText(`
                 <h2>Season Winner</h2>
                 <p>👑 <strong>${finaleWinner.name}</strong> wins the Lipsync Smackdown and the crown!</p>
