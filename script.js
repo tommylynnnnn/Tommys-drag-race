@@ -1718,10 +1718,21 @@ function advanceSmackdownFinale() {
             finaleRunnerUp = finalResult.eliminated[0];
 
             seasonQueens.forEach(q => {
-                if (q.name === finaleWinner.name) trackRecord[q.name].push("WINNER");
-                else if (q.name === finaleRunnerUp.name) trackRecord[q.name].push("RUNNER-UP");
-                else trackRecord[q.name].push("ELIM");
-            });
+    const row = trackRecord[q.name];
+
+    if (q.name === finaleWinner.name) {
+        row.push("WINNER");
+    }
+    else if (q.name === finaleRunnerUp.name) {
+        row.push("RUNNER-UP");
+    }
+    else {
+        // ⭐ Only add ELIM if they were NOT already eliminated earlier
+        if (row[row.length - 1] !== "ELIM") {
+            row.push("ELIM");
+        }
+    }
+});
 
             // Prevent double ELIM bug
 seasonQueens.forEach(q => {
