@@ -565,14 +565,14 @@ const episodeQueensContainer = document.getElementById("episode-queens");
 
 // ====== RENDER QUEENS ======
 
-function renderQueens() {
+function renderQueens(list = ALL_QUEENS) {
     grid.innerHTML = "";
 
     // Update queen count
     document.getElementById("queen-count").textContent =
-        `Available Queens: ${ALL_QUEENS.length}`;
-    
-    ALL_QUEENS
+        `Available Queens: ${list.length}`;
+
+    list
         .slice()
         .sort((a, b) => a.name.localeCompare(b.name))
         .forEach(q => {
@@ -583,6 +583,8 @@ function renderQueens() {
             card.innerHTML = `
                 <img src="${q.img}" alt="${q.name}">
                 <p>${q.name}</p>
+                <p class="season-label">${q.seasons.join(", ")}</p>
+
                 <div class="stats-box">
                     <p><strong>Comedy:</strong> ${q.stats.comedy}</p>
                     <p><strong>Acting:</strong> ${q.stats.acting}</p>
@@ -593,9 +595,22 @@ function renderQueens() {
                 </div>
             `;
 
-            card.addEventListener("click", () => card.classList.toggle("selected"));
+            card.addEventListener("click", () => {
+                card.classList.toggle("selected");
+            });
+
             grid.appendChild(card);
         });
+}
+
+function filterQueensBySeason(season) {
+    if (season === "all") {
+        renderQueens(ALL_QUEENS);
+        return;
+    }
+
+    const filtered = ALL_QUEENS.filter(q => q.seasons.includes(season));
+    renderQueens(filtered);
 }
 
 renderQueens();
@@ -1589,5 +1604,8 @@ function advanceSmackdownFinale() {
 }
 
 // ====== EVENT LISTENERS ======
+document.getElementById("season-filter").addEventListener("change", (e) => {
+    filterQueensBySeason(e.target.value);
+});
 document.getElementById("start-btn").addEventListener("click", startSeason);
 episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
