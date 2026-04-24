@@ -971,7 +971,8 @@ function startEpisode() {
     episodeStep = 0;
     isFinale =
     (selectedFinaleType === "top3" && currentCast.length === 3) ||
-    (selectedFinaleType === "top4cut2" && currentCast.length === 4);
+    (selectedFinaleType === "top4cut2" && currentCast.length === 4) ||
+    (selectedFinaleType === "smackdown" && currentCast.length === 4);
     // ===== DOUBLE PREMIERE: USE GROUP QUEENS =====
 if (premiereType === "double" && episodeNumber <= 2) {
     currentCast = premiereGroups[episodeNumber - 1];
