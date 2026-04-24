@@ -6,7 +6,9 @@ Welcome to Tommys Drag Race!
 🌟 Update 1.11.0
 
 -Season 16 cast added
+
 -Season 16 lip-sync songs added
+
 -Season 16 runways added
 
 🌟 Update 1.10.0
@@ -20,17 +22,21 @@ Welcome to Tommys Drag Race!
 🌟 Update 1.8.0
 
 -Added Top 2 feature on regular seasons
+
 -Top 2 will randomly happen, and no elimination will occur
 
 🌟 Update 1.7.0
 
 -Added Double Shantay
+
 -Added Double Sashay
 
 🌟 Update 1.6.0
 
 -Season 17 cast added
+
 -Season 17 lip-sync songs added
+
 -Season 17 runways added
 
 🌟 Update 1.5.0
