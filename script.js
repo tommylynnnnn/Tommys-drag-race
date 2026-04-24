@@ -374,12 +374,6 @@ const ALL_QUEENS = [
         seasons: ["Season 15"]
     },
     {
-        name: "Loosey LaDuca",
-        img: "https://i.pinimg.com/736x/d6/4b/e8/d64be8ceb18424440ad381f232fbcf39.jpg",
-        stats: { acting: 9, comedy: 14, improv: 12, dance: 9, design: 6, lipsync: 6 },
-        seasons: ["Season 15"]
-    },
-    {
         name: "Mistress Isabelle Brooks",
         img: "https://i.pinimg.com/736x/68/9c/ed/689ced9a87c0447e3db6b433fb8aaf66.jpg",
         stats: { acting: 10, comedy: 10, improv: 10, dance: 8, design: 11, lipsync: 11 },
@@ -399,7 +393,7 @@ const ALL_QUEENS = [
     },
     {
         name: "Salina EsTitties",
-        img: "https://i.pinimg.com/736x/43/6c/65/436c650eff8e3239e5aae0b9687af58c.jpg",
+        img: "https://i.pinimg.com/736x/dc/4c/bb/dc4cbbcc7b7467e6fe17e238fe60dd15.jpg",
         stats: { acting: 6, comedy: 8, improv: 7, dance: 9, design: 3, lipsync: 11 },
         seasons: ["Season 15", "All Stars 11"]
     }
