@@ -1246,10 +1246,6 @@ break;
 
 // ====== FINALE FLOW ======
 
-// Shared finale variables
-let finaleWinner = null;
-let finaleRunnerUp = null;
-
 // ====== FINALE ROUTER ======
 function advanceFinaleStep() {
 
