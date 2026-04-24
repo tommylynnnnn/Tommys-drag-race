@@ -361,7 +361,7 @@ const ELIMINATION_LINES = {
     "Amanda Tori Meating": "Well, at least I did what I came to do: blow the sound crew!",
     "Geneva Karr": "I'll just keep it short and bilingual. Hasta la vi-star!",
     "Mhi'ya Iman Le'Paige": "From the palace to the queendom, the queen of flips is exiting the group chat!",
-    "Hershii LiqCour-Jeté": "I... did not prepare this part."
+    "Hershii LiqCour-Jeté": "I... did not prepare this part.",
     "Sasha Colby": "Thank you so much for letting me come here and share my creativity... you've done so much for me and everyone else on this stage. Goodbye."
 };
 
