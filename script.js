@@ -1245,18 +1245,26 @@ break;
 }
 
 // ====== FINALE FLOW ======
-function advanceFinaleStep() {
-    // ... your finale switch (cases 0–6) ...
-}
 
+// Shared finale variables
+let finaleCutQueen = null;
+let finaleWinner = null;
+let finaleRunnerUp = null;
+
+// ====== FINALE ROUTER ======
 function advanceFinaleStep() {
 
-    // ⭐ NEW: route to Final 4 → Final 2 finale
+    // ⭐ NEW: Lipsync Smackdown Finale
+    if (selectedFinaleType === "smackdown") {
+        return advanceSmackdownFinale();
+    }
+
+    // ⭐ Final 4 → Final 2 Finale
     if (selectedFinaleType === "top4cut2") {
         return advanceFinal4Cut2();
     }
 
-    // ⭐ EXISTING: Top 3 finale
+    // ⭐ DEFAULT: Top 3 Finale
     switch (episodeStep) {
         case 0:
             setEpisodeText(`<h2>Finale</h2><p>Our Top 3 queens are ready for the crown.</p>`, currentCast);
@@ -1274,11 +1282,11 @@ function advanceFinaleStep() {
             eliminationOrder.unshift(finaleCutQueen.name);
 
             setEpisodeText(`
-    <h2>Top 3 Cut</h2>
-    <p>❌ <strong>${finaleCutQueen.name}</strong> has been cut.</p>
-    <p><em>"${ELIMINATION_LINES[finaleCutQueen.name] || ""}"</em></p>
-    <p>The final 2 will now lip sync for the crown.</p>
-`, [finaleCutQueen]);
+                <h2>Top 3 Cut</h2>
+                <p>❌ <strong>${finaleCutQueen.name}</strong> has been cut.</p>
+                <p><em>"${ELIMINATION_LINES[finaleCutQueen.name] || ""}"</em></p>
+                <p>The final 2 will now lip sync for the crown.</p>
+            `, [finaleCutQueen]);
             break;
 
         case 3:
@@ -1293,13 +1301,13 @@ function advanceFinaleStep() {
             updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
 
             const finaleSong = getRandomLipSyncSong();
-currentLipSyncSong = finaleSong;
+            currentLipSyncSong = finaleSong;
 
-setEpisodeText(`
-    <h2>Lip Sync For The Crown</h2>
-    <p>${final2[0].name} vs ${final2[1].name}</p>
-    <p><strong>Final Song:</strong> "${finaleSong.title}" by ${finaleSong.artist}</p>
-`, final2);
+            setEpisodeText(`
+                <h2>Lip Sync For The Crown</h2>
+                <p>${final2[0].name} vs ${final2[1].name}</p>
+                <p><strong>Final Song:</strong> "${finaleSong.title}" by ${finaleSong.artist}</p>
+            `, final2);
 
             break;
 
@@ -1319,7 +1327,6 @@ setEpisodeText(`
             break;
 
         case 6:
-            // Auto-refresh after finale
             location.reload();
             return;
 
@@ -1330,6 +1337,7 @@ setEpisodeText(`
 
     episodeStep++;
 }
+
 
 // ====== FINAL 4 → FINAL 2 FINALE ======
 
@@ -1357,7 +1365,6 @@ function advanceFinal4Cut2() {
             finaleCut2 = scored[2].queen;
 
             finaleFinal2 = [scored[0].queen, scored[1].queen];
-
             currentCast = [...finaleFinal2];
 
             setEpisodeText(`
@@ -1417,10 +1424,96 @@ function advanceFinal4Cut2() {
     finale4Step++;
 }
 
-// ====== EVENT LISTENERS ======
 
-document.getElementById("start-btn").addEventListener("click", startSeason);
-episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
+// ====== LIPSYNC SMACKDOWN FINALE ======
+
+let smackStep = 0;
+let semi1Winner = null;
+let semi2Winner = null;
+
+function advanceSmackdownFinale() {
+    switch (smackStep) {
+
+        case 0:
+            setEpisodeText(`
+                <h2>Lipsync Smackdown</h2>
+                <p>The Top 4 will battle in a bracket-style lipsync tournament!</p>
+            `, currentCast);
+            break;
+
+        case 1:
+            const [q1, q2, q3, q4] = currentCast;
+
+            const semi1 = lipSync([q1, q2]);
+            semi1Winner = semi1.winner;
+
+            setEpisodeText(`
+                <h2>Semifinal 1</h2>
+                <p>${q1.name} vs ${q2.name}</p>
+                <p><strong>Winner:</strong> ${semi1Winner.name}</p>
+            `, [q1, q2]);
+            break;
+
+        case 2:
+            const semi2 = lipSync([q3, q4]);
+            semi2Winner = semi2.winner;
+
+            setEpisodeText(`
+                <h2>Semifinal 2</h2>
+                <p>${q3.name} vs ${q4.name}</p>
+                <p><strong>Winner:</strong> ${semi2Winner.name}</p>
+            `, [q3, q4]);
+            break;
+
+        case 3:
+            const finalSong = getRandomLipSyncSong();
+            currentLipSyncSong = finalSong;
+
+            setEpisodeText(`
+                <h2>Final Lipsync</h2>
+                <p>${semi1Winner.name} vs ${semi2Winner.name}</p>
+                <p><strong>Song:</strong> "${finalSong.title}" by ${finalSong.artist}</p>
+            `, [semi1Winner, semi2Winner]);
+            break;
+
+        case 4:
+            const finalResult = lipSync([semi1Winner, semi2Winner]);
+
+            finaleWinner = finalResult.winner;
+            finaleRunnerUp = finalResult.eliminated[0];
+
+            seasonQueens.forEach(q => {
+                if (q.name === finaleWinner.name) trackRecord[q.name].push("WINNER");
+                else if (q.name === finaleRunnerUp.name) trackRecord[q.name].push("RUNNER-UP");
+                else trackRecord[q.name].push("ELIM");
+            });
+
+            setEpisodeText(`
+                <h2>Season Winner</h2>
+                <p>👑 <strong>${finaleWinner.name}</strong> wins the Lipsync Smackdown and the crown!</p>
+            `, [finaleWinner]);
+            break;
+
+        case 5:
+            setEpisodeText(`
+                <h2>Final Track Record</h2>
+                <p>Here is the final track record for the season:</p>
+            `);
+            renderTrackRecordCards();
+            break;
+
+        case 6:
+            location.reload();
+            return;
+
+        default:
+            location.reload();
+            return;
+    }
+
+    smackStep++;
+}
+
 
 // ====== EVENT LISTENERS ======
 document.getElementById("start-btn").addEventListener("click", startSeason);
