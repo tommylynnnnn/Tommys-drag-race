@@ -3,6 +3,14 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.15.0
+
+-Season 15 cast added
+
+-Season 15 lip-sync songs added
+
+-Season 15 runways added
+
 🌟 Update 1.14.0
 
 -Added season sort feature in queen selector
