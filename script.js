@@ -1198,21 +1198,21 @@ function advanceEpisodeStep() {
                 break;
             }
 
-            // NORMAL ELIMINATION
-            const eliminated = result.eliminated[0];
-            currentCast = eliminateFromCast(currentCast, eliminated);
-            eliminationOrder.unshift(eliminated.name);
+           // NORMAL ELIMINATION
+const eliminatedSingle = result.eliminated[0];
+currentCast = eliminateFromCast(currentCast, eliminatedSingle);
+eliminationOrder.unshift(eliminatedSingle.name);
 
-            updateTrackRecordEpisode(currentJudging, currentBottom2, eliminated);
+updateTrackRecordEpisode(currentJudging, currentBottom2, eliminatedSingle);
 
-            setEpisodeText(`
-                <h2>Elimination</h2>
-                <p>❌ <strong>${eliminated.name}</strong> has been eliminated.</p>
-                <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-                <p><em>"${ELIMINATION_LINES[eliminated.name] || ""}"</em></p>
-                <p>${currentCast.length} queens remain.</p>
-            `, [eliminated]);
-            break;
+setEpisodeText(`
+    <h2>Elimination</h2>
+    <p>❌ <strong>${eliminatedSingle.name}</strong> has been eliminated.</p>
+    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}</strong> by ${currentLipSyncSong.artist}</p>
+    <p><em>"${ELIMINATION_LINES[eliminatedSingle.name] || ""}"</em></p>
+    <p>${currentCast.length} queens remain.</p>
+`, [eliminatedSingle]);
+break;
 
         case 10:
             setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
@@ -1243,8 +1243,11 @@ function advanceEpisodeStep() {
 
     episodeStep++;
 }
-  
+
 // ====== FINALE FLOW ======
+function advanceFinaleStep() {
+    // ... your finale switch (cases 0–6) ...
+}
 
 function advanceFinaleStep() {
 
@@ -1418,5 +1421,9 @@ function advanceFinal4Cut2() {
 
 // ====== EVENT LISTENERS ======
 
+document.getElementById("start-btn").addEventListener("click", startSeason);
+episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
+
+// ====== EVENT LISTENERS ======
 document.getElementById("start-btn").addEventListener("click", startSeason);
 episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
