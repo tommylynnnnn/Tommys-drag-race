@@ -3,6 +3,12 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.14.0
+
+-Added season sort feature in queen selector
+
+-Added the seasons each queen competed in on their name card
+
 🌟 Update 1.13.0
 
 -Added lip-sync smackdown finale
