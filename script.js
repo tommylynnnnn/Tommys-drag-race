@@ -1247,7 +1247,6 @@ break;
 // ====== FINALE FLOW ======
 
 // Shared finale variables
-let finaleCutQueen = null;
 let finaleWinner = null;
 let finaleRunnerUp = null;
 
