@@ -3,6 +3,12 @@ Welcome to Tommys Drag Race!
 
 🏁 = Patch  🌟 = Minor Update 🎉 = Major Update
 
+🌟 Update 1.11.0
+
+-Season 16 cast added
+-Season 16 lip-sync songs added
+-Season 16 runways added
+
 🌟 Update 1.10.0
 
 -Added DOUBLE PREMIERE!!!
