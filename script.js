@@ -396,6 +396,24 @@ const ALL_QUEENS = [
         img: "https://i.pinimg.com/736x/dc/4c/bb/dc4cbbcc7b7467e6fe17e238fe60dd15.jpg",
         stats: { acting: 6, comedy: 8, improv: 7, dance: 9, design: 3, lipsync: 11 },
         seasons: ["Season 15", "All Stars 11"]
+    },
+    {
+        name: "Willow Pill",
+        img: "https://i.pinimg.com/736x/49/69/29/496929f9b42e75a8f6e4e18b5f48b80b.jpg",
+        stats: { acting: 11, comedy: 9, improv: 10, dance: 6, design: 12, lipsync: 11 },
+        seasons: ["Season 14"]
+    },
+    {
+        name: "Lady Camden",
+        img: "https://i.pinimg.com/736x/8c/cb/03/8ccb03bf0461b962ac1c89ec3d2627da.jpg",
+        stats: { acting: 12, comedy: 9, improv: 11, dance: 11, design: 12, lipsync: 10 },
+        seasons: ["Season 14"]
+    },
+    {
+        name: "Daya Betty",
+        img: "https://i.pinimg.com/736x/6f/47/7b/6f477b2a7cfd2760dc626f1d02570843.jpg",
+        stats: { acting: 10, comedy: 8, improv: 9, dance: 12, design: 11, lipsync: 10 },
+        seasons: ["Season 14", "All Stars 10"]
     }
 ];
 
@@ -464,7 +482,10 @@ const ENTRANCE_LINES = {
     "Amethyst": "Is this thing on?",
     "Irene the Alien": "(sneezes) Okay, someone's wearing cheap perfume. Oh wait, it's me!",
     "Jax": "Make room for your MVP, spelled J-A-X.”",
-    "Princess Poppy": "I'm homo... phobic."
+    "Princess Poppy": "I'm homo... phobic.",
+    "Willow Pill": "Where am I?",
+    "Lady Camden": "Hello, you sexy bitches!",
+    "Daya Betty": "You betty be ready!"
 };
 
 const ELIMINATION_LINES = {
@@ -532,7 +553,10 @@ const ELIMINATION_LINES = {
     "Amethyst": "Thank you so much, Ru. Thank you, everybody. I really appreciate it. I'm gonna go now. *walks off runway, then turns around to the judges* Okay. *fakes out final words on runway, then leaves*",
     "Irene the Alien": "Well, I may not have won the crown…",
     "Jax": "Fatality!",
-    "Princess Poppy": "*burps*"
+    "Princess Poppy": "*burps*",
+    "Willow Pill": "Toodles!",
+    "Lady Camden": "MAXINEEEE!",
+    "Daya Betty": "I guess Betty wasn't ready yet, bitch."
 };
 
 // ====== CHALLENGES ======
@@ -616,6 +640,24 @@ const RUNWAY_THEMES = [
     "Night of 1000 Beyoncés",
     "Rip Her to Shreds!",
     "Everybody Say Glove!",
+    "Candy Land",
+    "Arcade",
+    "Signature Show-Stopping Drag",
+    "Sickening Signature Drag",
+    "Zebra Print Resort",
+    "Leopard Evening Wear",
+    "Red Hot Resort",
+    "Evening Wear, Why It Gotta Be White?",
+    "Nigh Of A Thousand J'Lo's",
+    "Spring Has Sprung",
+    "Chaps On The Runway",
+    "Heart On",
+    "Shoulder Pads",
+    "Holy Couture",
+    "Mirror Mirror",
+    "Tutu Much",
+    "You're A Winner Baby",
+    "Viva Drag Vegas"
 ];
 
 const LIP_SYNC_SONGS = [
