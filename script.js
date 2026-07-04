@@ -418,6 +418,18 @@ const ALL_QUEENS = [
         img: "https://i.pinimg.com/736x/6f/47/7b/6f477b2a7cfd2760dc626f1d02570843.jpg",
         stats: { acting: 10, comedy: 8, improv: 9, dance: 12, design: 11, lipsync: 10 },
         seasons: ["Season 14", "All Stars 10"]
+    },
+    {
+        name: "Angeria Paris VanMichaels",
+        img: "https://i.pinimg.com/736x/c1/b0/d3/c1b0d3e74e172a0c8463ab25d2fce17a.jpg",
+        stats: { acting: 11, comedy: 10, improv: 11, dance: 10, design: 11, lipsync: 11 },
+        seasons: ["Season 14", "All Stars 9"]
+    },
+    {
+        name: "Bosco",
+        img: "https://i.pinimg.com/736x/c1/60/f1/c160f14ac491d4a82466ce60507a549b.jpg",
+        stats: { acting: 11, comedy: 12, improv: 12, dance: 9, design: 11, lipsync: 7 },
+        seasons: ["Season 14", "All Stars 10"]
     }
 ];
 
@@ -489,7 +501,9 @@ const ENTRANCE_LINES = {
     "Princess Poppy": "I'm homo... phobic.",
     "Willow Pill": "Where am I?",
     "Lady Camden": "Hello, you sexy bitches!",
-    "Daya Betty": "You betty be ready!"
+    "Daya Betty": "You betty be ready!",
+    "Angeria Paris VanMichaels": "The name's Angeria, but you can call me Angie. Now, let's make it shake, honey!",
+    "Bosco": "Alright, let's get out there today and make a difference."
 };
 
 const ELIMINATION_LINES = {
@@ -561,6 +575,8 @@ const ELIMINATION_LINES = {
     "Willow Pill": "Toodles!",
     "Lady Camden": "MAXINEEEE!",
     "Daya Betty": "I guess Betty wasn't ready yet, bitch."
+    "Angeria Paris VanMichaels": "From the country to the silver screen, I will always and forever, be your queen...",
+    "Bosco": "Should have kept me around longer!"
 };
 
 // ====== CHALLENGES ======
