@@ -657,289 +657,150 @@ const RUNWAY_THEMES = [
     "Mirror Mirror",
     "Tutu Much",
     "You're A Winner Baby",
-    "Viva Drag Vegas"
+    "Viva Drag Vegas",
     "Best Drag",
     "Dress To Impress",
-"Mac-Viva Glam",
-
-"Executive Realness",
-
-"Swimwear",
-
-"High Class Drag",
-
-"Country Realness",
-
-"Personal Style",
-
-"Rocker Chick",
-
-"Novel Couture",
-
-"Teen Diva",
-
-"Diva D.C. Press",
-
-"Black And Grey",
-
-"Futurama Glamorama",
-
-"Favorite Body Part",
-
-"Extravagant Drag",
-
-"Favorite Drag Look",
-
-"Patriotic Drag",
-
-"Classic Hairstyle",
-
-"Modern Red Carpet",
-
-"Swimsuit Body Beautiful",
-
-"Cocktail Attire After 5 Look",
-
-"Retro-Futurism",
-
-"Girly Girl Couture",
-
-"Platinum & Gold",
-
-"Red Carpet",
-
-"Dragazines",
-
-"Frenemies",
-
-"Inaugural Ball",
-
-"Daytime Dog Park",
-
-"Pooch In A Purse",
-
-"Best Drag",
-
-"Black",
-
-"Gold",
-
-"Goddesses",
-
-"Think Pink",
-
-"Divalicious",
-
-"Deadliest Snatch Glamour",
-
-"Favorite Body Part",
-
-"Company Spokeswoman",
-
-"Latina Eleganza",
-
-"Super Duper Sweet 16",
-
-"Executive Realness",
-
-"Black and Pink",
-
-"Tony Awards Glamour",
-
-"A Night Of A Thousand Rupauls",
-
-"Crazy Sexy Cool",
-
-"Black & White",
-
-"Drag Queens Of Comedy",
-
-"Animal Kingdom Couture",
-
-"Banjee Girl Bling",
-
-"Platinum Card Executive Realness",
-
-"Back To Basics",
-
-"Nude Illusion",
-
-"Jetset Eleganza",
-
-"Bearded And Beautiful",
-
-"Green",
-
-"Award Show",
-
-"Death Becomes Her",
-
-"Leather and Lace",
-
-"Ugliest Dress Ever",
-
-"Half Man, Half Woman",
-
-"Hello Kitty Couture",
-
-"Retro",
-
-"Movie Premiere Realness",
-
-"Rollergirls",
-
-"Neon Realness",
-
-"Night of a Thousand Madonnas",
-
-"Black and White Realness",
-
-"Baby Drag Realness",
-
-"That's My Mama Realness",
-
-"Monochrome",
-
-"Hometown Look",
-
-"Gaga Look",
-
-"White Party Realness",
-
-"Naughty Nighty",
-
-"Faux Fur Realness",
-
-"Night of 1,000 Madonnas: Part 2",
-
-"Big Hair Everywhere",
-
-"Club Kid Couture",
-
-"Rainbow Look",
-
-"Sexy Unicorn Look",
-
-"Neon",
-
-"Very Best Drag",
-
-"Feathers",
-
-"Alaskan Winter Realness",
-
-"Miami Summer Realness",
-
-"Denim & Diamonds",
-
-"Hats Incredible",
-
-"Mermaid Fantasy",
-
-"Glitterific",
-
-"Silver Foxy",
-
-"Best Self",
-
-"Inner Saboteur",
-
-"Color Blocking",
-
-"What's Your Sign?",
-
-"Fringe",
-
-"Orange Alert",
-
-"Trampy Trick or Treater",
-
-"Witch, Please!",
-
-"All That Glitters Is Gold",
-
-"Sequins on the Runway",
-
-"Facekini Realness",
-
-"Caftan Realness",
-
-"Red, White, and Blue",
-
-"Rebellion",
-
-"Spring",
-
-"Fall",
-
-"Sparkle",
-
-"Tulle",
-
-"Buttons and Bows",
-
-"Lady Baller",
-
-"Basketball Wife Realness",
-
-"Planet of the Capes",
-
-"Frozen Eleganza",
-
-"Night of a Thousand Michelle Visages",
-
-"Black Wedding",
-
-"Stars and Stripes Forever",
-
-"The Colour Purple",
-
-"Eleganza Extravanganza",
-
-"Slumber Party",
-
-"Red Carpet",
-
-"Pastel Pin-Up",
-
-"Pasteloquence",
-
-"Neon Pastel Mansion",
-
-"Lamé You Stay",
-
-"Day Time",
-
-"Night Time",
-
-"Lady",
-
-"Vamp",
-
-"Sheer",
-
-"Trains for Days",
-
-"Mixed Bag",
-
-"Money Bags",
-
-"Little Black Dress",
-
-"Bead It!",
-
-"Yellow, Gorgeous",
-
-"Fascinating Fascinators",
-
-"BEAST Couture",
-
-"Haute Pockets",
-
-"Drag Excellence",
-
-"Red All Over",
-];
+    "Mac-Viva Glam",
+    "Executive Realness",
+    "Swimwear",
+    "High Class Drag",
+    "Country Realness",
+    "Personal Style",
+    "Rocker Chick",
+    "Novel Couture",
+    "Teen Diva",
+    "Diva D.C. Press",
+    "Black And Grey",
+    "Futurama Glamorama",
+    "Favorite Body Part",
+    "Extravagant Drag",
+    "Favorite Drag Look",
+    "Patriotic Drag",
+    "Classic Hairstyle",
+    "Modern Red Carpet",
+    "Swimsuit Body Beautiful",
+    "Cocktail Attire After 5 Look",
+    "Retro-Futurism",
+    "Girly Girl Couture",
+    "Platinum & Gold",
+    "Red Carpet",
+    "Dragazines",
+    "Frenemies",
+    "Inaugural Ball",
+    "Daytime Dog Park",
+    "Pooch In A Purse",
+    "Best Drag",
+    "Black",
+    "Gold",
+    "Goddesses",
+    "Think Pink",
+    "Divalicious",
+    "Deadliest Snatch Glamour",
+    "Favorite Body Part",
+    "Company Spokeswoman",
+    "Latina Eleganza",
+    "Super Duper Sweet 16",
+    "Executive Realness",
+    "Black and Pink",
+    "Tony Awards Glamour",
+    "A Night Of A Thousand Rupauls",
+    "Crazy Sexy Cool",
+    "Black & White",
+    "Drag Queens Of Comedy",
+    "Animal Kingdom Couture",
+    "Banjee Girl Bling",
+    "Platinum Card Executive Realness",
+    "Back To Basics",
+    "Nude Illusion",
+    "Jetset Eleganza",
+    "Bearded And Beautiful",
+    "Green",
+    "Award Show",
+    "Death Becomes Her",
+    "Leather and Lace",
+    "Ugliest Dress Ever",
+    "Half Man, Half Woman",
+    "Hello Kitty Couture",
+    "Retro",
+    "Movie Premiere Realness",
+    "Rollergirls",
+    "Neon Realness",
+    "Night of a Thousand Madonnas",
+    "Black and White Realness",
+    "Baby Drag Realness",
+    "That's My Mama Realness",
+    "Monochrome",
+    "Hometown Look",
+    "Gaga Look",
+    "White Party Realness",
+    "Naughty Nighty",
+    "Faux Fur Realness",
+    "Night of 1,000 Madonnas: Part 2",
+    "Big Hair Everywhere",
+    "Club Kid Couture",
+    "Rainbow Look",
+    "Sexy Unicorn Look",
+    "Neon",
+    "Very Best Drag",
+    "Feathers",
+    "Alaskan Winter Realness",
+    "Miami Summer Realness",
+    "Denim & Diamonds",
+    "Hats Incredible",
+    "Mermaid Fantasy",
+    "Glitterific",
+    "Silver Foxy",
+    "Best Self",
+    "Inner Saboteur",
+    "Color Blocking",
+    "What's Your Sign?",
+    "Fringe",
+    "Orange Alert",
+    "Trampy Trick or Treater",
+    "Witch, Please!",
+    "All That Glitters Is Gold",
+    "Sequins on the Runway",
+    "Facekini Realness",
+    "Caftan Realness",
+    "Red, White, and Blue",
+    "Rebellion",
+    "Spring",
+    "Fall",
+    "Sparkle",
+    "Tulle",
+    "Buttons and Bows",
+    "Lady Baller",
+    "Basketball Wife Realness",
+    "Planet of the Capes",
+    "Frozen Eleganza",
+    "Night of a Thousand Michelle Visages",
+    "Black Wedding",
+    "Stars and Stripes Forever",
+    "The Colour Purple",
+    "Eleganza Extravanganza",
+    "Slumber Party",
+    "Red Carpet",
+    "Pastel Pin-Up",
+    "Pasteloquence",
+    "Neon Pastel Mansion",
+    "Lamé You Stay",
+    "Day Time",
+    "Night Time",
+    "Lady",
+    "Vamp",
+    "Sheer",
+    "Trains for Days",
+    "Mixed Bag",
+    "Money Bags",
+    "Little Black Dress",
+    "Bead It!",
+    "Yellow, Gorgeous",
+    "Fascinating Fascinators",
+    "BEAST Couture",
+    "Haute Pockets",
+    "Drag Excellence",
+    "Red All Over",
+    ];
 
 const LIP_SYNC_SONGS = [
     { title: "Too Much", artist: "Dove Cameron" },
