@@ -6,6 +6,10 @@ let currentPremiereIndex = 0;    // 0 = first premiere, 1 = second
 let selectedPremiereType = "normal";
 let selectedFinaleType = "top3";
 
+// ===== TRACK RECORD STATE =====
+let trackRecord = {};
+let eliminationOrder = [];
+
 const ALL_QUEENS = [
     {
         name: "Alaska",
@@ -452,8 +456,8 @@ const ENTRANCE_LINES = {
     "Hormona Lisa": "Hello, loyal subjects. It is I, Hormona Lisa, at your service. *laugh* Wow, that was annoying.",
     "Crystal Envy": "Yeah, I'd envy me too.",
     "Arrietty": "Hi! (said in Stitch voice)",
-    "Acacia Forgot": "Totally tubular.", 
-    "Nymphia Wind": "Bananas!", 
+    "Acacia Forgot": "Totally tubular.",
+    "Nymphia Wind": "Bananas!",
     "Sapphira Cristál": "Ooooh, Ooooooh! I think this place is haunted.",
     "Plane Jane": "Fasten your seatbelts, 'cause this plane always goes down.",
     "Q": "'Q' the music, because the show is about to start!",
@@ -524,7 +528,7 @@ const ELIMINATION_LINES = {
     "Crystal Envy": "You definitely make me feel mayo real righty, RuPaul!",
     "Arrietty": "Well, it looks like the runway category just dropped, immensely! Y'all ugly boogers!",
     "Acacia Forgot": "You can now find my new single on all streaming platforms.",
-    "Nymphia Wind": "*Cries a lot*", 
+    "Nymphia Wind": "*Cries a lot*",
     "Sapphira Cristál": "Thank you for everything Rupaul, peace out.",
     "Plane Jane": "Ugh!",
     "Q": "Quoi?!",
@@ -560,39 +564,12 @@ const ELIMINATION_LINES = {
 };
 
 // ====== CHALLENGES ======
-
 const CHALLENGES = [
-    // PERFORMANCE
-    "Acting",
-    "Comedy",
-    "Improv",
-    "Dance",
-    "Rusical",
-    "Girl Groups",
-    "Talent Show",
-    "Lip Sync Smackdown",
-
-    // DESIGN
-    "Design",
-    "Makeover",
-    "Ball Challenge",
-
-    // WRITING / SPEAKING
-    "Roast",
-    "Roast Battle",
-    "Stand-Up",
-    "RDR Live",
-    "Commercial",
-    "Branding",
-
-    // MUSIC
-    "Songwriting",
-    "Music Video",
-
-    // OTHER
-    "Snatch Game",
-    "Marketing Challenge",
-    "Hosting Challenge"
+    "Acting", "Comedy", "Improv", "Dance", "Rusical", "Girl Groups", "Talent Show", "Lip Sync Smackdown",
+    "Design", "Makeover", "Ball Challenge",
+    "Roast", "Roast Battle", "Stand-Up", "RDR Live", "Commercial", "Branding",
+    "Songwriting", "Music Video",
+    "Snatch Game", "Marketing Challenge", "Hosting Challenge"
 ];
 
 const RUNWAY_THEMES = [
@@ -689,18 +666,15 @@ const RUNWAY_THEMES = [
     "Inaugural Ball",
     "Daytime Dog Park",
     "Pooch In A Purse",
-    "Best Drag",
     "Black",
     "Gold",
     "Goddesses",
     "Think Pink",
     "Divalicious",
     "Deadliest Snatch Glamour",
-    "Favorite Body Part",
     "Company Spokeswoman",
     "Latina Eleganza",
     "Super Duper Sweet 16",
-    "Executive Realness",
     "Black and Pink",
     "Tony Awards Glamour",
     "A Night Of A Thousand Rupauls",
@@ -718,7 +692,6 @@ const RUNWAY_THEMES = [
     "Award Show",
     "Death Becomes Her",
     "Leather and Lace",
-    "Ugliest Dress Ever",
     "Half Man, Half Woman",
     "Hello Kitty Couture",
     "Retro",
@@ -762,7 +735,6 @@ const RUNWAY_THEMES = [
     "Sequins on the Runway",
     "Facekini Realness",
     "Caftan Realness",
-    "Red, White, and Blue",
     "Rebellion",
     "Spring",
     "Fall",
@@ -779,7 +751,6 @@ const RUNWAY_THEMES = [
     "The Colour Purple",
     "Eleganza Extravanganza",
     "Slumber Party",
-    "Red Carpet",
     "Pastel Pin-Up",
     "Pasteloquence",
     "Neon Pastel Mansion",
@@ -798,99 +769,17 @@ const RUNWAY_THEMES = [
     "Fascinating Fascinators",
     "BEAST Couture",
     "Haute Pockets",
-    "Drag Excellence",
-    "Red All Over",
-    ];
+    "Red All Over"
+];
 
 const LIP_SYNC_SONGS = [
     { title: "Too Much", artist: "Dove Cameron" },
     { title: "Love in Real Life", artist: "Lizzo" },
     { title: "Lights Camera Action", artist: "Kylie Minogue" },
-    { title: "Toxic", artist: "Britney Spears" },
-    { title: "Houdini", artist: "Dua Lipa" },
-    { title: "Head Over Heels", artist: "The Go Go's" },
-    { title: "Call Me When You Break Up", artist: "Selena Gomez, Benny Blanco, and Gracie Abrams" },
-    { title: "Total Eclipse of the Heart", artist: "Bonnie Tyler" },
-    { title: "we can't be friends (wait for your love)", artist: "Ariana Grande" },
-    { title: "Garden Of Eden", artist: "Lady Gaga" },
-    { title: "Super Graphic Ultra Modern Girl", artist: "Chappell Roan" },
-    { title: "Enough (Miami)", artist: "Cardi B" },
-    { title: "Pretty Ugly", artist: "Zara Larsson" },
-    { title: "Jerkin'", artist: "Amyl & The Sniffers" },
-    { title: "Feels Like Another One ", artist: "Patti LaBelle" },
-    { title: "Every Girl You've Ever Loved", artist: "Miley Cyrus ft. Naomi Campbell" },
-    { title: "yes, and?", artist: "Ariana Grande" },
-    { title: "The Way That You Love Me", artist: "Paula Abdul" },
-    { title: "Buttons", artist: "The Pussycat Dolls ft. Snoopdog" },
-    { title: "Boogie Wonderland", artist: "Earth, Wind & Fire and The Emotions" },
-    { title: "get him back!", artist: "Olivia Rodrigo" },
-    { title: "Hands to Myself", artist: "Selena Gomez" },
-    { title: "WET DREAM", artist: "Adam Lambert" },
-    { title: "Kiss Me Deadly", artist: "Lita Ford" },
-    { title: "YA YA", artist: "Beyoncé" },
-    { title: "Unholy", artist: "Sam Smith and Kim Petras" },
-    { title: "Illusion", artist: "Dua Lipa" },
-    { title: "1 Thing", artist: "Amerie" },
-    { title: "Love Child", artist: "Diana Ross & The Supremes" },
-    { title: "Woman's World", artist: "Katy Perry" },
-    { title: "Alter Ego", artist: "Doechii & JT" },
-    { title: "Say Liza (Liza with a 'Z')", artist: "Liza Minelli" },
-    { title: "Training Season", artist: "Dua Lipa" },
-    { title: "Step by Step (Junior Vasquez Tribal X Beats)", artist: "Whitney Houston" },
-    { title: "Blow Me (One Last Kiss)", artist: "P!nk" },
-    { title: "You Make Me Feel (Mighty Real)", artist: "Sylvester" },
-    { title: "We Found Love", artist: "Rihanna" },
-    { title: "360", artist: "Charli XCX" },
-    { title: "APT", artist: "ROSÉ and Bruno Mars" },
-    { title: "Abracadabra", artist: "Lady Gaga" },
-    { title: "Maybe You're The Problem", artist: "Ava Max" },
-    { title: "Dark Lady", artist: "Cher" },
-    { title: "Emergency", artist: "Icona Pop" },
-    { title: "Control", artist: "Janet Jackson" },
-    { title: "Flowers", artist: "Miley Cyrus" },
-    { title: "I Wanna Dance With Somebody", artist: "Whitney Houston" },
-    { title: "Bloody Mary (Wednesday Dance Tiktok Version)", artist: "Lady Gaga" },
-    { title: "Dim All the Lights", artist: "Donna Summer" },
-    { title: "Body", artist: "Megan Thee Stallion" },
-    { title: "Miss Me More", artist: "Kelsea Ballerini" },
-    { title: "Better Be Good to Me", artist: "Tina Turner" },
-    { title: "Break My Soul", artist: "Beyoncé" },
-    { title: "Shower", artist: "Becky G" },
-    { title: "Made You Look", artist: "Meghan Trainor" },
-    { title: "Damaged", artist: "Danity Kane" },
-    { title: "What About", artist: "Janet Jackson" },
-    { title: "Million Dollar Baby", artist: "Ava Max" },
-    { title: "Alone 2.0", artist: "Kim Petra & Nicki Minaj" },
-    { title: "Milkshake", artist: "Kelis" },
-    { title: "The Shoop Shoop Song", artist: "Cher" },
-    { title: "This Time I Know It's For Real", artist: "Donna Summer" },
-    { title: "We Got The Beat", artist: "The Go-Go's" },
-    { title: "Gonna Make You Sweat (Everybody Dance Now)", artist: "C+C Music Factory" },
-    { title: "Padam Padam", artist: "Kylie Minogue" },
-    { title: "7 Rings", artist: "Ariana Grande" },
-    { title: "Ain't No Mountain High Enough", artist: "Diana Ross" },
-    { title: "You Better Run", artist: "Pat Benatar" },
-    { title: "Q.U.E.E.N.", artist: "Janelle Monáe" },
-    { title: "In Your Room", artist: "The Bangles" },
-    { title: "Sweetest Pie", artist: "Megan Thee Stallion & Dua Lipa" },
-    { title: "That's What I want", artist: "Lil Nas X" },
-    { title: "Single Ladies", artist: "Beyoncé" },
-    { title: "Boss Bitch", artist: "Doja Cat" },
-    { title: "Running Up That Hill", artist: "Kate Bush" },
-    { title: "For the Girls", artist: "Hayley Kiyoko" },
-    { title: "When Love Takes Over", artist: "David Guetta feat. Kelly Rowland" },
-    { title: "Boys Don't Cry", artist: "Anitta" },
-    { title: "Do You Wanna Touch", artist: "Joan Jett" },
-    { title: "It's All Coming Back To Me Now", artist: "Celine Dion" },
-    { title: "I'm in Love with a Monster", artist: "Fifth Harmony" },
-    { title: "Don't Go Yet", artist: "Camilla Cabello" },
-    { title: "The Right Stuff", artist: "Vanessa Williams" },
-    { title: "Finally", artist: "CeCe Peniston" },
-    { title: "Knock on Wood", artist: "Amii Stewart" }
+    { title: "Toxic", artist: "Britney Spears" }
 ];
 
 // ====== DOM ======
-
 const grid = document.getElementById("queen-grid");
 const overlay = document.getElementById("episode-overlay");
 const episodeContent = document.getElementById("episode-content");
@@ -898,53 +787,37 @@ const episodeContinueBtn = document.getElementById("episode-continue-btn");
 const episodeQueensContainer = document.getElementById("episode-queens");
 
 // ====== RENDER QUEENS ======
-
 function renderQueens(list = ALL_QUEENS) {
     grid.innerHTML = "";
+    document.getElementById("queen-count").textContent = `Available Queens: ${list.length}`;
 
-    // Update queen count
-    document.getElementById("queen-count").textContent =
-        `Available Queens: ${list.length}`;
+    list.slice().sort((a, b) => a.name.localeCompare(b.name)).forEach(q => {
+        const card = document.createElement("div");
+        card.className = "queen-card";
+        card.dataset.name = q.name;
 
-    list
-        .slice()
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(q => {
-            const card = document.createElement("div");
-            card.className = "queen-card";
-            card.dataset.name = q.name;
+        card.innerHTML = `
+            <img src="${q.img}" alt="${q.name}">
+            <p>${q.name}</p>
+            <p class="season-label">${q.seasons.join(", ")}</p>
+            <div class="stats-box">
+                <p><strong>Comedy:</strong> ${q.stats.comedy}</p>
+                <p><strong>Acting:</strong> ${q.stats.acting}</p>
+                <p><strong>Improv:</strong> ${q.stats.improv}</p>
+                <p><strong>Dance:</strong> ${q.stats.dance}</p>
+                <p><strong>Design:</strong> ${q.stats.design}</p>
+                <p><strong>Lip Sync:</strong> ${q.stats.lipsync}</p>
+            </div>
+        `;
 
-            card.innerHTML = `
-                <img src="${q.img}" alt="${q.name}">
-                <p>${q.name}</p>
-                <p class="season-label">${q.seasons.join(", ")}</p>
-
-                <div class="stats-box">
-                    <p><strong>Comedy:</strong> ${q.stats.comedy}</p>
-                    <p><strong>Acting:</strong> ${q.stats.acting}</p>
-                    <p><strong>Improv:</strong> ${q.stats.improv}</p>
-                    <p><strong>Dance:</strong> ${q.stats.dance}</p>
-                    <p><strong>Design:</strong> ${q.stats.design}</p>
-                    <p><strong>Lip Sync:</strong> ${q.stats.lipsync}</p>
-                </div>
-            `;
-
-            card.addEventListener("click", () => {
-                card.classList.toggle("selected");
-            });
-
-            grid.appendChild(card);
-        });
+        card.addEventListener("click", () => card.classList.toggle("selected"));
+        grid.appendChild(card);
+    });
 }
 
 function filterQueensBySeason(season) {
-    if (season === "all") {
-        renderQueens(ALL_QUEENS);
-        return;
-    }
-
-    const filtered = ALL_QUEENS.filter(q => q.seasons.includes(season));
-    renderQueens(filtered);
+    if (season === "all") return renderQueens(ALL_QUEENS);
+    renderQueens(ALL_QUEENS.filter(q => q.seasons.includes(season)));
 }
 
 renderQueens();
@@ -965,24 +838,17 @@ document.getElementById("random-select-btn").addEventListener("click", () => {
         return;
     }
 
-    // Clear all selections first
-    document.querySelectorAll(".queen-card").forEach(card => {
-        card.classList.remove("selected");
-    });
+    document.querySelectorAll(".queen-card").forEach(card => card.classList.remove("selected"));
 
-    // Pick random queens
     const shuffled = ALL_QUEENS.slice().sort(() => Math.random() - 0.5);
     const chosen = shuffled.slice(0, count).map(q => q.name);
 
-    // Select them in the UI
     document.querySelectorAll(".queen-card").forEach(card => {
-        if (chosen.includes(card.dataset.name)) {
-            card.classList.add("selected");
-        }
+        if (chosen.includes(card.dataset.name)) card.classList.add("selected");
     });
 });
-// ====== STATE ======
 
+// ====== STATE ======
 let currentCast = [];
 let seasonQueens = [];
 let episodeNumber = 1;
@@ -992,12 +858,9 @@ let currentJudging = null;
 let currentBottom2 = null;
 let currentLipSyncResult = null;
 let isFinale = false;
-
-let currentLipSyncSong = null; // <-- ADD THIS
-
+let currentLipSyncSong = null;
 
 // ====== HELPERS ======
-
 document.getElementById("premiere-type").addEventListener("change", (e) => {
     selectedPremiereType = e.target.value;
 });
@@ -1019,51 +882,42 @@ function scoreQueen(q, type) {
         case "RDR Live":
             base = s.acting + s.improv + s.comedy;
             break;
-
         case "Comedy":
         case "Roast":
         case "Roast Battle":
         case "Stand-Up":
             base = s.comedy + s.improv;
             break;
-
         case "Improv":
         case "Snatch Game":
             base = s.improv + s.comedy + s.acting;
             break;
-
         case "Dance":
         case "Girl Groups":
         case "Music Video":
             base = s.dance + s.lipsync;
             break;
-
         case "Rusical":
         case "Talent Show":
             base = s.acting + s.dance + s.lipsync;
             break;
-
         case "Design":
         case "Makeover":
         case "Ball Challenge":
             base = s.design + s.acting;
             break;
-
         case "Commercial":
         case "Branding":
         case "Marketing Challenge":
         case "Hosting Challenge":
             base = s.acting + s.comedy + s.improv;
             break;
-
         case "Songwriting":
             base = s.comedy + s.improv + s.lipsync;
             break;
-
         case "Lip Sync Smackdown":
             base = s.lipsync + s.dance;
             break;
-
         default:
             base = s.acting + s.comedy;
     }
@@ -1073,10 +927,9 @@ function scoreQueen(q, type) {
 
 function getScoreBasedRating(score, maxScore, minScore) {
     const range = maxScore - minScore;
-    if (range === 0) return "Fine"; // prevent divide-by-zero
+    if (range === 0) return "Fine";
 
     const normalized = (score - minScore) / range;
-
     if (normalized >= 0.85) return "Slayed";
     if (normalized >= 0.65) return "Good";
     if (normalized >= 0.45) return "Fine";
@@ -1085,112 +938,23 @@ function getScoreBasedRating(score, maxScore, minScore) {
 }
 
 function getBottomCount(q) {
-    if (!q || !q.name || !trackRecord[q.name]) return 0;
-    return trackRecord[q.name].filter(p => p === "BTM2").length;
+    return trackRecord[q.name]?.filter(p => p === "BTM2").length || 0;
 }
 
 function getWinCount(q) {
-    if (!q || !q.name || !trackRecord[q.name]) return 0;
-    return trackRecord[q.name].filter(p => p === "WIN").length;
+    return trackRecord[q.name]?.filter(p => p === "WIN").length || 0;
 }
 
-
-function judgeQueens(cast, type) {
-
-    // ===== DOUBLE PREMIERE SPECIAL RULES =====
-    if (premiereType === "double" && episodeNumber <= 2) {
-
-        // Score everyone normally
-        const scored = cast
-            .map(q => ({ queen: q, score: scoreQueen(q, type) }))
-            .sort((a, b) => b.score - a.score);
-
-        const top1 = scored[0].queen;
-        const top2 = scored[1].queen;
-        const safe = scored.slice(2).map(s => s.queen);
-
-        return {
-            scored,
-            winner: null,
-            high: [],
-            safe,
-            low: [],
-            bottom2: [top1, top2] // reused as TOP2
-        };
-    }
-
-    // ===== NORMAL EPISODE LOGIC =====
-    const scored = cast
-        .map(q => ({ queen: q, score: scoreQueen(q, type) }))
-        .sort((a, b) => b.score - a.score);
-
-    const winnerEntry = scored.find(s => getWinCount(s.queen) < 4) || scored[0];
-    const winner = winnerEntry.queen;
-
-    const bottom2 = [
-        scored[scored.length - 1].queen,
-        scored[scored.length - 2].queen
-    ];
-
-    const remaining = scored
-        .filter(s =>
-            s.queen.name !== winner.name &&
-            !bottom2.some(b => b.name === s.queen.name)
-        )
-        .map(s => s.queen);
-
-    let high = [], low = [], safe = [];
-
-    if (remaining.length <= 2) {
-        safe = remaining;
-    } else {
-        high = remaining.slice(0, 2);
-        low = remaining.slice(-2);
-        safe = remaining.slice(2, remaining.length - 2);
-    }
-
-    return { scored, winner, high, safe, low, bottom2 };
+function chance(p) {
+    return Math.random() < p;
 }
 
-function lipSync(btm2) {
-    if (!Array.isArray(btm2) || btm2.length < 2 || !btm2[0] || !btm2[1]) {
-        console.error("lipSync() called with invalid queens:", btm2);
-        return { type: "invalid", winner: null, eliminated: [] };
-    }
-
-    const [q1, q2] = btm2;
-
-    const q1Bottoms = getBottomCount(q1);
-    const q2Bottoms = getBottomCount(q2);
-
-    // AUTO-ELIM RULE (4th bottom)
-    if (q1Bottoms >= 3 && q2Bottoms < 3) {
-        return { type: "single", winner: q2, eliminated: [q1] };
-    }
-    if (q2Bottoms >= 3 && q1Bottoms < 3) {
-        return { type: "single", winner: q1, eliminated: [q2] };
-    }
-
-    const allowSpecial = !(q1Bottoms >= 3 && q2Bottoms >= 3);
-
-    const s1 = q1.stats.lipsync + (Math.random() * 6 - 3);
-    const s2 = q2.stats.lipsync + (Math.random() * 6 - 3);
-
-    if (allowSpecial && chance(0.10)) {
-        return { type: "double-shantay", winner: null, eliminated: [] };
-    }
-
-    if (allowSpecial && chance(0.05)) {
-        return { type: "double-sashay", winner: null, eliminated: [q1, q2] };
-    }
-
-    if (s1 >= s2) return { type: "single", winner: q1, eliminated: [q2] };
-    return { type: "single", winner: q2, eliminated: [q1] };
+function getRandomRunwayTheme() {
+    return RUNWAY_THEMES[Math.floor(Math.random() * RUNWAY_THEMES.length)];
 }
 
-
-function eliminateFromCast(cast, q) {
-    return cast.filter(x => x.name !== q.name);
+function getRandomLipSyncSong() {
+    return LIP_SYNC_SONGS[Math.floor(Math.random() * LIP_SYNC_SONGS.length)];
 }
 
 function showOverlay() { overlay.classList.remove("hidden"); }
@@ -1208,75 +972,60 @@ function setEpisodeText(text, queens = []) {
     });
 }
 
-function getRandomLipSyncSong() {
-    return LIP_SYNC_SONGS[Math.floor(Math.random() * LIP_SYNC_SONGS.length)];
-}
-
-function chance(p) {
-    return Math.random() < p;
-}
-
-function getRandomRunwayTheme() {
-    return RUNWAY_THEMES[Math.floor(Math.random() * RUNWAY_THEMES.length)];
-}
-
-// ===== DOUBLE PREMIERE: SPLIT GROUPS =====
 function splitIntoDoublePremiereGroups(queens) {
     const shuffled = [...queens];
-
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-
     const mid = Math.floor(shuffled.length / 2);
-
-    const group1 = shuffled.slice(0, mid);
-    const group2 = shuffled.slice(mid);
-
-    return [group1, group2];
+    return [shuffled.slice(0, mid), shuffled.slice(mid)];
 }
 
-// ====== TRACK RECORD ======
-
+// ====== TRACK RECORD HELPERS ======
 function initTrackRecord() {
     trackRecord = {};
-    eliminationOrder = []; // reset this too
+    eliminationOrder = [];
     seasonQueens.forEach(q => trackRecord[q.name] = []);
 }
 
-function updateTrackRecordEpisode(j, bottom2, eliminated) {
-    if (!j || !Array.isArray(seasonQueens)) return;
-
-    seasonQueens.forEach(q => {
-        let p = "";
-
-        if (eliminated && q.name === eliminated.name) p = "ELIM";
-        else if (j.winner && q.name === j.winner.name) p = "WIN";
-        else if (Array.isArray(bottom2) && bottom2.some(b => b && b.name === q.name)) p = "BTM2";
-        else if (j.high && j.high.some(h => h && h.name === q.name)) p = "HIGH";
-        else if (j.low && j.low.some(l => l && l.name === q.name)) p = "LOW";
-        else if (j.safe && j.safe.some(s => s && s.name === q.name)) p = "SAFE";
-
-        if (!trackRecord[q.name]) trackRecord[q.name] = [];
-        trackRecord[q.name].push(p);
-    });
+function pushPlacement(qName, placement) {
+    if (!trackRecord[qName]) trackRecord[qName] = [];
+    const row = trackRecord[qName];
+    if (row[row.length - 1] !== placement) row.push(placement);
 }
 
+function updateTrackRecordEpisode(j, bottom2, eliminated) {
+    if (!j) return;
+
+    seasonQueens.forEach(q => {
+        if (eliminated && q.name === eliminated.name) {
+            pushPlacement(q.name, "ELIM");
+        } else if (j.winner && q.name === j.winner.name) {
+            pushPlacement(q.name, "WIN");
+        } else if (Array.isArray(bottom2) && bottom2.some(b => b && b.name === q.name)) {
+            pushPlacement(q.name, "BTM2");
+        } else if (j.high?.some(h => h && h.name === q.name)) {
+            pushPlacement(q.name, "HIGH");
+        } else if (j.low?.some(l => l && l.name === q.name)) {
+            pushPlacement(q.name, "LOW");
+        } else if (j.safe?.some(s => s && s.name === q.name)) {
+            pushPlacement(q.name, "SAFE");
+        }
+    });
+}
 
 function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
     seasonQueens.forEach(q => {
-        let p = "";
-
-        if (winner && q.name === winner.name) p = "WINNER";
-        else if (runnerUp && q.name === runnerUp.name) p = "RUNNER-UP";
-        else if (cutQueen && q.name === cutQueen.name) p = "ELIM";
-
-        if (!trackRecord[q.name]) trackRecord[q.name] = [];
-        trackRecord[q.name].push(p);
+        if (winner && q.name === winner.name) {
+            pushPlacement(q.name, "WINNER");
+        } else if (runnerUp && q.name === runnerUp.name) {
+            pushPlacement(q.name, "RUNNER-UP");
+        } else if (cutQueen && q.name === cutQueen.name) {
+            pushPlacement(q.name, "ELIM");
+        }
     });
 }
-
 
 function getLatestPlacement(q) {
     const rec = trackRecord[q.name];
@@ -1284,33 +1033,15 @@ function getLatestPlacement(q) {
     return rec[rec.length - 1];
 }
 
-function getWinCount(q) {
-    return trackRecord[q.name].filter(p => p === "WIN").length;
-}
-
-function getBottomCount(q) {
-    return trackRecord[q.name].filter(p => p === "BTM2").length;
-}
-
 function sortQueensByPlacement(queens) {
-    const order = ["WINNER", "RUNNER-UP", "WIN", "TOP2", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", ""];
-
-    // ACTIVE queens (not eliminated)
+    const order = ["WINNER", "RUNNER-UP", "WIN", "HIGH", "SAFE", "LOW", "BTM2", "ELIM", ""];
     const active = queens.filter(q => !eliminationOrder.includes(q.name));
+    const eliminated = eliminationOrder.map(name => queens.find(q => q.name === name)).filter(Boolean);
 
-    // ELIMINATED queens in the exact order they were eliminated
-    const eliminated = eliminationOrder
-        .map(name => queens.find(q => q.name === name))
-        .filter(q => q); // remove nulls
-
-    // Sort active queens normally
     const sortedActive = active.slice().sort((a, b) => {
-        const pa = getLatestPlacement(a);
-        const pb = getLatestPlacement(b);
-        return order.indexOf(pa) - order.indexOf(pb);
+        return order.indexOf(getLatestPlacement(a)) - order.indexOf(getLatestPlacement(b));
     });
 
-    // Return active queens first, then eliminated queens frozen in order
     return [...sortedActive, ...eliminated];
 }
 
@@ -1335,7 +1066,7 @@ function renderTrackRecordCards() {
         const placements = document.createElement("div");
         placements.className = "track-card-placements";
 
-        trackRecord[q.name].forEach(p => {
+        (trackRecord[q.name] || []).forEach(p => {
             const badge = document.createElement("span");
             badge.className = "track-badge track-" + p.toLowerCase();
             badge.textContent = p;
@@ -1351,18 +1082,7 @@ function renderTrackRecordCards() {
     episodeContent.appendChild(container);
 }
 
-function normalizeTrackRecordForEpisode() {
-    seasonQueens.forEach(q => {
-        if (!trackRecord[q.name]) trackRecord[q.name] = [];
-        while (trackRecord[q.name].length < episodeNumber) {
-            trackRecord[q.name].push("RUN"); // or "—" if you prefer a visible blank
-        }
-    });
-}
-
-
 // ====== SEASON CONTROL ======
-
 function startSeason() {
     const selected = [...document.querySelectorAll(".queen-card.selected")].map(c => c.dataset.name);
 
@@ -1375,34 +1095,30 @@ function startSeason() {
     seasonQueens = [...currentCast];
     initTrackRecord();
 
-    // ===== READ PREMIERE TYPE =====
-premiereType = selectedPremiereType;
-
-if (premiereType === "double") {
-    premiereGroups = splitIntoDoublePremiereGroups(currentCast);
-    currentPremiereIndex = 0;
-} else {
-    premiereGroups = null;
-}
+    premiereType = selectedPremiereType;
+    if (premiereType === "double") {
+        premiereGroups = splitIntoDoublePremiereGroups(currentCast);
+        currentPremiereIndex = 0;
+    } else {
+        premiereGroups = null;
+    }
 
     episodeNumber = 1;
     startEpisode();
-
-    console.log("Premiere:", selectedPremiereType);
-console.log("Finale:", selectedFinaleType);
-    
 }
 
 function startEpisode() {
     episodeStep = 0;
+
     isFinale =
-    (selectedFinaleType === "top3" && currentCast.length === 3) ||
-    (selectedFinaleType === "top4cut2" && currentCast.length === 4) ||
-    (selectedFinaleType === "smackdown" && currentCast.length === 4);
-    // ===== DOUBLE PREMIERE: USE GROUP QUEENS =====
-if (premiereType === "double" && episodeNumber <= 2) {
-    currentCast = premiereGroups[episodeNumber - 1];
-}
+        (selectedFinaleType === "top3" && currentCast.length === 3) ||
+        (selectedFinaleType === "top4cut2" && currentCast.length === 4) ||
+        (selectedFinaleType === "smackdown" && currentCast.length === 4);
+
+    if (premiereType === "double" && episodeNumber <= 2) {
+        currentCast = premiereGroups[episodeNumber - 1];
+    }
+
     currentChallenge = getRandomChallenge();
     currentJudging = null;
     currentBottom2 = null;
@@ -1413,7 +1129,6 @@ if (premiereType === "double" && episodeNumber <= 2) {
 }
 
 // ====== EPISODE FLOW ======
-
 let finaleCutQueen = null;
 let finaleWinner = null;
 let finaleRunnerUp = null;
@@ -1437,127 +1152,86 @@ function advanceEpisodeStep() {
                     ${lines}
                 `);
             } else {
-                setEpisodeText(
-                    `<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`,
-                    currentCast
-                );
+                setEpisodeText(`<h2>Episode ${episodeNumber}</h2><p>${currentCast.length} queens remain.</p>`, currentCast);
             }
             break;
 
-        case 1:
+        case 1: {
             const runwayTheme = getRandomRunwayTheme();
-            currentRunwayTheme = runwayTheme;
-
-            setEpisodeText(
-                `
+            setEpisodeText(`
                 <h2>Maxi Challenge</h2>
                 <p>This week’s challenge is <strong>${currentChallenge}</strong>!</p>
                 <h3>Runway Theme</h3>
                 <p><strong>${runwayTheme}</strong></p>
-                `,
-                currentCast
-            );
+            `, currentCast);
             break;
+        }
 
         case 2:
             currentJudging = judgeQueens(currentCast, currentChallenge);
+            {
+                const scored = currentJudging.scored;
+                const maxScore = scored[0].score;
+                const minScore = scored[scored.length - 1].score;
 
-            const scored = currentJudging.scored;
-            const maxScore = scored[0].score;
-            const minScore = scored[scored.length - 1].score;
+                const summaryHTML = scored.map(s => `
+                    <div class="perf-summary">
+                        <img src="${s.queen.img}" class="perf-summary-img">
+                        <p><strong>${s.queen.name}</strong> — ${getScoreBasedRating(s.score, maxScore, minScore)}</p>
+                    </div>
+                `).join("");
 
-            const summaryHTML = scored.map(s => `
-                <div class="perf-summary">
-                    <img src="${s.queen.img}" class="perf-summary-img">
-                    <p><strong>${s.queen.name}</strong> — ${getScoreBasedRating(s.score, maxScore, minScore)}</p>
-                </div>
-            `).join("");
-
-            setEpisodeText(`
-                <h2>Challenge Results</h2>
-                ${summaryHTML}
-            `);
+                setEpisodeText(`<h2>Challenge Results</h2>${summaryHTML}`);
+            }
             break;
 
         case 3:
-            setEpisodeText(
-                `<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`,
-                currentJudging.safe
-            );
+            setEpisodeText(`<h2>Safe</h2><p>${currentJudging.safe.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.safe);
             break;
 
         case 4:
-            setEpisodeText(
-                `<h2>High</h2><p>${currentJudging.high.map(q => q.name).join(", ") || "None"}</p>`,
-                currentJudging.high
-            );
+            setEpisodeText(`<h2>High</h2><p>${currentJudging.high.map(q => q.name).join(", ") || "None"}</p>`, currentJudging.high);
             break;
 
         case 5:
             if (premiereType === "double" && episodeNumber <= 2) {
-                // Skip winner page in double premiere
                 episodeStep++;
                 return advanceEpisodeStep();
             }
-
-            setEpisodeText(`
-                <h2>Winner</h2>
-                <p>🏆 <strong>${currentJudging.winner.name}</strong> wins the challenge!</p>
-            `, [currentJudging.winner]);
+            setEpisodeText(`<h2>Winner</h2><p>🏆 <strong>${currentJudging.winner.name}</strong> wins the challenge!</p>`, [currentJudging.winner]);
             break;
 
         case 6:
             if (premiereType === "double" && episodeNumber <= 2) {
-                // Skip low page in double premiere
                 episodeStep++;
                 return advanceEpisodeStep();
             }
-
-            setEpisodeText(`
-                <h2>Low</h2>
-                <p>The following queens are low:</p>
-            `, currentJudging.low);
+            setEpisodeText(`<h2>Low</h2><p>The following queens are low:</p>`, currentJudging.low);
             break;
 
         case 7:
             if (premiereType === "double" && episodeNumber <= 2) {
                 currentBottom2 = currentJudging.bottom2;
-                const [top1, top2] = currentBottom2;
-
-                setEpisodeText(`
-                    <h2>Top 2 Lipsync</h2>
-                    <p>The top 2 queens will now lipsync for the win!</p>
-                `, [top1, top2]);
-
+                setEpisodeText(`<h2>Top 2 Lipsync</h2><p>The top 2 queens will now lipsync for the win!</p>`, currentBottom2);
                 break;
             }
-
-            setEpisodeText(`
-                <h2>Bottom 2</h2>
-                <p>The following queens are up for elimination:</p>
-            `, currentJudging.bottom2);
+            setEpisodeText(`<h2>Bottom 2</h2><p>The following queens are up for elimination:</p>`, currentJudging.bottom2);
             break;
 
         case 8:
             if (premiereType === "double" && episodeNumber <= 2) {
                 const [top1, top2] = currentJudging.bottom2;
-
                 const winner = Math.random() < 0.5 ? top1 : top2;
                 const runner = winner === top1 ? top2 : top1;
 
-                trackRecord[winner.name].push("WIN");
-                trackRecord[runner.name].push("TOP2");
-                currentJudging.safe.forEach(q => trackRecord[q.name].push("SAFE"));
+                pushPlacement(winner.name, "WIN");
+                pushPlacement(runner.name, "TOP2");
+                currentJudging.safe.forEach(q => pushPlacement(q.name, "SAFE"));
 
-                setEpisodeText(`
-                    <h2>Lipsync Winner</h2>
-                    <p>🏆 <strong>${winner.name}</strong> wins the lipsync and the challenge!</p>
-                `, [winner]);
-
+                setEpisodeText(`<h2>Lipsync Winner</h2><p>🏆 <strong>${winner.name}</strong> wins the lipsync and the challenge!</p>`, [winner]);
                 break;
             }
 
-            // NORMAL LIP SYNC
             currentBottom2 = currentJudging.bottom2;
             currentLipSyncResult = lipSync(currentBottom2);
             currentLipSyncSong = getRandomLipSyncSong();
@@ -1569,7 +1243,6 @@ function advanceEpisodeStep() {
             break;
 
         case 9:
-            // DOUBLE PREMIERE: NO ELIMINATION
             if (premiereType === "double" && episodeNumber <= 2) {
                 episodeStep++;
                 return advanceEpisodeStep();
@@ -1585,15 +1258,12 @@ function advanceEpisodeStep() {
                 `, currentBottom2);
 
                 seasonQueens.forEach(q => {
-                    let p = "";
-                    if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-                    else if (q.name === currentJudging.winner.name) p = "WIN";
-                    else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-                    else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-                    else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-                    trackRecord[q.name].push(p);
+                    if (currentBottom2.some(b => b.name === q.name)) pushPlacement(q.name, "BTM2");
+                    else if (q.name === currentJudging.winner.name) pushPlacement(q.name, "WIN");
+                    else if (currentJudging.high.some(h => h.name === q.name)) pushPlacement(q.name, "HIGH");
+                    else if (currentJudging.low.some(l => l.name === q.name)) pushPlacement(q.name, "LOW");
+                    else if (currentJudging.safe.some(s => s.name === q.name)) pushPlacement(q.name, "SAFE");
                 });
-
                 break;
             }
 
@@ -1612,39 +1282,34 @@ function advanceEpisodeStep() {
                 `, eliminated);
 
                 seasonQueens.forEach(q => {
-                    let p = "";
-                    if (eliminated.some(e => e.name === q.name)) p = "ELIM";
-                    else if (q.name === currentJudging.winner.name) p = "WIN";
-                    else if (currentBottom2.some(b => b.name === q.name)) p = "BTM2";
-                    else if (currentJudging.high.some(h => h.name === q.name)) p = "HIGH";
-                    else if (currentJudging.low.some(l => l.name === q.name)) p = "LOW";
-                    else if (currentJudging.safe.some(s => s.name === q.name)) p = "SAFE";
-                    trackRecord[q.name].push(p);
+                    if (eliminated.some(e => e.name === q.name)) pushPlacement(q.name, "ELIM");
+                    else if (q.name === currentJudging.winner.name) pushPlacement(q.name, "WIN");
+                    else if (currentBottom2.some(b => b.name === q.name)) pushPlacement(q.name, "BTM2");
+                    else if (currentJudging.high.some(h => h.name === q.name)) pushPlacement(q.name, "HIGH");
+                    else if (currentJudging.low.some(l => l.name === q.name)) pushPlacement(q.name, "LOW");
+                    else if (currentJudging.safe.some(s => s.name === q.name)) pushPlacement(q.name, "SAFE");
                 });
-
                 break;
             }
 
-           // NORMAL ELIMINATION
-const eliminatedSingle = result.eliminated[0];
-currentCast = eliminateFromCast(currentCast, eliminatedSingle);
-eliminationOrder.unshift(eliminatedSingle.name);
+            const eliminatedSingle = result.eliminated[0];
+            currentCast = eliminateFromCast(currentCast, eliminatedSingle);
+            eliminationOrder.unshift(eliminatedSingle.name);
 
-updateTrackRecordEpisode(currentJudging, currentBottom2, eliminatedSingle);
+            updateTrackRecordEpisode(currentJudging, currentBottom2, eliminatedSingle);
 
-setEpisodeText(`
-    <h2>Elimination</h2>
-    <p>❌ <strong>${eliminatedSingle.name}</strong> has been eliminated.</p>
-    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
-    <p><em>"${ELIMINATION_LINES[eliminatedSingle.name] || ""}"</em></p>
-    <p>${currentCast.length} queens remain.</p>
-`, [eliminatedSingle]);
-break;
+            setEpisodeText(`
+                <h2>Elimination</h2>
+                <p>❌ <strong>${eliminatedSingle.name}</strong> has been eliminated.</p>
+                <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
+                <p><em>"${ELIMINATION_LINES[eliminatedSingle.name] || ""}"</em></p>
+                <p>${currentCast.length} queens remain.</p>
+            `, [eliminatedSingle]);
+            break;
 
         case 10:
             setEpisodeText(`<h2>Track Record</h2><p>Here is the track record so far:</p>`);
             renderTrackRecordCards();
-            normalizeTrackRecordForEpisode();   // <-- padding here
             break;
 
         case 11:
@@ -1652,10 +1317,7 @@ break;
                 location.reload();
                 return;
             } else {
-                setEpisodeText(
-                    `<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`,
-                    currentCast
-                );
+                setEpisodeText(`<h2>Next Episode</h2><p>Get ready for Episode ${episodeNumber + 1}…</p>`, currentCast);
             }
             break;
 
@@ -1672,21 +1334,10 @@ break;
 }
 
 // ====== FINALE FLOW ======
-
-// ====== FINALE ROUTER ======
 function advanceFinaleStep() {
+    if (selectedFinaleType === "smackdown") return advanceSmackdownFinale();
+    if (selectedFinaleType === "top4cut2") return advanceFinal4Cut2();
 
-    // ⭐ NEW: Lipsync Smackdown Finale
-    if (selectedFinaleType === "smackdown") {
-        return advanceSmackdownFinale();
-    }
-
-    // ⭐ Final 4 → Final 2 Finale
-    if (selectedFinaleType === "top4cut2") {
-        return advanceFinal4Cut2();
-    }
-
-    // ⭐ DEFAULT: Top 3 Finale
     switch (episodeStep) {
         case 0:
             setEpisodeText(`<h2>Finale</h2><p>Our Top 3 queens are ready for the crown.</p>`, currentCast);
@@ -1696,8 +1347,7 @@ function advanceFinaleStep() {
             setEpisodeText(`<h2>Final Challenge</h2><p>The queens face their final challenge…</p>`, currentCast);
             break;
 
-        case 2:
-            // Random cut
+        case 2: {
             const cutIndex = Math.floor(Math.random() * currentCast.length);
             finaleCutQueen = currentCast[cutIndex];
             currentCast = eliminateFromCast(currentCast, finaleCutQueen);
@@ -1710,18 +1360,19 @@ function advanceFinaleStep() {
                 <p>The final 2 will now lip sync for the crown.</p>
             `, [finaleCutQueen]);
             break;
+        }
 
-        case 3:
+        case 3: {
             const final2 = [...currentCast];
             const finalResult = lipSync(final2);
 
-            finaleWinner = finalResult.winner;
-            finaleRunnerUp = finalResult.eliminated[0] || null;
+            if (!finalResult.winner || !finalResult.eliminated?.[0]) {
+                console.error("Finale lip sync returned invalid result:", finalResult);
+                return;
+            }
 
-            if (!finalResult.winner || !finalResult.eliminated.length) {
-    console.error("Finale lip sync returned invalid result:", finalResult);
-    return;
-}
+            finaleWinner = finalResult.winner;
+            finaleRunnerUp = finalResult.eliminated[0];
             currentCast = [finaleWinner];
 
             updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
@@ -1736,6 +1387,7 @@ function advanceFinaleStep() {
             `, final2);
 
             break;
+        }
 
         case 4:
             setEpisodeText(`
@@ -1764,9 +1416,7 @@ function advanceFinaleStep() {
     episodeStep++;
 }
 
-
 // ====== FINAL 4 → FINAL 2 FINALE ======
-
 let finale4Step = 0;
 let finaleCut1 = null;
 let finaleCut2 = null;
@@ -1774,7 +1424,6 @@ let finaleFinal2 = [];
 
 function advanceFinal4Cut2() {
     switch (finale4Step) {
-
         case 0:
             setEpisodeText(`
                 <h2>Final 4</h2>
@@ -1782,14 +1431,13 @@ function advanceFinal4Cut2() {
             `, currentCast);
             break;
 
-        case 1:
+        case 1: {
             const scored = currentCast
                 .map(q => ({ queen: q, score: scoreQueen(q, "Finale") }))
                 .sort((a, b) => b.score - a.score);
 
             finaleCut1 = scored[3].queen;
             finaleCut2 = scored[2].queen;
-
             finaleFinal2 = [scored[0].queen, scored[1].queen];
             currentCast = [...finaleFinal2];
 
@@ -1799,8 +1447,9 @@ function advanceFinal4Cut2() {
                 <p>The final 2 are: <strong>${finaleFinal2[0].name}</strong> and <strong>${finaleFinal2[1].name}</strong>.</p>
             `, [finaleCut1, finaleCut2]);
             break;
+        }
 
-        case 2:
+        case 2: {
             const song = getRandomLipSyncSong();
             currentLipSyncSong = song;
 
@@ -1810,8 +1459,9 @@ function advanceFinal4Cut2() {
                 <p><strong>Final Song:</strong> "${song.title}" by ${song.artist}</p>
             `, finaleFinal2);
             break;
+        }
 
-        case 3:
+        case 3: {
             const s1 = finaleFinal2[0].stats.lipsync + (Math.random() * 6 - 3);
             const s2 = finaleFinal2[1].stats.lipsync + (Math.random() * 6 - 3);
 
@@ -1819,9 +1469,9 @@ function advanceFinal4Cut2() {
             finaleRunnerUp = s1 >= s2 ? finaleFinal2[1] : finaleFinal2[0];
 
             seasonQueens.forEach(q => {
-                if (q.name === finaleWinner.name) trackRecord[q.name].push("WINNER");
-                else if (q.name === finaleRunnerUp.name) trackRecord[q.name].push("RUNNER-UP");
-                else if (q.name === finaleCut1.name || q.name === finaleCut2.name) trackRecord[q.name].push("ELIM");
+                if (q.name === finaleWinner.name) pushPlacement(q.name, "WINNER");
+                else if (q.name === finaleRunnerUp.name) pushPlacement(q.name, "RUNNER-UP");
+                else if (q.name === finaleCut1.name || q.name === finaleCut2.name) pushPlacement(q.name, "ELIM");
             });
 
             setEpisodeText(`
@@ -1829,6 +1479,7 @@ function advanceFinal4Cut2() {
                 <p>👑 <strong>${finaleWinner.name}</strong> is the winner of the season!</p>
             `, [finaleWinner]);
             break;
+        }
 
         case 4:
             setEpisodeText(`
@@ -1850,32 +1501,31 @@ function advanceFinal4Cut2() {
     finale4Step++;
 }
 
-
 // ====== LIPSYNC SMACKDOWN FINALE ======
-
 let smackStep = 0;
 let semi1Winner = null;
 let semi2Winner = null;
 
 function advanceSmackdownFinale() {
     switch (smackStep) {
-
-        case 0: {
+        case 0:
             setEpisodeText(`
                 <h2>Lipsync Smackdown</h2>
                 <p>The Top 4 will battle in a bracket-style lipsync tournament!</p>
             `, currentCast);
             break;
-        }
 
         case 1: {
             const [q1, q2, q3, q4] = currentCast;
-
-            // ⭐ SONG FOR SEMI 1
             const song1 = getRandomLipSyncSong();
             currentLipSyncSong = song1;
 
             const semi1 = lipSync([q1, q2]);
+            if (!semi1.winner) {
+                console.error("Invalid semifinal 1 result:", semi1);
+                return;
+            }
+
             semi1Winner = semi1.winner;
 
             setEpisodeText(`
@@ -1889,12 +1539,15 @@ function advanceSmackdownFinale() {
 
         case 2: {
             const [q1, q2, q3, q4] = currentCast;
-
-            // ⭐ SONG FOR SEMI 2
             const song2 = getRandomLipSyncSong();
             currentLipSyncSong = song2;
 
             const semi2 = lipSync([q3, q4]);
+            if (!semi2.winner) {
+                console.error("Invalid semifinal 2 result:", semi2);
+                return;
+            }
+
             semi2Winner = semi2.winner;
 
             setEpisodeText(`
@@ -1907,7 +1560,6 @@ function advanceSmackdownFinale() {
         }
 
         case 3: {
-            // ⭐ SONG FOR FINAL LIPSYNC
             const finalSong = getRandomLipSyncSong();
             currentLipSyncSong = finalSong;
 
@@ -1922,41 +1574,28 @@ function advanceSmackdownFinale() {
         case 4: {
             const finalResult = lipSync([semi1Winner, semi2Winner]);
 
-            if (!finalResult.winner || !finalResult.eliminated || !finalResult.eliminated[0]) {
-    console.error("Smackdown finale lip sync returned invalid result:", finalResult);
-    return;
-}
+            if (!finalResult.winner || !finalResult.eliminated?.[0]) {
+                console.error("Smackdown finale lip sync returned invalid result:", finalResult);
+                return;
+            }
 
-finaleWinner = finalResult.winner;
-finaleRunnerUp = finalResult.eliminated[0];
+            finaleWinner = finalResult.winner;
+            finaleRunnerUp = finalResult.eliminated[0];
 
-
+            // IMPORTANT:
+            // Only write finale placements once, and do not duplicate ELIM for earlier eliminated queens.
             seasonQueens.forEach(q => {
-    const row = trackRecord[q.name];
-
-    if (q.name === finaleWinner.name) {
-        row.push("WINNER");
-    }
-    else if (q.name === finaleRunnerUp.name) {
-        row.push("RUNNER-UP");
-    }
-    else {
-        // ⭐ Only add ELIM if they were NOT already eliminated earlier
-        if (row[row.length - 1] !== "ELIM") {
-            row.push("ELIM");
-        }
-    }
-});
-
-            // Prevent double ELIM bug
-seasonQueens.forEach(q => {
-    const row = trackRecord[q.name];
-
-    // If the last two placements are both "ELIM", remove one
-    if (row[row.length - 1] === "ELIM" && row[row.length - 2] === "ELIM") {
-        row.pop();
-    }
-});
+                if (q.name === finaleWinner.name) {
+                    pushPlacement(q.name, "WINNER");
+                } else if (q.name === finaleRunnerUp.name) {
+                    pushPlacement(q.name, "RUNNER-UP");
+                } else {
+                    // Keep earlier eliminations untouched; only ensure there is not a duplicated ELIM.
+                    if (!trackRecord[q.name].includes("ELIM")) {
+                        pushPlacement(q.name, "ELIM");
+                    }
+                }
+            });
 
             setEpisodeText(`
                 <h2>Season Winner</h2>
@@ -1965,24 +1604,21 @@ seasonQueens.forEach(q => {
             break;
         }
 
-        case 5: {
+        case 5:
             setEpisodeText(`
                 <h2>Final Track Record</h2>
                 <p>Here is the final track record for the season:</p>
             `);
             renderTrackRecordCards();
             break;
-        }
 
-        case 6: {
+        case 6:
             location.reload();
             return;
-        }
 
-        default: {
+        default:
             location.reload();
             return;
-        }
     }
 
     smackStep++;
@@ -1992,5 +1628,6 @@ seasonQueens.forEach(q => {
 document.getElementById("season-filter").addEventListener("change", (e) => {
     filterQueensBySeason(e.target.value);
 });
+
 document.getElementById("start-btn").addEventListener("click", startSeason);
 episodeContinueBtn.addEventListener("click", advanceEpisodeStep);
