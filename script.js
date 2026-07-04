@@ -1073,6 +1073,8 @@ function scoreQueen(q, type) {
 
 function getScoreBasedRating(score, maxScore, minScore) {
     const range = maxScore - minScore;
+    if (range === 0) return "Fine"; // prevent divide-by-zero
+
     const normalized = (score - minScore) / range;
 
     if (normalized >= 0.85) return "Slayed";
@@ -1081,6 +1083,17 @@ function getScoreBasedRating(score, maxScore, minScore) {
     if (normalized >= 0.25) return "Bad";
     return "Flopped";
 }
+
+function getBottomCount(q) {
+    if (!q || !q.name || !trackRecord[q.name]) return 0;
+    return trackRecord[q.name].filter(p => p === "BTM2").length;
+}
+
+function getWinCount(q) {
+    if (!q || !q.name || !trackRecord[q.name]) return 0;
+    return trackRecord[q.name].filter(p => p === "WIN").length;
+}
+
 
 function judgeQueens(cast, type) {
 
@@ -1140,6 +1153,11 @@ function judgeQueens(cast, type) {
 }
 
 function lipSync(btm2) {
+    if (!Array.isArray(btm2) || btm2.length < 2 || !btm2[0] || !btm2[1]) {
+        console.error("lipSync() called with invalid queens:", btm2);
+        return { type: "invalid", winner: null, eliminated: [] };
+    }
+
     const [q1, q2] = btm2;
 
     const q1Bottoms = getBottomCount(q1);
@@ -1153,27 +1171,23 @@ function lipSync(btm2) {
         return { type: "single", winner: q1, eliminated: [q2] };
     }
 
-    // If BOTH have 3 bottoms → normal lipsync only
     const allowSpecial = !(q1Bottoms >= 3 && q2Bottoms >= 3);
 
-    // Base lipsync scores
     const s1 = q1.stats.lipsync + (Math.random() * 6 - 3);
     const s2 = q2.stats.lipsync + (Math.random() * 6 - 3);
 
-    // DOUBLE SHANTAY (both stay)
-    if (allowSpecial && chance(0.10)) { // 10% chance
+    if (allowSpecial && chance(0.10)) {
         return { type: "double-shantay", winner: null, eliminated: [] };
     }
 
-    // DOUBLE SASHAY (both go)
-    if (allowSpecial && chance(0.05)) { // 5% chance
+    if (allowSpecial && chance(0.05)) {
         return { type: "double-sashay", winner: null, eliminated: [q1, q2] };
     }
 
-    // NORMAL LIP SYNC
     if (s1 >= s2) return { type: "single", winner: q1, eliminated: [q2] };
     return { type: "single", winner: q2, eliminated: [q1] };
 }
+
 
 function eliminateFromCast(cast, q) {
     return cast.filter(x => x.name !== q.name);
@@ -1232,31 +1246,37 @@ function initTrackRecord() {
 }
 
 function updateTrackRecordEpisode(j, bottom2, eliminated) {
+    if (!j || !Array.isArray(seasonQueens)) return;
+
     seasonQueens.forEach(q => {
         let p = "";
 
-        if (q.name === eliminated.name) p = "ELIM";
-        else if (q.name === j.winner.name) p = "WIN";
-        else if (bottom2.some(b => b.name === q.name)) p = "BTM2";
-        else if (j.high.some(h => h.name === q.name)) p = "HIGH";
-        else if (j.low.some(l => l.name === q.name)) p = "LOW";
-        else if (j.safe.some(s => s.name === q.name)) p = "SAFE";
+        if (eliminated && q.name === eliminated.name) p = "ELIM";
+        else if (j.winner && q.name === j.winner.name) p = "WIN";
+        else if (Array.isArray(bottom2) && bottom2.some(b => b && b.name === q.name)) p = "BTM2";
+        else if (j.high && j.high.some(h => h && h.name === q.name)) p = "HIGH";
+        else if (j.low && j.low.some(l => l && l.name === q.name)) p = "LOW";
+        else if (j.safe && j.safe.some(s => s && s.name === q.name)) p = "SAFE";
 
+        if (!trackRecord[q.name]) trackRecord[q.name] = [];
         trackRecord[q.name].push(p);
     });
 }
+
 
 function updateTrackRecordFinale(winner, runnerUp, cutQueen) {
     seasonQueens.forEach(q => {
         let p = "";
 
-        if (q.name === winner.name) p = "WINNER";
-        else if (q.name === runnerUp.name) p = "RUNNER-UP";
-        else if (q.name === cutQueen.name) p = "ELIM";
+        if (winner && q.name === winner.name) p = "WINNER";
+        else if (runnerUp && q.name === runnerUp.name) p = "RUNNER-UP";
+        else if (cutQueen && q.name === cutQueen.name) p = "ELIM";
 
+        if (!trackRecord[q.name]) trackRecord[q.name] = [];
         trackRecord[q.name].push(p);
     });
 }
+
 
 function getLatestPlacement(q) {
     const rec = trackRecord[q.name];
@@ -1615,7 +1635,7 @@ updateTrackRecordEpisode(currentJudging, currentBottom2, eliminatedSingle);
 setEpisodeText(`
     <h2>Elimination</h2>
     <p>❌ <strong>${eliminatedSingle.name}</strong> has been eliminated.</p>
-    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}</strong> by ${currentLipSyncSong.artist}</p>
+    <p><strong>Lip Sync Song:</strong> "${currentLipSyncSong.title}" by ${currentLipSyncSong.artist}</p>
     <p><em>"${ELIMINATION_LINES[eliminatedSingle.name] || ""}"</em></p>
     <p>${currentCast.length} queens remain.</p>
 `, [eliminatedSingle]);
@@ -1696,8 +1716,12 @@ function advanceFinaleStep() {
             const finalResult = lipSync(final2);
 
             finaleWinner = finalResult.winner;
-            finaleRunnerUp = finalResult.eliminated;
+            finaleRunnerUp = finalResult.eliminated[0] || null;
 
+            if (!finalResult.winner || !finalResult.eliminated.length) {
+    console.error("Finale lip sync returned invalid result:", finalResult);
+    return;
+}
             currentCast = [finaleWinner];
 
             updateTrackRecordFinale(finaleWinner, finaleRunnerUp, finaleCutQueen);
@@ -1898,8 +1922,14 @@ function advanceSmackdownFinale() {
         case 4: {
             const finalResult = lipSync([semi1Winner, semi2Winner]);
 
-            finaleWinner = finalResult.winner;
-            finaleRunnerUp = finalResult.eliminated[0];
+            if (!finalResult.winner || !finalResult.eliminated || !finalResult.eliminated[0]) {
+    console.error("Smackdown finale lip sync returned invalid result:", finalResult);
+    return;
+}
+
+finaleWinner = finalResult.winner;
+finaleRunnerUp = finalResult.eliminated[0];
+
 
             seasonQueens.forEach(q => {
     const row = trackRecord[q.name];
