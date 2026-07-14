@@ -574,7 +574,7 @@ const ELIMINATION_LINES = {
     "Princess Poppy": "*burps*",
     "Willow Pill": "Toodles!",
     "Lady Camden": "MAXINEEEE!",
-    "Daya Betty": "I guess Betty wasn't ready yet, bitch."
+    "Daya Betty": "I guess Betty wasn't ready yet, bitch.",
     "Angeria Paris VanMichaels": "From the country to the silver screen, I will always and forever, be your queen...",
     "Bosco": "Should have kept me around longer!"
 };
