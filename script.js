@@ -61,8 +61,8 @@ const ALL_QUEENS = [
     },
     {
         name: "Myki Meeks",
-        img: "https://i.pinimg.com/736x/b9/76/6a/b9766aedded3bc2ebcac17b8a6b3cbde.jpg",
-        stats: { acting: 13, comedy: 14, improv: 14, dance: 9, design: 11, lipsync: 13 },
+        img: "assets/myki.jpg",
+        stats: { acting: 4.25, comedy: 4.6, improv: 4.425, dance: 3, design: 3.75, lipsync: 4.25 },
         seasons: ["Season 18"]
     },
     {
