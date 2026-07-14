@@ -419,6 +419,18 @@ const ALL_QUEENS = [
         stats: { acting: 10, comedy: 8, improv: 9, dance: 12, design: 11, lipsync: 10 },
         seasons: ["Season 14", "All Stars 10"]
     },
+    {
+        name: "Angeria Paris VanMichaels",
+        img: "https://i.pinimg.com/736x/c1/b0/d3/c1b0d3e74e172a0c8463ab25d2fce17a.jpg",
+        stats: { acting: 11, comedy: 10, improv: 11, dance: 10, design: 11, lipsync: 11 },
+        seasons: ["Season 14", "All Stars 9"]
+    },
+    {
+        name: "Bosco",
+        img: "https://i.pinimg.com/736x/c1/60/f1/c160f14ac491d4a82466ce60507a549b.jpg",
+        stats: { acting: 11, comedy: 12, improv: 12, dance: 9, design: 11, lipsync: 7 },
+        seasons: ["Season 14", "All Stars 10"]
+    }
 ];
 
 const ENTRANCE_LINES = {
