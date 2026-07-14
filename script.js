@@ -73,8 +73,8 @@ const ALL_QUEENS = [
     },
     {
         name: "Nini Coco",
-        img: "https://i.pinimg.com/736x/b5/1e/6a/b51e6aa16ea992aa267a435831919304.jpg",
-        stats: { acting: 8, comedy: 7, improv: 8, dance: 9, design: 10, lipsync: 12 },
+        img: "assets/ninicoco.jpg",
+        stats: { acting: 2.5, comedy: 2.4, improv: 2.45, dance: 3, design: 3.25, lipsync: 3.86 },
         seasons: ["Season 18"]
     },
     {
